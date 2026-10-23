@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Marcellus&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Figtree:wght@400;600;700&family=Marcellus&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap">
 <style>
 /* Layout: one narrow phone column on a deep emerald night; ivory reading cards
    carry sacred text, gold is reserved for frames, counts and active state. */
@@ -39,6 +39,7 @@
   --f-arabic: "Amiri", "Scheherazade New", "Noto Naskh Arabic", serif;
   --f-urdu: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Noto Naskh Arabic", serif;
   --f-latin: "Marcellus", "Georgia", serif;
+  --f-ui-en: "Figtree", "Segoe UI", Roboto, system-ui, sans-serif;
 
   --r: 18px;
   --nav-h: 66px;
@@ -407,6 +408,48 @@ details.more summary::-webkit-details-marker { display: none; }
   .grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
 }
 
+/* ---------- language switch (slide) ---------- */
+.langsw {
+  position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; flex: none;
+  padding: 3px; border-radius: 999px; background: rgba(3,19,14,.72); border: 1px solid var(--line);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.langsw button {
+  position: relative; z-index: 1; border: 0; background: none; color: var(--muted);
+  min-width: 64px; height: 34px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1;
+  font-family: var(--f-ui-en); font-weight: 600; transition: color .25s;
+}
+.langsw button[lang="ur"] { font-family: var(--f-urdu); font-size: 13px; font-weight: 400; line-height: 1; padding-bottom: 4px; }
+.langsw button[aria-pressed="true"] { color: #1c1606; }
+.langsw .thumb {
+  position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px;
+  background: linear-gradient(180deg, #e2c06c, #c39a41); box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  transition: transform .28s cubic-bezier(.3,.7,.3,1);
+}
+.langsw:has(button[data-lang="en"][aria-pressed="true"]) .thumb { transform: translateX(100%); }
+.langsw.small button { min-width: 50px; height: 30px; padding: 0 8px; font-size: 12px; }
+.hero-lang {
+  position: absolute; z-index: 2; top: calc(env(safe-area-inset-top, 0px) + 12px);
+  inset-inline-end: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- English (left-to-right) interface ---------- */
+:root[lang="en"] body, [lang="en"] .sheet { font-family: var(--f-ui-en); line-height: 1.55; }
+:root[lang="en"] .topbar h1 { font-family: var(--f-latin); font-size: 20px; line-height: 1.3; }
+:root[lang="en"] .tile b, :root[lang="en"] .resume .t b { line-height: 1.35; }
+:root[lang="en"] .tile small, :root[lang="en"] .small, :root[lang="en"] .notice, :root[lang="en"] .meta { line-height: 1.5; }
+:root[lang="en"] .tile { gap: 6px; }
+:root[lang="en"] .nav button { font-size: 11.5px; line-height: 1.4; gap: 2px; }
+:root[lang="en"] .section-label { font-family: var(--f-latin); letter-spacing: .02em; }
+:root[lang="en"] .daily-frame .label { font-family: var(--f-latin); font-size: 22px; }
+:root[lang="en"] .btn, :root[lang="en"] .chip, :root[lang="en"] .seg button, :root[lang="en"] .rbtn { line-height: 1.3; }
+:root[lang="en"] .ref:not([lang="ur"]) { line-height: 1.6; padding-block: 3px; }
+:root[dir="ltr"] [data-back] svg { transform: scaleX(-1); }
+[lang="ur"] { font-family: var(--f-urdu); }
+.ur[lang="ur"], .note[lang="ur"] { line-height: 2.25; }
+.en-dua { margin-top: 10px !important; font-size: 14px; line-height: 1.7 !important; color: var(--muted); font-family: var(--f-ui-en); }
+.tile.wide small { display: inline; }
+
 </style>
 </head>
 <body>
@@ -416,11 +459,11 @@ details.more summary::-webkit-details-marker { display: none; }
 </div>
 <nav class="nav" id="nav" dir="rtl" aria-label="بنیادی مینو">
   <div class="nav-inner">
-    <button data-go="home" aria-label="ہوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>ہوم</button>
-    <button data-go="quran" aria-label="قرآن"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5Z"/><path d="M12 6.5v13"/></svg>قرآن</button>
-    <button data-go="tasbeeh" class="center" aria-label="تسبیح"><span class="disc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="4.5" r="1.6"/><circle cx="17.3" cy="6.7" r="1.6"/><circle cx="19.5" cy="12" r="1.6"/><circle cx="17.3" cy="17.3" r="1.6"/><circle cx="6.7" cy="6.7" r="1.6"/><circle cx="4.5" cy="12" r="1.6"/><circle cx="6.7" cy="17.3" r="1.6"/><path d="M12 19v3"/></svg></span>تسبیح</button>
-    <button data-go="hadith" aria-label="حدیث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></svg>حدیث</button>
-    <button data-go="saved" aria-label="محفوظ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>محفوظ</button>
+    <button data-go="home" aria-label="ہوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg><span data-nl="home">ہوم</span></button>
+    <button data-go="quran" aria-label="قرآن"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5Z"/><path d="M12 6.5v13"/></svg><span data-nl="quran">قرآن</span></button>
+    <button data-go="tasbeeh" class="center" aria-label="تسبیح"><span class="disc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="4.5" r="1.6"/><circle cx="17.3" cy="6.7" r="1.6"/><circle cx="19.5" cy="12" r="1.6"/><circle cx="17.3" cy="17.3" r="1.6"/><circle cx="6.7" cy="6.7" r="1.6"/><circle cx="4.5" cy="12" r="1.6"/><circle cx="6.7" cy="17.3" r="1.6"/><path d="M12 19v3"/></svg></span><span data-nl="tasbeeh">تسبیح</span></button>
+    <button data-go="hadith" aria-label="حدیث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></svg><span data-nl="hadith">حدیث</span></button>
+    <button data-go="saved" aria-label="محفوظ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg><span data-nl="saved">محفوظ</span></button>
   </div>
 </nav>
 
@@ -431,17 +474,13 @@ details.more summary::-webkit-details-marker { display: none; }
 const APP_CONFIG = {
   appName: "Noor-e-Tasbeeh",
   appNameUr: "نورِ تسبیح",
-  version: "1.0.1",
+  version: "1.1.0",
 
   /* After you upload the APK to Google Drive, paste the real share link here
      (see GUIDE-ur.md, step 6). Leave empty until then — the app will simply
      not show a download link. Never put a placeholder link here. */
   APP_DOWNLOAD_URL: "",
 
-  /* Official Islam360 website (external link only — no official API found). */
-  ISLAM360_URL: "https://theislam360.com/",
-  /* Islam360 Android app on Google Play (official publisher: Islam360 Foundation Trust) */
-  ISLAM360_PLAY_URL: "https://play.google.com/store/apps/details?id=com.islam360",
 
   /* Free data sources (no API key needed) */
   QURAN_API: "https://api.alquran.cloud/v1",
@@ -721,12 +760,15 @@ const AZKAR_DATA = {
   for (const it of M) if (map[it.id]) { it.ur = P[map[it.id]].ur; it.urSource = "card"; }
 })();
 
+
 if (typeof module !== "undefined") module.exports = AZKAR_DATA;
 
 </script>
 <script>
 const HERO_IMG = "data:image/webp;base64,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";
-/* Noor-e-Tasbeeh — application logic (plain JavaScript, no framework) */
+/* Noor-e-Tasbeeh — application logic (plain JavaScript, no framework)
+ * Interface language: Urdu (default) or English. Only the interface changes;
+ * Quran, Hadith and Azkar texts always stay in Arabic + Urdu. */
 (function () {
   "use strict";
 
@@ -737,7 +779,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   const mem = {};
   const store = {
     get(k, d) {
-      try { const v = localStorage.getItem("nt." + k); return v == null ? d : JSON.parse(v); }
+      try { const v = localStorage.getItem("nt." + k); return v == null ? (k in mem ? mem[k] : d) : JSON.parse(v); }
       catch (e) { return k in mem ? mem[k] : d; }
     },
     set(k, v) {
@@ -747,36 +789,65 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     del(k) { delete mem[k]; try { localStorage.removeItem("nt." + k); } catch (e) {} }
   };
 
+  /* ================= language ================= */
+  let LANG = store.get("lang", "ur") === "en" ? "en" : "ur";
+  const t = (ur, en) => (LANG === "en" ? en : ur);
+  const N = (n) => (LANG === "en" ? String(n) : String(n).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]));
+  const LOCALE = () => (LANG === "en" ? "en-GB" : "ur-PK");
+  // Urdu content (translations, notes, references from the card) keeps RTL + Urdu font in both modes
+  const U = 'dir="rtl" lang="ur"';
+
+  function applyLang() {
+    const root = document.documentElement;
+    root.lang = LANG; root.dir = LANG === "en" ? "ltr" : "rtl";
+    const app = document.getElementById("app"); if (app) { app.dir = root.dir; app.lang = LANG; }
+    const nav = document.getElementById("nav"); if (nav) nav.dir = root.dir;
+    const labels = { home: t("ہوم", "Home"), quran: t("قرآن", "Quran"), tasbeeh: t("تسبیح", "Tasbeeh"), hadith: t("حدیث", "Hadith"), saved: t("محفوظ", "Saved") };
+    document.querySelectorAll("[data-nl]").forEach((s) => (s.textContent = labels[s.dataset.nl]));
+    document.querySelectorAll(".nav button").forEach((b) => b.setAttribute("aria-label", labels[b.dataset.go]));
+    if (nav) nav.setAttribute("aria-label", t("بنیادی مینو", "Main menu"));
+  }
+  function setLang(l) {
+    if (l === LANG) return;
+    LANG = l; store.set("lang", l); applyLang(); render();
+  }
+  function langSwitch(extra = "") {
+    return `<div class="langsw ${extra}" role="group" aria-label="${t("زبان", "Language")}" dir="ltr">
+      <button type="button" data-lang="ur" aria-pressed="${LANG === "ur"}" lang="ur">اردو</button>
+      <button type="button" data-lang="en" aria-pressed="${LANG === "en"}">English</button>
+      <span class="thumb" aria-hidden="true"></span>
+    </div>`;
+  }
+
   /* ================= helpers ================= */
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-  const urNum = (n) => String(n).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
   function localDayKey(d = new Date()) {
     return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
   }
   function dayNumber(d = new Date()) { return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / DAY); }
   function fmtDate(ts) {
-    try { return new Intl.DateTimeFormat("ur-PK", { day: "numeric", month: "long", year: "numeric" }).format(new Date(ts)); }
+    try { return new Intl.DateTimeFormat(LOCALE(), { day: "numeric", month: "long", year: "numeric" }).format(new Date(ts)); }
     catch (e) { return new Date(ts).toLocaleDateString(); }
   }
   function fmtDateTime(ts) {
-    try { return new Intl.DateTimeFormat("ur-PK", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }).format(new Date(ts)); }
+    try { return new Intl.DateTimeFormat(LOCALE(), { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }).format(new Date(ts)); }
     catch (e) { return new Date(ts).toLocaleString(); }
   }
   function hijri(d = new Date()) {
-    try { return new Intl.DateTimeFormat("ur-PK-u-ca-islamic-umalqura", { day: "numeric", month: "long", year: "numeric" }).format(d); }
+    try { return new Intl.DateTimeFormat(LOCALE() + "-u-ca-islamic-umalqura", { day: "numeric", month: "long", year: "numeric" }).format(d); }
     catch (e) { return ""; }
   }
   function toast(msg) {
-    const t = document.createElement("div");
-    t.className = "toast" + (route.name === "tasbeeh" ? " top" : ""); t.textContent = msg; document.body.appendChild(t);
-    setTimeout(() => t.remove(), 2200);
+    const el = document.createElement("div");
+    el.className = "toast" + (route.name === "tasbeeh" ? " top" : ""); el.textContent = msg; document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2200);
   }
   function vibrate(ms) { try { navigator.vibrate && navigator.vibrate(ms); } catch (e) {} }
   async function copyText(text) {
-    try { await navigator.clipboard.writeText(text); toast("کاپی ہو گیا"); return true; }
-    catch (e) { toast("کاپی نہیں ہو سکا — متن کو دبا کر منتخب کریں"); return false; }
+    try { await navigator.clipboard.writeText(text); toast(t("کاپی ہو گیا", "Copied")); return true; }
+    catch (e) { toast(t("کاپی نہیں ہو سکا — متن کو دبا کر منتخب کریں", "Couldn't copy — long-press the text to select it")); return false; }
   }
 
   const ICON = {
@@ -791,18 +862,16 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     bookmark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>',
     bookmarkFill: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>',
     info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 21s-7-4.4-7-10.2A4.3 4.3 0 0 1 12 8a4.3 4.3 0 0 1 7 2.8C19 16.6 12 21 12 21Z"/></svg>',
-    external: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.4 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.4-3.5-8.5s1-5.9 3.5-8.5Z"/></svg>',
     share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4M8.2 13.2l7.6 4"/></svg>',
     copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg>',
     wa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.2-3.8A8 8 0 1 1 8 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 1c-1-.5-2.5-2-3-3l1-1-1-2z"/></svg>',
     image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5-5 4 4 3-3 4.5 4.5"/></svg>',
     minus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg>',
-    sun2: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>',
     download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>'
   };
 
   /* ================= Tasbeeh sessions + 30-day expiry ================= */
-  /* Pure function so it can be unit-tested (tests/expiry.test.mjs). */
+  /* Pure function so it can be unit-tested (tests/app.test.mjs). */
   function pruneSessions(sessions, now, days) {
     const limit = days * DAY;
     const kept = [], removed = [];
@@ -837,10 +906,10 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   function netErrorHTML(retryFn) {
     const id = "r" + uid();
     setTimeout(() => { const b = document.getElementById(id); if (b) b.onclick = retryFn; }, 0);
-    return `<div class="notice"><b>مواد لوڈ نہیں ہو سکا۔</b><br>
-      یہ حصہ انٹرنیٹ سے مفت ذرائع (alquran.cloud / hadith-api) سے متن لاتا ہے۔ انٹرنیٹ کنکشن چیک کریں۔
-      اگر آپ یہ ایپ Claude کے پیش نظارہ (preview) میں دیکھ رہے ہیں تو وہاں بیرونی ذرائع بند ہیں — اپنی ویب سائٹ/APK پر یہ حصہ چلے گا۔
-      <div style="margin-top:8px"><button class="btn" id="${id}">دوبارہ کوشش کریں</button></div></div>`;
+    return `<div class="notice"><b>${t("مواد لوڈ نہیں ہو سکا۔", "Couldn't load this content.")}</b><br>
+      ${t("یہ حصہ انٹرنیٹ سے مفت ذرائع (alquran.cloud / hadith-api) سے متن لاتا ہے۔ انٹرنیٹ کنکشن چیک کریں۔ اگر آپ یہ ایپ Claude کے پیش نظارہ (preview) میں دیکھ رہے ہیں تو وہاں بیرونی ذرائع بند ہیں — اپنی ویب سائٹ/APK پر یہ حصہ چلے گا۔",
+        "This section loads text from free online sources (alquran.cloud / hadith-api). Check your internet connection. In the Claude preview, outside sources are blocked — this section works on your own website or APK.")}
+      <div style="margin-top:8px"><button class="btn" id="${id}">${t("دوبارہ کوشش کریں", "Try again")}</button></div></div>`;
   }
 
   /* ================= router ================= */
@@ -855,13 +924,17 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
   function back() {
     const prev = historyStack.pop();
-    if (prev) { route = prev; render(); } else go("home", {}, false);
+    if (prev) {
+      route = prev;
+      try { history.replaceState(null, "", "#" + prev.name); } catch (e) {}
+      render();
+    } else go("home", {}, false);
   }
 
   function topbar(title, opts = {}) {
     return `<header class="topbar">
-      <button class="iconbtn" data-back aria-label="واپس">${ICON.back}</button>
-      <h1>${title}</h1>${opts.right || ""}</header>`;
+      <button class="iconbtn" data-back aria-label="${t("واپس", "Back")}">${ICON.back}</button>
+      <h1>${title}</h1>${opts.right || langSwitch("small")}</header>`;
   }
 
   const view = () => $("#view");
@@ -879,39 +952,37 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     const today = new Date();
     view().innerHTML = `
       <section class="hero" style="background-image:url('${HERO_IMG}')">
+        <div class="hero-lang">${langSwitch()}</div>
         <div class="hero-inner">
-          <p class="brand-ar">${C.appNameUr}</p>
+          <p class="brand-ar" lang="ur">${C.appNameUr}</p>
           <p class="brand-en">${C.appName}</p>
-          <div class="hero-date">${esc(hijri(today))} <span class="muted">(تقریبی)</span> · ${esc(fmtDate(today))}</div>
+          <div class="hero-date">${esc(hijri(today))} <span class="muted">${t("(تقریبی)", "(approx.)")}</span> · ${esc(fmtDate(today))}</div>
         </div>
       </section>
       <div class="view" style="padding-top:0;margin-top:-6px">
         <button class="resume" data-go="tasbeeh">
           <span class="num">${cur.count}</span>
-          <span class="t"><b>${cur.name ? esc(cur.name) : "ڈیجیٹل تسبیح"}</b><span>${cur.count ? "جاری تسبیح — جہاں چھوڑی تھی وہیں سے جاری رکھیں" : "شروع کرنے کے لیے دبائیں"}</span></span>
+          <span class="t"><b>${cur.name ? esc(cur.name) : t("ڈیجیٹل تسبیح", "Digital Tasbeeh")}</b><span>${cur.count ? t("جاری تسبیح — جہاں چھوڑی تھی وہیں سے جاری رکھیں", "In progress — continue where you left off") : t("شروع کرنے کے لیے دبائیں", "Tap to start")}</span></span>
           <span class="iconbtn" aria-hidden="true">${ICON.beads}</span>
         </button>
 
         <div class="grid">
-          ${tile("tasbeeh", ICON.beads, "ڈیجیٹل تسبیح", "پوری اسکرین کاؤنٹر", "feature")}
-          ${tile("quran", ICON.book, "قرآن پاک", "۱۱۴ سورتیں، اردو ترجمہ")}
-          ${tile("hadith", ICON.search, "حدیث تلاش", "کتبِ حدیث، عربی و اردو")}
-          ${tile("daily", ICON.scroll, "روزانہ حدیث", "آج کی حدیث، شیئر کریں")}
-          ${tile("azkar-morning", ICON.sun, "صبح کے اذکار", "مسنون اذکار، گنتی کے ساتھ")}
-          ${tile("azkar-evening", ICON.moon, "شام کے اذکار", "مسنون اذکار، گنتی کے ساتھ")}
-          ${tile("azkar-prayer", ICON.mosque, "نماز کے بعد اذکار", "فجر، ظہر، عصر، مغرب، عشاء", "feature")}
-          ${tile("saved", ICON.bookmark, "محفوظ شدہ", "تسبیحات، آیات، احادیث")}
-          ${tile("about", ICON.info, "ایپ کے بارے میں", "دعائے مغفرت")}
-          <a class="tile" href="${esc(C.ISLAM360_PLAY_URL)}" target="_blank" rel="noopener noreferrer">
-            <span class="ext">external ↗</span>
-            <span class="ic">${ICON.external}</span><b>Islam360</b><small>آفیشل ایپ (Play Store) — بیرونی لنک</small>
-          </a>
+          ${tile("tasbeeh", ICON.beads, t("ڈیجیٹل تسبیح", "Digital Tasbeeh"), t("پوری اسکرین کاؤنٹر", "Full-screen counter"), "feature")}
+          ${tile("quran", ICON.book, t("قرآن پاک", "Quran Pak"), t("۱۱۴ سورتیں، اردو ترجمہ", "114 Surahs, Urdu translation"))}
+          ${tile("hadith", ICON.search, t("حدیث تلاش", "Hadith Search"), t("کتبِ حدیث، عربی و اردو", "Hadith books, Arabic & Urdu"))}
+          ${tile("daily", ICON.scroll, t("روزانہ حدیث", "Daily Hadith"), t("آج کی حدیث، شیئر کریں", "Today's hadith, share it"))}
+          ${tile("azkar-morning", ICON.sun, t("صبح کے اذکار", "Morning Azkar"), t("مسنون اذکار، گنتی کے ساتھ", "Sunnah azkar with counter"))}
+          ${tile("azkar-evening", ICON.moon, t("شام کے اذکار", "Evening Azkar"), t("مسنون اذکار، گنتی کے ساتھ", "Sunnah azkar with counter"))}
+          ${tile("azkar-prayer", ICON.mosque, t("نماز کے بعد اذکار", "Azkar After Prayer"), t("فجر، ظہر، عصر، مغرب، عشاء", "Fajr, Dhuhr, Asr, Maghrib, Isha"), "feature")}
+          ${tile("saved", ICON.bookmark, t("محفوظ شدہ", "Saved Items"), t("تسبیحات، آیات، احادیث", "Tasbeehs, ayahs, hadith"))}
+          ${tile("about", ICON.info, t("ایپ کے بارے میں", "About the App"), t("دعائے مغفرت", "Dua for forgiveness"), "wide")}
         </div>
 
-        <p class="footer-dua">مرحوم محمد عاشق صاحب کے لیے دعائے مغفرت کی درخواست ہے۔ <button data-go="about">مزید</button></p>
+        <p class="footer-dua">${t("مرحوم محمد عاشق صاحب کے لیے دعائے مغفرت کی درخواست ہے۔", "Please pray for the forgiveness of the late Muhammad Ashiq.")} <button data-go="about">${t("مزید", "More")}</button></p>
       </div>`;
   }
   function tile(go, icon, title, sub, cls = "") {
+    if (cls === "wide") return `<button class="tile wide" data-go="${go}"><span class="ic">${icon}</span><span class="grow"><b>${title}</b><br><small>${sub}</small></span></button>`;
     return `<button class="tile ${cls}" data-go="${go}"><span class="ic">${icon}</span><b>${title}</b><small>${sub}</small></button>`;
   }
 
@@ -922,14 +993,14 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     view().innerHTML = `
       <section class="tsb" id="tsb">
         <div class="tsb-top">
-          <button class="iconbtn" data-back aria-label="واپس">${ICON.back}</button>
-          <label class="sr" for="tsbName">تسبیح کا نام</label>
-          <input id="tsbName" class="input" maxlength="60" placeholder="تسبیح کا نام لکھیں (مثلاً سبحان اللہ)" value="${esc(cur.name)}">
+          <button class="iconbtn" data-back aria-label="${t("واپس", "Back")}">${ICON.back}</button>
+          <label class="sr" for="tsbName">${t("تسبیح کا نام", "Tasbeeh name")}</label>
+          <input id="tsbName" class="input" maxlength="60" placeholder="${t("تسبیح کا نام لکھیں (مثلاً سبحان اللہ)", "Name this tasbeeh (e.g. SubhanAllah)")}" value="${esc(cur.name)}">
         </div>
-        <div class="tsb-targets" role="group" aria-label="ہدف">
-          ${targets.map((t) => `<button class="chip" data-target="${t}" aria-pressed="${(cur.target || 0) === t}">${t ? "ہدف " + urNum(t) : "بغیر ہدف"}</button>`).join("")}
+        <div class="tsb-targets" role="group" aria-label="${t("ہدف", "Target")}">
+          ${targets.map((x) => `<button class="chip" data-target="${x}" aria-pressed="${(cur.target || 0) === x}">${x ? t("ہدف ", "Target ") + N(x) : t("بغیر ہدف", "No target")}</button>`).join("")}
         </div>
-        <button class="tsb-tap" id="tsbTap" aria-label="گنتی میں ایک کا اضافہ کریں">
+        <button class="tsb-tap" id="tsbTap" aria-label="${t("گنتی میں ایک کا اضافہ کریں", "Add one to the count")}">
           <div class="tsb-ring" id="tsbRing">
             <svg viewBox="0 0 200 200" aria-hidden="true">
               <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(214,178,94,.16)" stroke-width="6"/>
@@ -940,14 +1011,14 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
               <div class="tsb-sub" id="tsbSub"></div>
             </div>
           </div>
-          <div class="tsb-hint">اسکرین پر کہیں بھی دبائیں</div>
+          <div class="tsb-hint">${t("اسکرین پر کہیں بھی دبائیں", "Tap anywhere on the screen")}</div>
         </button>
         <div class="tsb-bottom">
-          <button class="tsb-minus" id="tsbMinus">${ICON.minus} ایک کم کریں</button>
+          <button class="tsb-minus" id="tsbMinus">${ICON.minus} ${t("ایک کم کریں", "Minus one")}</button>
           <div class="tsb-row">
-            <button class="btn danger" id="tsbReset">ری سیٹ</button>
-            <button class="btn gold" id="tsbSave">محفوظ کریں</button>
-            <button class="btn green" id="tsbCont">جاری رکھیں</button>
+            <button class="btn danger" id="tsbReset">${t("ری سیٹ", "Reset")}</button>
+            <button class="btn gold" id="tsbSave">${t("محفوظ کریں", "Save")}</button>
+            <button class="btn green" id="tsbCont">${t("جاری رکھیں", "Continue")}</button>
           </div>
         </div>
       </section>`;
@@ -956,21 +1027,21 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     function paint(flash) {
       const c = getCurrent();
       countEl.textContent = c.count;
-      const t = c.target || 0;
-      if (t) {
-        const p = Math.min(1, (c.count % t === 0 && c.count > 0) ? 1 : (c.count % t) / t);
+      const tg = c.target || 0;
+      if (tg) {
+        const p = Math.min(1, (c.count % tg === 0 && c.count > 0) ? 1 : (c.count % tg) / tg);
         arc.setAttribute("stroke-dashoffset", String(578 * (1 - p)));
-        const rounds = Math.floor(c.count / t);
-        sub.textContent = `ہدف ${urNum(t)} · مکمل چکر: ${urNum(rounds)}`;
+        const rounds = Math.floor(c.count / tg);
+        sub.textContent = t(`ہدف ${N(tg)} · مکمل چکر: ${N(rounds)}`, `Target ${tg} · Rounds completed: ${rounds}`);
       } else {
         arc.setAttribute("stroke-dashoffset", "578");
-        sub.textContent = c.id ? "محفوظ تسبیح جاری ہے" : "";
+        sub.textContent = c.id ? t("محفوظ تسبیح جاری ہے", "Saved tasbeeh in progress") : "";
       }
       if (flash) { countEl.classList.remove("flash"); void countEl.offsetWidth; countEl.classList.add("flash"); }
     }
     paint();
 
-    $("#tsbTap").addEventListener("click", (ev) => {
+    $("#tsbTap").addEventListener("click", () => {
       const c = getCurrent();
       c.count += 1; c.lastTapAt = Date.now();
       setCurrent(c);
@@ -983,7 +1054,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     $("#tsbMinus").addEventListener("click", () => {
       const c = getCurrent();
       if (c.count > 0) { c.count -= 1; setCurrent(c); vibrate(8); paint(); }
-      else toast("گنتی صفر سے کم نہیں ہو سکتی");
+      else toast(t("گنتی صفر سے کم نہیں ہو سکتی", "The count can't go below zero"));
     });
     $("#tsbName").addEventListener("input", (e) => { const c = getCurrent(); c.name = e.target.value.slice(0, 60); setCurrent(c); });
     document.querySelectorAll("[data-target]").forEach((b) => b.addEventListener("click", () => {
@@ -992,10 +1063,10 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       paint();
     }));
     $("#tsbReset").addEventListener("click", () => confirmBox({
-      title: "گنتی ری سیٹ کریں؟",
-      body: `موجودہ گنتی (${getCurrent().count}) صفر ہو جائے گی۔ محفوظ شدہ تسبیحات پر اثر نہیں پڑے گا۔`,
-      ok: "ہاں، ری سیٹ کریں", danger: true,
-      onOk() { const c = getCurrent(); c.count = 0; setCurrent(c); paint(); toast("ری سیٹ ہو گیا"); }
+      title: t("گنتی ری سیٹ کریں؟", "Reset the count?"),
+      body: t(`موجودہ گنتی (${getCurrent().count}) صفر ہو جائے گی۔ محفوظ شدہ تسبیحات پر اثر نہیں پڑے گا۔`, `The current count (${getCurrent().count}) will go back to zero. Saved tasbeehs are not affected.`),
+      ok: t("ہاں، ری سیٹ کریں", "Yes, reset"), danger: true,
+      onOk() { const c = getCurrent(); c.count = 0; setCurrent(c); paint(); toast(t("ری سیٹ ہو گیا", "Count reset")); }
     }));
     $("#tsbSave").addEventListener("click", () => { saveCurrentSession(); paint(); });
     $("#tsbCont").addEventListener("click", () => sessionsSheet(() => paint()));
@@ -1003,7 +1074,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
 
   function saveCurrentSession() {
     const c = getCurrent();
-    const name = (c.name || "").trim() || "تسبیح " + fmtDate(Date.now());
+    const name = (c.name || "").trim() || t("تسبیح ", "Tasbeeh ") + fmtDate(Date.now());
     const list = getSessions();
     const now = Date.now();
     let s = c.id && list.find((x) => x.id === c.id);
@@ -1015,28 +1086,28 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     saveSessions(list);
     c.id = s.id; c.name = name; setCurrent(c);
     const n = $("#tsbName"); if (n) n.value = name;
-    toast("محفوظ ہو گئی: " + name);
+    toast(t("محفوظ ہو گئی: ", "Saved: ") + name);
   }
 
   function sessionsSheet(onPick) {
     const list = getSessions();
     const cur = getCurrent();
     const html = `
-      <h2>محفوظ تسبیحات — جاری رکھیں</h2>
-      <button class="btn block" data-new>نئی تسبیح شروع کریں (موجودہ گنتی ${cur.count} ${cur.id ? "محفوظ رہے گی" : "ختم ہو جائے گی"})</button>
+      <h2>${t("محفوظ تسبیحات — جاری رکھیں", "Saved tasbeehs — continue")}</h2>
+      <button class="btn block" data-new>${t(`نئی تسبیح شروع کریں (موجودہ گنتی ${cur.count} ${cur.id ? "محفوظ رہے گی" : "ختم ہو جائے گی"})`, `Start a new tasbeeh (current count ${cur.count} ${cur.id ? "stays saved" : "will be lost"})`)}</button>
       ${list.length ? `<div class="list">${list.map((s) => `
         <button class="li" data-pick="${s.id}">
-          <span class="grow"><b>${esc(s.name)}</b><span>آخری استعمال: ${esc(fmtDateTime(s.updatedAt))}${s.keepForever ? " · ہمیشہ محفوظ" : ""}</span></span>
+          <span class="grow"><b>${esc(s.name)}</b><span>${t("آخری استعمال: ", "Last used: ")}${esc(fmtDateTime(s.updatedAt))}${s.keepForever ? t(" · ہمیشہ محفوظ", " · Kept forever") : ""}</span></span>
           <span class="ltr" style="font-family:var(--f-latin);font-size:22px;color:var(--gold)">${s.count}</span>
-        </button>`).join("")}</div>` : `<div class="empty">ابھی کوئی تسبیح محفوظ نہیں۔ «محفوظ کریں» دبا کر موجودہ گنتی محفوظ کریں۔</div>`}
-      <p class="small muted">۳۰ دن تک استعمال نہ ہونے والی تسبیحات ایپ کھلنے پر خود حذف ہو جاتی ہیں، سوائے «ہمیشہ محفوظ» والی کے۔</p>
-      <button class="btn ghost" data-close>بند کریں</button>`;
+        </button>`).join("")}</div>` : `<div class="empty">${t("ابھی کوئی تسبیح محفوظ نہیں۔ «محفوظ کریں» دبا کر موجودہ گنتی محفوظ کریں۔", "No saved tasbeehs yet. Tap Save to keep the current count.")}</div>`}
+      <p class="small muted">${t("۳۰ دن تک استعمال نہ ہونے والی تسبیحات ایپ کھلنے پر خود حذف ہو جاتی ہیں، سوائے «ہمیشہ محفوظ» والی کے۔", "Tasbeehs unused for 30 days are removed when the app opens, except those marked Keep Forever.")}</p>
+      <button class="btn ghost" data-close>${t("بند کریں", "Close")}</button>`;
     const sh = openSheet(html);
     sh.querySelector("[data-new]").onclick = () => {
-      const doNew = () => { setCurrent({ id: null, name: "", count: 0, target: cur.target || 0, startedAt: Date.now() }); closeSheet(); const n = $("#tsbName"); if (n) n.value = ""; onPick && onPick(); toast("نئی تسبیح"); };
+      const doNew = () => { setCurrent({ id: null, name: "", count: 0, target: cur.target || 0, startedAt: Date.now() }); closeSheet(); const n = $("#tsbName"); if (n) n.value = ""; onPick && onPick(); toast(t("نئی تسبیح", "New tasbeeh")); };
       if (!cur.id && cur.count > 0) {
         closeSheet();
-        confirmBox({ title: "نئی تسبیح؟", body: `موجودہ گنتی (${cur.count}) محفوظ نہیں ہے۔ پہلے «محفوظ کریں» دبائیں ورنہ یہ گنتی ختم ہو جائے گی۔`, ok: "پھر بھی نئی شروع کریں", danger: true, onOk: doNew });
+        confirmBox({ title: t("نئی تسبیح؟", "Start a new tasbeeh?"), body: t(`موجودہ گنتی (${cur.count}) محفوظ نہیں ہے۔ پہلے «محفوظ کریں» دبائیں ورنہ یہ گنتی ختم ہو جائے گی۔`, `The current count (${cur.count}) isn't saved. Tap Save first, or this count will be lost.`), ok: t("پھر بھی نئی شروع کریں", "Start new anyway"), danger: true, onOk: doNew });
       } else doNew();
     };
     sh.querySelectorAll("[data-pick]").forEach((b) => b.onclick = () => {
@@ -1050,14 +1121,14 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     s.updatedAt = Date.now(); saveSessions(list);
     setCurrent({ id: s.id, name: s.name, count: s.count, target: s.target || 0, startedAt: Date.now() });
     const n = $("#tsbName"); if (n) n.value = s.name;
-    toast("جاری: " + s.name);
+    toast(t("جاری: ", "Continuing: ") + s.name);
   }
 
   /* ================= sheets & confirm (in-page, no browser dialogs) ================= */
   function openSheet(inner) {
     closeSheet();
     const o = document.createElement("div");
-    o.className = "overlay"; o.id = "overlay"; o.dir = "rtl";
+    o.className = "overlay"; o.id = "overlay"; o.dir = LANG === "en" ? "ltr" : "rtl"; o.lang = LANG;
     o.innerHTML = `<div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${inner}</div>`;
     o.addEventListener("click", (e) => { if (e.target === o || e.target.closest("[data-close]")) closeSheet(); });
     document.body.appendChild(o);
@@ -1066,7 +1137,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   function closeSheet() { const o = $("#overlay"); if (o) o.remove(); }
   function confirmBox({ title, body, ok, danger, onOk }) {
     const sh = openSheet(`<h2>${esc(title)}</h2><p style="margin:0">${esc(body)}</p>
-      <div class="row"><button class="btn ${danger ? "danger" : "gold"} grow" data-ok>${esc(ok)}</button><button class="btn grow" data-close>منسوخ</button></div>`);
+      <div class="row"><button class="btn ${danger ? "danger" : "gold"} grow" data-ok>${esc(ok)}</button><button class="btn grow" data-close>${t("منسوخ", "Cancel")}</button></div>`);
     sh.querySelector("[data-ok]").onclick = () => { closeSheet(); onOk(); };
   }
 
@@ -1079,27 +1150,30 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     store.set("surahList", list);
     return list;
   }
+  const quranCredit = () => t("عربی متن: Tanzil (رسمِ عثمانی) · اردو ترجمہ: مولانا محمد جوناگڑھی رحمہ اللہ · ذریعہ: alquran.cloud",
+    "Arabic text: Tanzil (Uthmani script) · Urdu translation: Maulana Muhammad Junagarhi · Source: alquran.cloud");
   async function screenQuran() {
-    view().innerHTML = topbar("قرآن پاک") + `<div class="view">
+    view().innerHTML = topbar(t("قرآن پاک", "Quran Pak")) + `<div class="view">
       <div class="row">
-        <input id="qFilter" class="input grow" placeholder="سورت کا نام یا نمبر">
+        <input id="qFilter" class="input grow" placeholder="${t("سورت کا نام یا نمبر", "Surah name or number")}">
       </div>
       <form id="qSearch" class="card" style="display:flex;flex-direction:column;gap:8px">
-        <label for="qKw" class="small muted">قرآن میں تلاش کریں</label>
-        <div class="row"><input id="qKw" class="input grow" placeholder="مثلاً: صبر، رحمت"><button class="btn gold" type="submit">${ICON.search} تلاش</button></div>
-        <div class="chips" role="group" aria-label="تلاش کہاں">
-          <button type="button" class="chip" data-qs="ur" aria-pressed="true">اردو ترجمے میں</button>
-          <button type="button" class="chip" data-qs="ar" aria-pressed="false">عربی متن میں</button>
+        <label for="qKw" class="small muted">${t("قرآن میں تلاش کریں", "Search the Quran")}</label>
+        <div class="row"><input id="qKw" class="input grow" placeholder="${t("مثلاً: صبر، رحمت", "In Urdu or Arabic, e.g. صبر")}"><button class="btn gold" type="submit">${ICON.search} ${t("تلاش", "Search")}</button></div>
+        <div class="chips" role="group" aria-label="${t("تلاش کہاں", "Search in")}">
+          <button type="button" class="chip" data-qs="ur" aria-pressed="true">${t("اردو ترجمے میں", "Urdu translation")}</button>
+          <button type="button" class="chip" data-qs="ar" aria-pressed="false">${t("عربی متن میں", "Arabic text")}</button>
         </div>
       </form>
       <div id="qResults"></div>
       <div id="qList"><div class="spinner"></div></div>
-      <p class="small muted">عربی متن: Tanzil (رسمِ عثمانی) · اردو ترجمہ: مولانا محمد جوناگڑھی رحمہ اللہ · ذریعہ: alquran.cloud</p>
+      <p class="small muted">${quranCredit()}</p>
     </div>`;
     let qs = "ur";
     document.querySelectorAll("[data-qs]").forEach((b) => b.onclick = () => {
       qs = b.dataset.qs; document.querySelectorAll("[data-qs]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
     });
+    const none = (kw) => `<div class="empty">${t(`«${esc(kw)}» کے لیے کوئی نتیجہ نہیں ملا۔`, `No results for “${esc(kw)}”.`)}</div>`;
     $("#qSearch").onsubmit = async (e) => {
       e.preventDefault();
       const kw = $("#qKw").value.trim(); if (!kw) return;
@@ -1108,15 +1182,15 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         const ed = qs === "ur" ? C.QURAN_UR_EDITION : "quran-simple-clean";
         const j = await getJSON(`${C.QURAN_API}/search/${encodeURIComponent(kw)}/all/${ed}`);
         const m = (j.data && j.data.matches) || [];
-        if (!m.length) { box.innerHTML = `<div class="empty">«${esc(kw)}» کے لیے کوئی نتیجہ نہیں ملا۔</div>`; return; }
-        box.innerHTML = `<p class="small muted">${urNum(m.length)} نتائج${m.length > 60 ? " (پہلے ۶۰ دکھائے جا رہے ہیں)" : ""}</p><div class="list">${m.slice(0, 60).map((x) => `
+        if (!m.length) { box.innerHTML = none(kw); return; }
+        box.innerHTML = `<p class="small muted">${t(`${N(m.length)} نتائج${m.length > 60 ? " (پہلے ۶۰ دکھائے جا رہے ہیں)" : ""}`, `${m.length} results${m.length > 60 ? " (showing the first 60)" : ""}`)}</p><div class="list">${m.slice(0, 60).map((x) => `
           <button class="li" data-open="${x.surah.number}:${x.numberInSurah}">
             <span class="no">${x.surah.number}</span>
-            <span class="grow"><b>${esc(x.surah.name)} · آیت ${urNum(x.numberInSurah)}</b><span>${esc(x.text.slice(0, 140))}${x.text.length > 140 ? "…" : ""}</span></span>
+            <span class="grow"><b>${esc(LANG === "en" ? x.surah.englishName : x.surah.name)} · ${t("آیت", "Ayah")} ${N(x.numberInSurah)}</b><span ${U}>${esc(x.text.slice(0, 140))}${x.text.length > 140 ? "…" : ""}</span></span>
           </button>`).join("")}</div>`;
         box.querySelectorAll("[data-open]").forEach((b) => b.onclick = () => { const [s, a] = b.dataset.open.split(":"); go("surah", { n: +s, ayah: +a }); });
       } catch (err) {
-        box.innerHTML = (err.message || "").includes("404") ? `<div class="empty">«${esc(kw)}» کے لیے کوئی نتیجہ نہیں ملا۔</div>` : netErrorHTML(() => $("#qSearch").requestSubmit());
+        box.innerHTML = (err.message || "").includes("404") ? none(kw) : netErrorHTML(() => $("#qSearch").requestSubmit());
       }
     };
     try {
@@ -1127,7 +1201,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         $("#qList").innerHTML = `<div class="list">${items.map((s) => `
           <button class="li" data-surah="${s.n}">
             <span class="no">${s.n}</span>
-            <span class="grow"><b class="ltr" style="text-align:right">${esc(s.en)}</b><span>${urNum(s.ayahs)} آیات · ${s.type === "Meccan" ? "مکی" : "مدنی"}</span></span>
+            <span class="grow"><b class="ltr" style="text-align:start">${esc(s.en)}</b><span>${N(s.ayahs)} ${t("آیات", "ayahs")} · ${s.type === "Meccan" ? t("مکی", "Makki") : t("مدنی", "Madani")}</span></span>
             <span class="arname">${esc(s.ar)}</span>
           </button>`).join("")}</div>`;
         $("#qList").querySelectorAll("[data-surah]").forEach((b) => b.onclick = () => go("surah", { n: +b.dataset.surah }));
@@ -1140,74 +1214,71 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
 
   const BISMILLAH_RE = /^﻿?بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ\s*/;
+  const ayahRef = (it) => t(`سورۃ ${it.sen} (${N(it.s)}) : آیت ${N(it.a)}`, `Surah ${it.sen} (${it.s}) : Ayah ${it.a}`);
   async function screenSurah({ n, ayah }) {
-    view().innerHTML = topbar("سورت " + urNum(n)) + `<div class="view" id="sv"><div class="spinner"></div></div>`;
+    view().innerHTML = topbar(t("سورت ", "Surah ") + N(n)) + `<div class="view" id="sv"><div class="spinner"></div></div>`;
     try {
       const j = await getJSON(`${C.QURAN_API}/surah/${n}/editions/${C.QURAN_AR_EDITION},${C.QURAN_UR_EDITION}`);
       const [ar, ur] = j.data;
-      $(".topbar h1").textContent = ar.name + " (" + urNum(n) + ")";
+      $(".topbar h1").textContent = (LANG === "en" ? ar.englishName : ar.name) + " (" + N(n) + ")";
       const bms = store.get("bm.ayah", []);
-      let showBism = n !== 1 && n !== 9;
-      const cards = ar.ayahs.map((a, i) => {
-        let t = a.text;
-        if (showBism && i === 0) t = t.replace(BISMILLAH_RE, "");
-        const key = `${n}:${a.numberInSurah}`;
-        const on = bms.some((b) => b.key === key);
-        return `<article class="rcard" id="a${a.numberInSurah}">
-          <div class="head"><span class="badge">${a.numberInSurah}</span><span class="title">${esc(ar.name)} · آیت ${urNum(a.numberInSurah)}</span></div>
-          <div class="ar quran">${esc(t)}</div>
-          <div class="ur">${esc(ur.ayahs[i] ? ur.ayahs[i].text : "")}</div>
-          <div class="actions">
-            <span class="ref">سورۃ ${esc(ar.englishName)} (${urNum(n)}) : آیت ${urNum(a.numberInSurah)}</span>
-            <button class="rbtn ${on ? "on" : ""}" data-bm="${a.numberInSurah}">${on ? ICON.bookmarkFill : ICON.bookmark} ${on ? "محفوظ" : "محفوظ کریں"}</button>
-            <button class="rbtn" data-cp="${a.numberInSurah}">${ICON.copy} کاپی</button>
-            <button class="rbtn" data-sh="${a.numberInSurah}">${ICON.share} شیئر</button>
-          </div>
-        </article>`;
-      }).join("");
-      $("#sv").innerHTML = `
-        <div class="row card" style="padding:10px 12px">
-          <label for="jump" class="small muted">آیت نمبر پر جائیں</label>
-          <input id="jump" class="input grow" type="number" min="1" max="${ar.numberOfAyahs}" inputmode="numeric" style="max-width:110px">
-          <button class="btn" id="jumpGo">جائیں</button>
-          <span class="grow"></span>
-          ${n > 1 ? `<button class="btn ghost" data-sur="${n - 1}">پچھلی</button>` : ""}
-          ${n < 114 ? `<button class="btn ghost" data-sur="${n + 1}">اگلی</button>` : ""}
-        </div>
-        ${showBism ? `<div class="ar quran" style="color:var(--gold-soft)">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : ""}
-        ${cards}
-        <p class="small muted">عربی: Tanzil Quran Text (رسمِ عثمانی) · اردو: مولانا محمد جوناگڑھی · بذریعہ alquran.cloud</p>`;
+      const showBism = n !== 1 && n !== 9;
       const getAyah = (no) => ({
         key: `${n}:${no}`, s: n, a: +no, sname: ar.name, sen: ar.englishName,
         ar: (no == 1 && showBism) ? ar.ayahs[no - 1].text.replace(BISMILLAH_RE, "") : ar.ayahs[no - 1].text,
         ur: ur.ayahs[no - 1] ? ur.ayahs[no - 1].text : ""
       });
+      const cards = ar.ayahs.map((a) => {
+        const it = getAyah(a.numberInSurah);
+        const on = bms.some((b) => b.key === it.key);
+        return `<article class="rcard" id="a${a.numberInSurah}">
+          <div class="head"><span class="badge">${a.numberInSurah}</span><span class="title">${esc(LANG === "en" ? ar.englishName : ar.name)} · ${t("آیت", "Ayah")} ${N(a.numberInSurah)}</span></div>
+          <div class="ar quran">${esc(it.ar)}</div>
+          <div class="ur" ${U}>${esc(it.ur)}</div>
+          <div class="actions">
+            <span class="ref">${esc(ayahRef(it))}</span>
+            <button class="rbtn ${on ? "on" : ""}" data-bm="${a.numberInSurah}">${on ? ICON.bookmarkFill + " " + t("محفوظ", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save")}</button>
+            <button class="rbtn" data-cp="${a.numberInSurah}">${ICON.copy} ${t("کاپی", "Copy")}</button>
+            <button class="rbtn" data-sh="${a.numberInSurah}">${ICON.share} ${t("شیئر", "Share")}</button>
+          </div>
+        </article>`;
+      }).join("");
+      $("#sv").innerHTML = `
+        <div class="row card" style="padding:10px 12px">
+          <label for="jump" class="small muted">${t("آیت نمبر پر جائیں", "Go to ayah")}</label>
+          <input id="jump" class="input grow" type="number" min="1" max="${ar.numberOfAyahs}" inputmode="numeric" style="max-width:110px">
+          <button class="btn" id="jumpGo">${t("جائیں", "Go")}</button>
+          <span class="grow"></span>
+          ${n > 1 ? `<button class="btn ghost" data-sur="${n - 1}">${t("پچھلی", "Previous")}</button>` : ""}
+          ${n < 114 ? `<button class="btn ghost" data-sur="${n + 1}">${t("اگلی", "Next")}</button>` : ""}
+        </div>
+        ${showBism ? `<div class="ar quran" style="color:var(--gold-soft)">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : ""}
+        ${cards}
+        <p class="small muted">${quranCredit()}</p>`;
       $("#sv").querySelectorAll("[data-sur]").forEach((b) => b.onclick = () => go("surah", { n: +b.dataset.sur }, false));
-      $("#jumpGo").onclick = () => { const v = +$("#jump").value; const el = document.getElementById("a" + v); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); else toast("درست آیت نمبر لکھیں"); };
+      $("#jumpGo").onclick = () => { const v = +$("#jump").value; const el = document.getElementById("a" + v); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); else toast(t("درست آیت نمبر لکھیں", "Enter a valid ayah number")); };
       $("#sv").querySelectorAll("[data-bm]").forEach((b) => b.onclick = () => {
         const it = getAyah(b.dataset.bm);
         let list = store.get("bm.ayah", []);
         const has = list.some((x) => x.key === it.key);
         list = has ? list.filter((x) => x.key !== it.key) : [{ ...it, savedAt: Date.now() }, ...list];
         store.set("bm.ayah", list);
-        b.classList.toggle("on", !has); b.innerHTML = (!has ? ICON.bookmarkFill + " محفوظ" : ICON.bookmark + " محفوظ کریں");
-        toast(has ? "ہٹا دیا گیا" : "آیت محفوظ ہو گئی");
+        b.classList.toggle("on", !has); b.innerHTML = !has ? ICON.bookmarkFill + " " + t("محفوظ", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save");
+        toast(has ? t("ہٹا دیا گیا", "Removed") : t("آیت محفوظ ہو گئی", "Ayah saved"));
       });
-      $("#sv").querySelectorAll("[data-cp]").forEach((b) => b.onclick = () => { const it = getAyah(b.dataset.cp); copyText(ayahText(it)); });
+      $("#sv").querySelectorAll("[data-cp]").forEach((b) => b.onclick = () => copyText(ayahText(getAyah(b.dataset.cp))));
       $("#sv").querySelectorAll("[data-sh]").forEach((b) => b.onclick = () => {
         const it = getAyah(b.dataset.sh);
-        shareSheet({ kind: "ayah", ar: it.ar, ur: it.ur, ref: `سورۃ ${it.sname} (${it.s}) : آیت ${it.a}`, text: ayahText(it) });
+        shareSheet({ kind: "ayah", ar: it.ar, ur: it.ur, ref: ayahRef(it), text: ayahText(it) });
       });
       if (ayah) setTimeout(() => { const el = document.getElementById("a" + ayah); if (el) el.scrollIntoView({ block: "start" }); }, 50);
     } catch (e) {
       $("#sv").innerHTML = netErrorHTML(() => screenSurah({ n, ayah }));
     }
   }
-  function ayahText(it) {
-    return `${it.ar}\n\n${it.ur}\n\n(سورۃ ${it.sname} ${it.s}:${it.a})${shareTail()}`;
-  }
+  function ayahText(it) { return `${it.ar}\n\n${it.ur}\n\n(${ayahRef(it)})${shareTail()}`; }
   function shareTail() {
-    return `\n\n— ${C.appNameUr} | ${C.appName}` + (C.APP_DOWNLOAD_URL ? `\nایپ ڈاؤن لوڈ کریں: ${C.APP_DOWNLOAD_URL}` : "");
+    return `\n\n— ${C.appNameUr} | ${C.appName}` + (C.APP_DOWNLOAD_URL ? `\n${t("ایپ ڈاؤن لوڈ کریں", "Download the app")}: ${C.APP_DOWNLOAD_URL}` : "");
   }
 
   /* ================= HADITH ================= */
@@ -1221,10 +1292,11 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     { id: "malik", ur: "مؤطا امام مالک", en: "Muwatta Malik" }
   ];
   const bookOf = (id) => BOOKS.find((b) => b.id === id) || BOOKS[0];
+  const bookName = (id) => (LANG === "en" ? bookOf(id).en : bookOf(id).ur);
   function hadithRef(h) {
     const b = bookOf(h.book);
-    let s = `${b.ur} — حدیث نمبر ${h.n}`;
-    if (!b.std && h.arabicnumber && String(h.arabicnumber) !== String(h.n)) s += ` (عربی نسخہ نمبر ${h.arabicnumber})`;
+    let s = t(`${b.ur} — حدیث نمبر ${h.n}`, `${b.en} — Hadith ${h.n}`);
+    if (!b.std && h.arabicnumber && String(h.arabicnumber) !== String(h.n)) s += t(` (عربی نسخہ نمبر ${h.arabicnumber})`, ` (Arabic edition no. ${h.arabicnumber})`);
     return s;
   }
   function mergeHadith(book, araList, urdList) {
@@ -1234,8 +1306,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       return {
         book, n: h.hadithnumber, arabicnumber: h.arabicnumber,
         ar: (h.text || "").trim(), ur: u && u.text ? u.text.trim() : "",
-        grades: (h.grades && h.grades.length ? h.grades : (u && u.grades) || []),
-        refBook: h.reference && h.reference.book, refHadith: h.reference && h.reference.hadith
+        grades: (h.grades && h.grades.length ? h.grades : (u && u.grades) || [])
       };
     }).filter((h) => h.ar || h.ur);
   }
@@ -1244,28 +1315,32 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     const on = store.get("bm.hadith", []).some((x) => x.key === key);
     const grades = (h.grades || []).filter((g) => g && g.grade).slice(0, 3);
     return `<article class="rcard">
-      <div class="head"><span class="badge">${h.n}</span><span class="title">${esc(bookOf(h.book).ur)}</span></div>
-      ${h.ar ? `<div class="ar" style="font-size:22px">${esc(h.ar)}</div>` : `<div class="verify">اس حدیث کا عربی متن اس ماخذ میں دستیاب نہیں۔</div>`}
-      ${h.ur ? `<div class="ur">${esc(h.ur)}</div>` : `<div class="verify">اس حدیث کا اردو ترجمہ اس ماخذ میں دستیاب نہیں۔</div>`}
+      <div class="head"><span class="badge">${h.n}</span><span class="title">${esc(bookName(h.book))}</span></div>
+      ${h.ar ? `<div class="ar" style="font-size:22px">${esc(h.ar)}</div>` : `<div class="verify">${t("اس حدیث کا عربی متن اس ماخذ میں دستیاب نہیں۔", "The Arabic text of this hadith isn't available in this source.")}</div>`}
+      ${h.ur ? `<div class="ur" ${U}>${esc(h.ur)}</div>` : `<div class="verify">${t("اس حدیث کا اردو ترجمہ اس ماخذ میں دستیاب نہیں۔", "The Urdu translation of this hadith isn't available in this source.")}</div>`}
       <div class="actions">
         <span class="ref">${esc(hadithRef(h))}</span>
         ${grades.map((g) => `<span class="ref ltr">${esc(g.name)}: ${esc(g.grade)}</span>`).join("")}
       </div>
       <div class="actions">
-        <button class="rbtn ${on ? "on" : ""}" data-hbm="${i}">${on ? ICON.bookmarkFill + " محفوظ" : ICON.bookmark + " محفوظ کریں"}</button>
-        <button class="rbtn" data-hcp="${i}">${ICON.copy} کاپی</button>
-        <button class="rbtn" data-hsh="${i}">${ICON.share} تصویر / شیئر</button>
+        <button class="rbtn ${on ? "on" : ""}" data-hbm="${i}">${on ? ICON.bookmarkFill + " " + t("محفوظ", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save")}</button>
+        <button class="rbtn" data-hcp="${i}">${ICON.copy} ${t("کاپی", "Copy")}</button>
+        <button class="rbtn" data-hsh="${i}">${ICON.share} ${t("تصویر / شیئر", "Image / Share")}</button>
       </div>
     </article>`;
   }
+  function toggleHadithBm(h) {
+    const key = `${h.book}:${h.n}`;
+    let bm = store.get("bm.hadith", []); const has = bm.some((x) => x.key === key);
+    bm = has ? bm.filter((x) => x.key !== key) : [{ key, ...h, savedAt: Date.now() }, ...bm];
+    store.set("bm.hadith", bm);
+    toast(has ? t("ہٹا دیا گیا", "Removed") : t("حدیث محفوظ ہو گئی", "Hadith saved"));
+    return !has;
+  }
   function wireHadithCards(root, list) {
     root.querySelectorAll("[data-hbm]").forEach((b) => b.onclick = () => {
-      const h = list[+b.dataset.hbm]; const key = `${h.book}:${h.n}`;
-      let bm = store.get("bm.hadith", []); const has = bm.some((x) => x.key === key);
-      bm = has ? bm.filter((x) => x.key !== key) : [{ key, ...h, savedAt: Date.now() }, ...bm];
-      store.set("bm.hadith", bm);
-      b.classList.toggle("on", !has); b.innerHTML = !has ? ICON.bookmarkFill + " محفوظ" : ICON.bookmark + " محفوظ کریں";
-      toast(has ? "ہٹا دیا گیا" : "حدیث محفوظ ہو گئی");
+      const on = toggleHadithBm(list[+b.dataset.hbm]);
+      b.classList.toggle("on", on); b.innerHTML = on ? ICON.bookmarkFill + " " + t("محفوظ", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save");
     });
     root.querySelectorAll("[data-hcp]").forEach((b) => b.onclick = () => copyText(hadithText(list[+b.dataset.hcp])));
     root.querySelectorAll("[data-hsh]").forEach((b) => b.onclick = () => {
@@ -1279,32 +1354,25 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   async function screenHadith(params) {
     const book = params.book || store.get("hadithBook", "bukhari");
     store.set("hadithBook", book);
-    view().innerHTML = topbar("حدیث تلاش", { right: `<a class="iconbtn" href="${esc(C.ISLAM360_URL)}" target="_blank" rel="noopener noreferrer" aria-label="Islam360 ویب سائٹ (بیرونی)">${ICON.external}</a>` }) + `<div class="view">
-      <div class="chips" role="group" aria-label="کتاب منتخب کریں">${BOOKS.map((b) => `<button class="chip" data-book="${b.id}" aria-pressed="${b.id === book}">${b.ur}</button>`).join("")}</div>
+    view().innerHTML = topbar(t("حدیث تلاش", "Hadith Search")) + `<div class="view">
+      <div class="chips" role="group" aria-label="${t("کتاب منتخب کریں", "Choose a book")}">${BOOKS.map((b) => `<button class="chip" data-book="${b.id}" aria-pressed="${b.id === book}">${esc(bookName(b.id))}</button>`).join("")}</div>
       <form id="hNum" class="card row" style="padding:10px 12px">
-        <label for="hNo" class="small muted">حدیث نمبر</label>
-        <input id="hNo" class="input grow" type="number" min="1" inputmode="numeric" placeholder="مثلاً 13" style="max-width:130px">
-        <button class="btn gold" type="submit">کھولیں</button>
+        <label for="hNo" class="small muted">${t("حدیث نمبر", "Hadith number")}</label>
+        <input id="hNo" class="input grow" type="number" min="1" inputmode="numeric" placeholder="${t("مثلاً 13", "e.g. 13")}" style="max-width:130px">
+        <button class="btn gold" type="submit">${t("کھولیں", "Open")}</button>
       </form>
       <form id="hSearch" class="card" style="display:flex;flex-direction:column;gap:8px">
-        <label for="hKw" class="small muted">${esc(bookOf(book).ur)} میں لفظ سے تلاش (عربی یا اردو)</label>
-        <div class="row"><input id="hKw" class="input grow" placeholder="مثلاً: نیت، صبر، الجار"><button class="btn gold" type="submit">${ICON.search} تلاش</button></div>
-        <p class="small muted" style="margin:0">پہلی تلاش پر پوری کتاب (چند MB) ایک بار ڈاؤن لوڈ ہوتی ہے، پھر تلاش فون پر ہی ہوتی ہے۔</p>
+        <label for="hKw" class="small muted">${t(`${esc(bookOf(book).ur)} میں لفظ سے تلاش (عربی یا اردو)`, `Search ${esc(bookOf(book).en)} by word (Arabic or Urdu)`)}</label>
+        <div class="row"><input id="hKw" class="input grow" placeholder="${t("مثلاً: نیت، صبر، الجار", "e.g. نیت، صبر، الجار")}"><button class="btn gold" type="submit">${ICON.search} ${t("تلاش", "Search")}</button></div>
+        <p class="small muted" style="margin:0">${t("پہلی تلاش پر پوری کتاب (چند MB) ایک بار ڈاؤن لوڈ ہوتی ہے، پھر تلاش فون پر ہی ہوتی ہے۔", "The first search downloads the whole book once (a few MB); after that, searching happens on your phone.")}</p>
       </form>
       <div id="hOut"></div>
       <div id="hSections"></div>
-      <div class="card" style="display:flex;flex-direction:column;gap:8px">
-        <b style="color:var(--gold)">Islam360 میں دیکھیں</b>
-        <span class="small muted">علمائے اہلِ حدیث کے اردو تراجم کے ساتھ احادیث پڑھنے کے لیے Islam360 کی آفیشل ایپ یا ویب سائٹ کھولیں۔ یہ بیرونی لنک ہیں؛ Islam360 کی کوئی سرکاری API نہیں ملی، اس لیے اس کا مواد اس ایپ کے اندر نہیں دکھایا جاتا۔</span>
-        <div class="row">
-          <a class="btn gold grow" href="${esc(C.ISLAM360_PLAY_URL)}" target="_blank" rel="noopener noreferrer">${ICON.external} Islam360 ایپ</a>
-          <a class="btn grow" href="${esc(C.ISLAM360_URL)}" target="_blank" rel="noopener noreferrer">${ICON.external} ویب سائٹ</a>
-        </div>
-      </div>
-      <div class="notice"><b>اردو ترجمہ:</b> اس مفت ماخذ میں احادیث کے مترجم کا نام درج نہیں، اس لیے یہ نہیں کہا جا سکتا کہ ترجمہ کس عالم کا ہے۔<br>
-      ماخذ: fawazahmed0/hadith-api (مفت، jsDelivr CDN)۔ صحیح البخاری کے نمبر معیاری ہیں؛ باقی کتب میں نمبر اس ماخذ کی ترتیب کے مطابق ہیں، اس لیے عربی نسخے کا نمبر بھی ساتھ دکھایا جاتا ہے۔</div>
+      <div class="notice">${t("<b>اردو ترجمہ:</b> اس مفت ماخذ میں احادیث کے مترجم کا نام درج نہیں۔<br>ماخذ: fawazahmed0/hadith-api (مفت، jsDelivr CDN)۔ صحیح البخاری کے نمبر معیاری ہیں؛ باقی کتب میں نمبر اس ماخذ کی ترتیب کے مطابق ہیں، اس لیے عربی نسخے کا نمبر بھی ساتھ دکھایا جاتا ہے۔",
+        "<b>Urdu translation:</b> this free source does not name the hadith translator.<br>Source: fawazahmed0/hadith-api (free, jsDelivr CDN). Sahih al-Bukhari uses standard numbers; other books follow this source's own order, so the Arabic edition number is shown as well.")}</div>
     </div>`;
     document.querySelectorAll("[data-book]").forEach((b) => b.onclick = () => go("hadith", { book: b.dataset.book }, false));
+    const notFound = () => `<div class="empty">${t("یہ حدیث نمبر اس کتاب میں نہیں ملا۔", "This hadith number wasn't found in this book.")}</div>`;
     $("#hNum").onsubmit = async (e) => {
       e.preventDefault();
       const n = +$("#hNo").value; if (!n) return;
@@ -1315,30 +1383,29 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
           getJSON(`${C.HADITH_API}/editions/urd-${book}/${n}.json`).catch(() => null)
         ]);
         const list = mergeHadith(book, a.hadiths, u && u.hadiths);
-        if (!list.length) { out.innerHTML = `<div class="empty">یہ حدیث نمبر نہیں ملا۔</div>`; return; }
+        if (!list.length) { out.innerHTML = notFound(); return; }
         out.innerHTML = list.map(hadithCardHTML).join("") +
-          `<div class="row"><button class="btn grow" data-step="-1">پچھلی حدیث</button><button class="btn grow" data-step="1">اگلی حدیث</button></div>`;
+          `<div class="row"><button class="btn grow" data-step="-1">${t("پچھلی حدیث", "Previous hadith")}</button><button class="btn grow" data-step="1">${t("اگلی حدیث", "Next hadith")}</button></div>`;
         wireHadithCards(out, list);
         out.querySelectorAll("[data-step]").forEach((b) => b.onclick = () => { $("#hNo").value = Math.max(1, n + +b.dataset.step); $("#hNum").requestSubmit(); });
       } catch (err) {
-        out.innerHTML = String(err.message).includes("404") ? `<div class="empty">یہ حدیث نمبر اس کتاب میں نہیں ملا۔</div>` : netErrorHTML(() => $("#hNum").requestSubmit());
+        out.innerHTML = String(err.message).includes("404") ? notFound() : netErrorHTML(() => $("#hNum").requestSubmit());
       }
     };
     $("#hSearch").onsubmit = async (e) => {
       e.preventDefault();
-      const kw = $("#hKw").value.trim(); if (kw.length < 2) { toast("کم از کم دو حروف لکھیں"); return; }
-      const out = $("#hOut"); out.innerHTML = `<div class="spinner"></div><p class="small muted" style="text-align:center">کتاب لوڈ ہو رہی ہے…</p>`;
+      const kw = $("#hKw").value.trim(); if (kw.length < 2) { toast(t("کم از کم دو حروف لکھیں", "Type at least two letters")); return; }
+      const out = $("#hOut"); out.innerHTML = `<div class="spinner"></div><p class="small muted" style="text-align:center">${t("کتاب لوڈ ہو رہی ہے…", "Loading the book…")}</p>`;
       try {
         const all = await loadWholeBook(book);
         const nk = normAr(kw);
         const hits = all.filter((h) => normAr(h.ar).includes(nk) || (h.ur && normAr(h.ur).includes(nk)));
-        if (!hits.length) { out.innerHTML = `<div class="empty">«${esc(kw)}» کے لیے کوئی حدیث نہیں ملی۔</div>`; return; }
+        if (!hits.length) { out.innerHTML = `<div class="empty">${t(`«${esc(kw)}» کے لیے کوئی حدیث نہیں ملی۔`, `No hadith found for “${esc(kw)}”.`)}</div>`; return; }
         const shown = hits.slice(0, 40);
-        out.innerHTML = `<p class="small muted">${urNum(hits.length)} احادیث ملیں${hits.length > 40 ? " — پہلی ۴۰ دکھائی جا رہی ہیں، لفظ مزید واضح کریں" : ""}</p>` + shown.map(hadithCardHTML).join("");
+        out.innerHTML = `<p class="small muted">${t(`${N(hits.length)} احادیث ملیں${hits.length > 40 ? " — پہلی ۴۰ دکھائی جا رہی ہیں، لفظ مزید واضح کریں" : ""}`, `${hits.length} hadith found${hits.length > 40 ? " — showing the first 40; try a more specific word" : ""}`)}</p>` + shown.map(hadithCardHTML).join("");
         wireHadithCards(out, shown);
       } catch (err) { out.innerHTML = netErrorHTML(() => $("#hSearch").requestSubmit()); }
     };
-    // sections (chapters) list
     const box = $("#hSections");
     try {
       if (!hadithInfo) hadithInfo = await getJSON(`${C.HADITH_API}/info.json`);
@@ -1346,23 +1413,24 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       const secs = meta && meta.sections ? Object.entries(meta.sections).filter(([k, v]) => k !== "0" && v) : [];
       const det = (meta && meta.section_details) || {};
       if (secs.length) {
-        box.innerHTML = `<p class="section-label">ابواب (کتب) — ${esc(bookOf(book).en)}</p><div class="list">${secs.map(([k, v]) => {
+        box.innerHTML = `<p class="section-label">${t("ابواب (کتب)", "Chapters")} — ${esc(bookOf(book).en)}</p><div class="list">${secs.map(([k, v]) => {
           const d = det[k] || {};
-          return `<button class="li" data-sec="${k}"><span class="no">${k}</span><span class="grow"><b class="ltr" style="text-align:right">${esc(v)}</b><span>${d.hadithnumber_first ? `احادیث ${d.hadithnumber_first} تا ${d.hadithnumber_last}` : ""}</span></span></button>`;
+          return `<button class="li" data-sec="${k}"><span class="no">${k}</span><span class="grow"><b class="ltr" style="text-align:start">${esc(v)}</b><span>${d.hadithnumber_first ? t(`احادیث ${d.hadithnumber_first} تا ${d.hadithnumber_last}`, `Hadith ${d.hadithnumber_first}–${d.hadithnumber_last}`) : ""}</span></span></button>`;
         }).join("")}</div>`;
         box.querySelectorAll("[data-sec]").forEach((b) => b.onclick = () => go("hsection", { book, sec: b.dataset.sec, name: meta.sections[b.dataset.sec] }));
       }
     } catch (e) { box.innerHTML = ""; }
   }
   async function screenHSection({ book, sec, name }) {
-    view().innerHTML = topbar(esc(bookOf(book).ur)) + `<div class="view" id="hs"><p class="ltr small muted" style="text-align:right;margin:0">${esc(name || "")}</p><div class="spinner"></div></div>`;
+    const head = `<p class="ltr small muted" style="text-align:start;margin:0">${esc(name || "")}</p>`;
+    view().innerHTML = topbar(esc(bookName(book))) + `<div class="view" id="hs">${head}<div class="spinner"></div></div>`;
     try {
       const [a, u] = await Promise.all([
         getJSON(`${C.HADITH_API}/editions/ara-${book}/sections/${sec}.json`),
         getJSON(`${C.HADITH_API}/editions/urd-${book}/sections/${sec}.json`).catch(() => null)
       ]);
       const list = mergeHadith(book, a.hadiths, u && u.hadiths);
-      $("#hs").innerHTML = `<p class="ltr small muted" style="text-align:right;margin:0">${esc(name || "")}</p>` + (list.length ? list.map(hadithCardHTML).join("") : `<div class="empty">اس باب میں کوئی حدیث نہیں ملی۔</div>`);
+      $("#hs").innerHTML = head + (list.length ? list.map(hadithCardHTML).join("") : `<div class="empty">${t("اس باب میں کوئی حدیث نہیں ملی۔", "No hadith in this chapter.")}</div>`);
       wireHadithCards($("#hs"), list);
     } catch (e) { $("#hs").innerHTML = netErrorHTML(() => screenHSection({ book, sec, name })); }
   }
@@ -1390,7 +1458,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
   async function screenDaily() {
     const today = localDayKey();
-    view().innerHTML = topbar("روزانہ حدیث") + `<div class="view" id="dv"><div class="spinner"></div></div>`;
+    view().innerHTML = topbar(t("روزانہ حدیث", "Daily Hadith")) + `<div class="view" id="dv"><div class="spinner"></div></div>`;
     const cache = store.get("daily", {});
     let entry = cache[today], stale = false;
     if (!entry) {
@@ -1418,35 +1486,31 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     $("#dv").innerHTML = `
       <section class="daily-frame" style="background-image:url('${HERO_IMG}')">
         <div class="in">
-          <div class="label">آج کی حدیث</div>
+          <div class="label">${t("آج کی حدیث", "Hadith of the Day")}</div>
           <div class="date">${esc(fmtDate(Date.now()))} · ${esc(hijri())}</div>
-          ${stale ? `<div class="notice">انٹرنیٹ دستیاب نہیں — ${esc(h.date)} کی محفوظ حدیث دکھائی جا رہی ہے۔</div>` : ""}
+          ${stale ? `<div class="notice">${t(`انٹرنیٹ دستیاب نہیں — ${esc(h.date)} کی محفوظ حدیث دکھائی جا رہی ہے۔`, `No internet — showing the saved hadith from ${esc(h.date)}.`)}</div>` : ""}
           <article class="rcard">
             <div class="ar" style="font-size:22px">${esc(h.ar)}</div>
-            ${h.ur ? `<div class="ur">${esc(h.ur)}</div>` : `<div class="verify">اردو ترجمہ اس ماخذ میں دستیاب نہیں۔</div>`}
+            ${h.ur ? `<div class="ur" ${U}>${esc(h.ur)}</div>` : `<div class="verify">${t("اردو ترجمہ اس ماخذ میں دستیاب نہیں۔", "The Urdu translation isn't available in this source.")}</div>`}
             <div class="actions"><span class="ref">${esc(hadithRef(h))}</span></div>
           </article>
         </div>
       </section>
       <div class="row">
-        <button class="btn wa grow" id="dWa">${ICON.wa} واٹس ایپ پر شیئر</button>
-        <button class="btn gold grow" id="dImg">${ICON.image} تصویر بنائیں</button>
+        <button class="btn wa grow" id="dWa">${ICON.wa} ${t("واٹس ایپ پر شیئر", "Share on WhatsApp")}</button>
+        <button class="btn gold grow" id="dImg">${ICON.image} ${t("تصویر بنائیں", "Make image")}</button>
       </div>
       <div class="row">
-        <button class="btn grow ${on ? "keep-on" : ""}" id="dSave">${on ? ICON.bookmarkFill + " محفوظ ہے" : ICON.bookmark + " محفوظ کریں"}</button>
-        <button class="btn grow" id="dCopy">${ICON.copy} متن کاپی</button>
+        <button class="btn grow ${on ? "keep-on" : ""}" id="dSave">${on ? ICON.bookmarkFill + " " + t("محفوظ ہے", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save")}</button>
+        <button class="btn grow" id="dCopy">${ICON.copy} ${t("متن کاپی", "Copy text")}</button>
       </div>
-      <a class="btn block" href="${esc(C.ISLAM360_PLAY_URL)}" target="_blank" rel="noopener noreferrer">${ICON.external} Islam360 ایپ میں مزید احادیث (بیرونی لنک)</a>
-      <p class="small muted">روزانہ حدیث صحیح البخاری کی منتخب احادیث میں سے ہر دن بدلتی ہے اور پورا دن ایک ہی رہتی ہے۔ متن: fawazahmed0/hadith-api (اردو مترجم کا نام ماخذ میں درج نہیں)۔ اردو متن میں سند (راویوں کا سلسلہ) بھی شامل ہو سکتی ہے۔</p>`;
-    const payload = { kind: "hadith", ar: h.ar, ur: h.ur, ref: hadithRef(h), text: hadithText(h), title: "آج کی حدیث" };
+      <p class="small muted">${t("روزانہ حدیث صحیح البخاری کی منتخب احادیث میں سے ہر دن بدلتی ہے اور پورا دن ایک ہی رہتی ہے۔ متن: fawazahmed0/hadith-api (اردو مترجم کا نام ماخذ میں درج نہیں)۔ اردو متن میں سند (راویوں کا سلسلہ) بھی شامل ہو سکتی ہے۔",
+        "The daily hadith changes each day from a selection of Sahih al-Bukhari and stays the same all day. Text: fawazahmed0/hadith-api (the source does not name the Urdu translator). The Urdu text may include the chain of narrators.")}</p>`;
+    const payload = { kind: "hadith", ar: h.ar, ur: h.ur, ref: hadithRef(h), text: hadithText(h), title: t("آج کی حدیث", "Hadith of the Day") };
     $("#dWa").onclick = () => shareWhatsApp(payload);
     $("#dImg").onclick = () => shareSheet(payload);
     $("#dCopy").onclick = () => copyText(payload.text);
-    $("#dSave").onclick = () => {
-      let bm = store.get("bm.hadith", []); const has = bm.some((x) => x.key === key);
-      bm = has ? bm.filter((x) => x.key !== key) : [{ key, ...h, savedAt: Date.now() }, ...bm];
-      store.set("bm.hadith", bm); screenDaily(); toast(has ? "ہٹا دیا گیا" : "حدیث محفوظ ہو گئی");
-    };
+    $("#dSave").onclick = () => { toggleHadithBm(h); screenDaily(); };
   }
 
   /* ================= share card (canvas) ================= */
@@ -1465,8 +1529,8 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       const words = para.split(/\s+/).filter(Boolean);
       let line = "";
       for (const w of words) {
-        const t = line ? line + " " + w : w;
-        if (ctx.measureText(t).width > maxW && line) { out.push(line); line = w; } else line = t;
+        const x = line ? line + " " + w : w;
+        if (ctx.measureText(x).width > maxW && line) { out.push(line); line = w; } else line = x;
       }
       if (line) out.push(line);
     }
@@ -1478,8 +1542,8 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     const c = document.createElement("canvas"); const ctx = c.getContext("2d");
     const arFont = kind === "ayah" ? '"Amiri Quran","Amiri",serif' : '"Amiri",serif';
     const urFont = '"Noto Nastaliq Urdu","Noto Naskh Arabic",serif';
+    const uiFont = LANG === "en" ? '"Marcellus","Georgia",serif' : urFont;
     ctx.direction = "rtl";
-    // size the text: shrink until it fits a comfortable height, otherwise grow the canvas
     let arSize = 50, urSize = 32, arLines, urLines, H;
     for (let i = 0; i < 12; i++) {
       ctx.font = `${arSize}px ${arFont}`; arLines = wrapLines(ctx, ar, inner);
@@ -1490,41 +1554,36 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     }
     H = Math.max(1350, Math.ceil(H));
     c.width = W; c.height = H;
-    ctx.direction = "rtl";
-    // background
     const g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, "#0b3a2a"); g.addColorStop(0.5, "#06281c"); g.addColorStop(1, "#03140e");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-    // subtle star lattice
     ctx.strokeStyle = "rgba(214,178,94,0.07)"; ctx.lineWidth = 1.5;
     for (let y = 0; y < H + 90; y += 90) for (let x = 0; x < W + 90; x += 90) star(ctx, x, y, 30);
-    // borders
     ctx.strokeStyle = "#d6b25e"; ctx.lineWidth = 4; roundRect(ctx, 36, 36, W - 72, H - 72, 34); ctx.stroke();
     ctx.strokeStyle = "rgba(214,178,94,0.5)"; ctx.lineWidth = 1.5; roundRect(ctx, 52, 52, W - 104, H - 104, 26); ctx.stroke();
     for (const [x, y] of [[52, 52], [W - 52, 52], [52, H - 52], [W - 52, H - 52]]) { ctx.fillStyle = "#d6b25e"; star(ctx, x, y, 16, true); }
-    // arch header
     ctx.strokeStyle = "#d6b25e"; ctx.lineWidth = 3;
     ctx.beginPath(); ctx.moveTo(W / 2 - 170, 200); ctx.lineTo(W / 2 - 170, 150);
     ctx.quadraticCurveTo(W / 2 - 160, 96, W / 2, 70); ctx.quadraticCurveTo(W / 2 + 160, 96, W / 2 + 170, 150); ctx.lineTo(W / 2 + 170, 200); ctx.stroke();
+    ctx.direction = LANG === "en" ? "ltr" : "rtl";
     ctx.textAlign = "center"; ctx.fillStyle = "#f0dfa8";
-    ctx.font = `40px ${urFont}`; ctx.fillText(title || (kind === "ayah" ? "آیتِ مبارکہ" : "حدیثِ مبارکہ"), W / 2, 178);
-    // arabic
+    ctx.font = `${LANG === "en" ? 36 : 40}px ${uiFont}`;
+    ctx.fillText(title || (kind === "ayah" ? t("آیتِ مبارکہ", "Holy Ayah") : t("حدیثِ مبارکہ", "Blessed Hadith")), W / 2, 178);
+    ctx.direction = "rtl";
     let y = 300;
     ctx.fillStyle = "#fbf6e7"; ctx.font = `${arSize}px ${arFont}`;
     for (const l of arLines) { ctx.fillText(l, W / 2, y); y += arSize * 1.9; }
-    // divider
     y += 10; ctx.strokeStyle = "rgba(214,178,94,.7)"; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(W / 2 - 220, y); ctx.lineTo(W / 2 - 24, y); ctx.moveTo(W / 2 + 24, y); ctx.lineTo(W / 2 + 220, y); ctx.stroke();
     ctx.fillStyle = "#d6b25e"; star(ctx, W / 2, y, 12, true);
     y += 70;
-    // urdu
     ctx.fillStyle = "#e8efe9"; ctx.font = `${urSize}px ${urFont}`; ctx.textAlign = "right";
     for (const l of urLines) { ctx.fillText(l, W - pad, y); y += urSize * 2.15; }
-    // reference + branding
     const fy = H - 170;
-    ctx.textAlign = "center"; ctx.fillStyle = "#d6b25e"; ctx.font = `28px ${urFont}`;
+    ctx.direction = LANG === "en" ? "ltr" : "rtl";
+    ctx.textAlign = "center"; ctx.fillStyle = "#d6b25e"; ctx.font = `${LANG === "en" ? 26 : 28}px ${uiFont}`;
     ctx.fillText(ref, W / 2, Math.max(y + 20, fy));
-    ctx.fillStyle = "#f0dfa8"; ctx.font = `30px ${urFont}`; ctx.fillText(C.appNameUr, W / 2, H - 100);
+    ctx.direction = "rtl"; ctx.fillStyle = "#f0dfa8"; ctx.font = `30px ${urFont}`; ctx.fillText(C.appNameUr, W / 2, H - 100);
     ctx.direction = "ltr"; ctx.font = `22px "Marcellus",serif`; ctx.fillStyle = "rgba(240,223,168,.8)";
     ctx.fillText(C.appName.toUpperCase().split("").join(" ") + (C.APP_DOWNLOAD_URL ? "   ·   " + shortUrl(C.APP_DOWNLOAD_URL) : ""), W / 2, H - 66);
     return new Promise((res) => c.toBlob((b) => res(b), "image/png"));
@@ -1541,7 +1600,6 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
   function waLink(text) { return "https://wa.me/?text=" + encodeURIComponent(text); }
   async function shareWhatsApp(p) {
-    // Prefer the system share sheet with the image (WhatsApp appears there on Android).
     try {
       const blob = await makeCard(p);
       const file = new File([blob], "noor-e-tasbeeh.png", { type: "image/png" });
@@ -1550,11 +1608,10 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         return;
       }
     } catch (e) { if (e && e.name === "AbortError") return; }
-    // Fallback: open WhatsApp with the text (and download link, if set).
     shareSheet(p, true);
   }
   async function shareSheet(p, waFirst) {
-    const sh = openSheet(`<h2>شیئر کریں</h2><div class="spinner"></div>`);
+    const sh = openSheet(`<h2>${t("شیئر کریں", "Share")}</h2><div class="spinner"></div>`);
     let url = "", file = null;
     try {
       const blob = await makeCard(p);
@@ -1562,22 +1619,23 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       file = new File([blob], "noor-e-tasbeeh.png", { type: "image/png" });
     } catch (e) { /* canvas unavailable */ }
     const canFiles = !!(file && navigator.canShare && (() => { try { return navigator.canShare({ files: [file] }); } catch (e) { return false; } })());
-    sh.innerHTML = `<div class="grab"></div><h2>شیئر کریں</h2>
-      ${url ? `<img class="preview" src="${url}" alt="شیئر کارڈ کی تصویر">` : ""}
-      ${waFirst ? `<p class="small muted" style="margin:0">اس ڈیوائس پر تصویر براہِ راست شیئر نہیں ہو سکی۔ واٹس ایپ پر متن بھیجیں، یا تصویر کو دبا کر محفوظ کریں اور پھر واٹس ایپ میں لگائیں۔</p>` : ""}
-      ${canFiles ? `<button class="btn gold block" data-sfile>${ICON.share} تصویر شیئر کریں (واٹس ایپ وغیرہ)</button>` : ""}
-      <a class="btn wa block" href="${waLink(p.text)}" target="_blank" rel="noopener noreferrer">${ICON.wa} واٹس ایپ پر متن بھیجیں</a>
-      ${url ? `<a class="btn block" href="${url}" download="noor-e-tasbeeh.png">${ICON.download} تصویر محفوظ کریں</a>` : ""}
-      <button class="btn block" data-scopy>${ICON.copy} متن کاپی کریں</button>
-      <p class="small muted" style="margin:0">${C.APP_DOWNLOAD_URL ? "شیئر متن میں ایپ کا ڈاؤن لوڈ لنک شامل ہے۔" : "ڈاؤن لوڈ لنک ابھی شامل نہیں (APK اپ لوڈ ہونے کے بعد config.js میں لگایا جائے گا)۔"}</p>
-      <button class="btn ghost" data-close>بند کریں</button>`;
+    sh.innerHTML = `<div class="grab"></div><h2>${t("شیئر کریں", "Share")}</h2>
+      ${url ? `<img class="preview" src="${url}" alt="${t("شیئر کارڈ کی تصویر", "Share card image")}">` : ""}
+      ${waFirst ? `<p class="small muted" style="margin:0">${t("اس ڈیوائس پر تصویر براہِ راست شیئر نہیں ہو سکی۔ واٹس ایپ پر متن بھیجیں، یا تصویر کو دبا کر محفوظ کریں اور پھر واٹس ایپ میں لگائیں۔", "This device couldn't share the image directly. Send the text on WhatsApp, or long-press the image to save it and attach it in WhatsApp.")}</p>` : ""}
+      ${canFiles ? `<button class="btn gold block" data-sfile>${ICON.share} ${t("تصویر شیئر کریں (واٹس ایپ وغیرہ)", "Share image (WhatsApp etc.)")}</button>` : ""}
+      <a class="btn wa block" href="${waLink(p.text)}" target="_blank" rel="noopener noreferrer">${ICON.wa} ${t("واٹس ایپ پر متن بھیجیں", "Send text on WhatsApp")}</a>
+      ${url ? `<a class="btn block" href="${url}" download="noor-e-tasbeeh.png">${ICON.download} ${t("تصویر محفوظ کریں", "Save image")}</a>` : ""}
+      <button class="btn block" data-scopy>${ICON.copy} ${t("متن کاپی کریں", "Copy text")}</button>
+      <p class="small muted" style="margin:0">${C.APP_DOWNLOAD_URL ? t("شیئر متن میں ایپ کا ڈاؤن لوڈ لنک شامل ہے۔", "The shared text includes the app download link.") : t("ڈاؤن لوڈ لنک ابھی شامل نہیں (APK اپ لوڈ ہونے کے بعد لگایا جائے گا)۔", "No download link yet (it will be added after the APK is uploaded).")}</p>
+      <button class="btn ghost" data-close>${t("بند کریں", "Close")}</button>`;
     const sf = sh.querySelector("[data-sfile]");
-    if (sf) sf.onclick = async () => { try { await navigator.share({ files: [file], text: p.text }); } catch (e) { if (e.name !== "AbortError") toast("شیئر نہیں ہو سکا"); } };
+    if (sf) sf.onclick = async () => { try { await navigator.share({ files: [file], text: p.text }); } catch (e) { if (e.name !== "AbortError") toast(t("شیئر نہیں ہو سکا", "Couldn't share")); } };
     sh.querySelector("[data-scopy]").onclick = () => copyText(p.text);
   }
 
   /* ================= AZKAR ================= */
-  function resolveItem(section, it) {
+  const PRAYER_EN = { fajr: "Fajr", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" };
+  function resolveItem(it) {
     if (it.same) {
       const base = AZKAR_DATA.morning.items.find((x) => x.id === it.same);
       return { ...base, ...it, id: it.id };
@@ -1590,58 +1648,58 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     const circ = 2 * Math.PI * 34;
     let step = "";
     if (it.steps) {
-      let acc = 0; for (const s of it.steps) { acc += s.n; if (got < acc) { step = `اب: ${s.label}`; break; } }
-      if (!step) step = "مکمل";
+      let acc = 0; for (const s of it.steps) { acc += s.n; if (got < acc) { step = t("اب: ", "Now: ") + s.label; break; } }
+      if (!step) step = t("مکمل", "Done");
     }
     return `<article class="rcard" data-z="${it.id}">
-      <div class="head"><span class="badge">${idx}</span><span class="title">${esc(it.title || "")}</span></div>
+      <div class="head"><span class="badge">${idx}</span><span class="title" ${U}>${esc(it.title || "")}</span></div>
       <div class="ar ${it.quran ? "quran" : ""}">${esc(it.ar)}</div>
-      ${it.countNote ? `<div class="countnote">(${esc(it.countNote)})</div>` : ""}
-      <div class="ur">${esc(it.ur)}</div>
-      ${it.note ? `<div class="note">${esc(it.note)}</div>` : ""}
-      ${it.ref ? `<span class="ref">حوالہ: ${esc(it.ref)}</span>` : ""}
-      ${it.verify ? `<details class="verify"><summary>تصدیق درکار ⓘ</summary>${esc(it.verify)}</details>` : ""}
+      ${it.countNote ? `<div class="countnote" ${U}>(${esc(it.countNote)})</div>` : ""}
+      <div class="ur" ${U}>${esc(it.ur)}</div>
+      ${it.note ? `<div class="note" ${U}>${esc(it.note)}</div>` : ""}
+      ${it.ref ? `<span class="ref" ${U}>حوالہ: ${esc(it.ref)}</span>` : ""}
       <div class="zfoot">
         <div class="grow">
-          <div class="zstep">${target > 1 ? `پڑھنے کی تعداد: ${urNum(target)} مرتبہ` : "ایک مرتبہ"}${step ? " · " + esc(step) : ""}</div>
-          ${got ? `<button class="zreset" data-zreset="${it.id}">یہ گنتی صفر کریں</button>` : ""}
+          <div class="zstep">${target > 1 ? t(`پڑھنے کی تعداد: ${N(target)} مرتبہ`, `Recite ${target} times`) : t("ایک مرتبہ", "Once")}${step ? " · " + esc(step) : ""}</div>
+          ${got ? `<button class="zreset" data-zreset="${it.id}">${t("یہ گنتی صفر کریں", "Reset this count")}</button>` : ""}
         </div>
-        <button class="zcount ${done ? "done" : ""}" data-zc="${it.id}" aria-label="گنتی بڑھائیں">
+        <button class="zcount ${done ? "done" : ""}" data-zc="${it.id}" aria-label="${t("گنتی بڑھائیں", "Count one")}">
           <svg class="ring" viewBox="0 0 74 74" aria-hidden="true"><circle cx="37" cy="37" r="34" fill="none" stroke="#e7dcb8" stroke-width="4"/><circle cx="37" cy="37" r="34" fill="none" stroke="${done ? "#d6b25e" : "#128060"}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ * (1 - pct)}"/></svg>
-          <span class="v">${done ? "✓" : got}<small>${done ? "مکمل" : "/ " + target}</small></span>
+          <span class="v">${done ? "✓" : got}<small>${done ? t("مکمل", "Done") : "/ " + target}</small></span>
         </button>
       </div>
     </article>`;
   }
   function screenAzkar(kind) {
     const isPrayer = kind === "prayer";
-    const title = isPrayer ? AZKAR_DATA.postPrayer.title : AZKAR_DATA[kind].title;
+    const title = isPrayer ? t(AZKAR_DATA.postPrayer.title, "Azkar After Prayer") : kind === "morning" ? t(AZKAR_DATA.morning.title, "Morning Azkar") : t(AZKAR_DATA.evening.title, "Evening Azkar");
     const pkey = isPrayer ? store.get("prayerTab", guessPrayer()) : null;
-    let items = [], groups = [];
+    const groups = [];
     if (isPrayer) {
       const P = AZKAR_DATA.postPrayer, pr = P.prayers[pkey];
       const mk = (id) => ({ id, ...P.items[id], count: (pr.counts && pr.counts[id]) || P.items[id].count });
-      groups.push({ label: `${pr.name} کی نماز کے بعد`, items: pr.items.map(mk) });
-      if (pr.extra) groups.push({ label: pr.extraLabel, items: pr.extra.map(mk) });
-      groups.push({ label: P.generalLabel, items: P.general.map(mk) });
+      groups.push({ label: t(`${pr.name} کی نماز کے بعد`, `After the ${PRAYER_EN[pkey]} prayer`), items: pr.items.map(mk) });
+      if (pr.extra) groups.push({ label: t(pr.extraLabel, "After Witr (Witr is not an obligatory prayer; this dhikr is said after it)"), items: pr.extra.map(mk) });
+      groups.push({ label: t(P.generalLabel, "Additional dua (the card does not tie it to a specific prayer)"), items: P.general.map(mk) });
     } else {
-      groups.push({ label: "", items: AZKAR_DATA[kind].items.map((it) => resolveItem(kind, it)) });
+      groups.push({ label: "", items: AZKAR_DATA[kind].items.map(resolveItem) });
     }
-    items = groups.flatMap((g) => g.items);
+    const items = groups.flatMap((g) => g.items);
     const pk = `azkar.${kind}${isPrayer ? "." + pkey : ""}.${localDayKey()}`;
     const prog = store.get(pk, {});
     const doneCount = items.filter((it) => (prog[it.id] || 0) >= it.count).length;
     let idx = 0;
     view().innerHTML = topbar(title) + `<div class="view" id="zv">
-      ${isPrayer ? `<div class="seg" role="group" aria-label="نماز منتخب کریں">${Object.entries(AZKAR_DATA.postPrayer.prayers).map(([k, v]) => `<button data-pr="${k}" aria-pressed="${k === pkey}">${v.name}</button>`).join("")}</div>` : ""}
+      ${isPrayer ? `<div class="seg" role="group" aria-label="${t("نماز منتخب کریں", "Choose prayer")}">${Object.entries(AZKAR_DATA.postPrayer.prayers).map(([k, v]) => `<button data-pr="${k}" aria-pressed="${k === pkey}">${t(v.name, PRAYER_EN[k])}</button>`).join("")}</div>` : ""}
       <div class="card" style="display:flex;flex-direction:column;gap:6px">
-        <div class="row"><span class="grow small">آج کی پیش رفت: <b style="color:var(--gold)">${urNum(doneCount)} / ${urNum(items.length)}</b> مکمل</span>
-        <button class="btn ghost" id="zResetAll" style="min-height:36px;font-size:12.5px">سب صفر کریں</button></div>
+        <div class="row"><span class="grow small">${t("آج کی پیش رفت:", "Today's progress:")} <b style="color:var(--gold)">${N(doneCount)} / ${N(items.length)}</b> ${t("مکمل", "done")}</span>
+        <button class="btn ghost" id="zResetAll" style="min-height:36px;font-size:12.5px">${t("سب صفر کریں", "Reset all")}</button></div>
         <div class="progress"><i style="width:${(doneCount / items.length) * 100}%"></i></div>
-        <span class="small muted">پیش رفت آج کی تاریخ کے ساتھ اسی فون پر محفوظ رہتی ہے؛ کل نئے سرے سے شروع ہو گی۔</span>
+        <span class="small muted">${t("پیش رفت آج کی تاریخ کے ساتھ اسی فون پر محفوظ رہتی ہے؛ کل نئے سرے سے شروع ہو گی۔", "Progress is saved on this phone for today; it starts fresh tomorrow.")}</span>
       </div>
-      ${isPrayer ? `<div class="notice">ماخذ: ایپ کے مالک کی فراہم کردہ اذکار کی تصویر (متن، گنتی اور حوالے جیسے چھپے ہیں)۔ یہ مسنون اذکار ہیں، فرض نہیں۔ جہاں «تصدیق درکار» لکھا ہے وہاں کارڈ واضح نہیں تھا۔</div>` :
-        `<div class="notice">حوالہ جات: حصن المسلم میں درج احادیث۔ قرآنی سورتوں اور آیت الکرسی کا اردو ترجمہ مالک کے اذکار کارڈ سے ہے۔ <b>باقی دعاؤں کا اردو ترجمہ</b> اس ورژن کے لیے تیار کیا گیا ہے؛ کسی عالم یا مستند اردو حصن المسلم سے نظرِ ثانی باقی ہے۔</div>`}
+      ${isPrayer ? `<div class="notice">${t("ماخذ: ایپ کے مالک کی فراہم کردہ اذکار کی تصویر (متن، گنتی اور حوالے جیسے چھپے ہیں)۔ یہ مسنون اذکار ہیں، فرض نہیں۔", "Source: the Azkar card provided by the app owner (text, counts and references as printed). These are Sunnah azkar, not obligations.")}</div>` :
+        `<div class="notice">${t("حوالہ جات: حصن المسلم میں درج احادیث۔ قرآنی سورتوں اور آیت الکرسی کا اردو ترجمہ مالک کے اذکار کارڈ سے ہے۔ <b>باقی دعاؤں کا اردو ترجمہ</b> اس ورژن کے لیے تیار کیا گیا ہے؛ کسی عالم یا مستند اردو حصن المسلم سے نظرِ ثانی باقی ہے۔",
+          "References: hadith listed in Hisn al-Muslim. The Urdu translation of the surahs and Ayat al-Kursi comes from the owner's Azkar card. <b>The Urdu translation of the other duas</b> was prepared for this version and is awaiting review by a scholar or a published Urdu Hisn al-Muslim.")}</div>`}
       ${groups.map((g) => `${g.label ? `<p class="section-label">${esc(g.label)}</p>` : ""}${g.items.map((it) => azkarCardHTML(it, ++idx, prog[it.id] || 0, it.count)).join("")}`).join("")}
     </div>`;
     const rerender = () => { const y = window.scrollY; screenAzkar(kind); window.scrollTo(0, y); };
@@ -1651,7 +1709,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       document.querySelectorAll("[data-zc]").forEach((b) => b.onclick = () => {
         const it = items.find((x) => x.id === b.dataset.zc); const p = store.get(pk, {});
         const v = p[it.id] || 0;
-        if (v >= it.count) { toast("یہ ذکر مکمل ہو چکا"); return; }
+        if (v >= it.count) { toast(t("یہ ذکر مکمل ہو چکا", "This dhikr is complete")); return; }
         p[it.id] = v + 1; store.set(pk, p); vibrate(p[it.id] >= it.count ? [40, 40, 80] : 10);
         if (p[it.id] >= it.count) { rerender(); return; }
         const card = b.closest(".rcard"); const i = [...document.querySelectorAll("#zv .rcard")].indexOf(card) + 1;
@@ -1660,7 +1718,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       });
     };
     rebind();
-    $("#zResetAll").onclick = () => confirmBox({ title: "آج کی پیش رفت صفر کریں؟", body: "اس حصے کی آج کی تمام گنتیاں صفر ہو جائیں گی۔", ok: "ہاں، صفر کریں", danger: true, onOk() { store.del(pk); rerender(); } });
+    $("#zResetAll").onclick = () => confirmBox({ title: t("آج کی پیش رفت صفر کریں؟", "Reset today's progress?"), body: t("اس حصے کی آج کی تمام گنتیاں صفر ہو جائیں گی۔", "All of today's counts in this section will go back to zero."), ok: t("ہاں، صفر کریں", "Yes, reset"), danger: true, onOk() { store.del(pk); rerender(); } });
   }
   function guessPrayer() {
     const h = new Date().getHours();
@@ -1676,49 +1734,50 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     const hadith = store.get("bm.hadith", []);
     let body = "";
     if (tab === "tasbeeh") {
-      body = `<div class="notice">۳۰ دن سے زیادہ غیر استعمال شدہ تسبیحات <b>ایپ کھلنے یا اس فہرست کو کھولنے پر</b> خود حذف ہو جاتی ہیں (پس منظر میں کوئی سروس نہیں چلتی)۔ جن کو «ہمیشہ محفوظ» کیا جائے وہ کبھی خود حذف نہیں ہوتیں۔</div>` +
+      body = `<div class="notice">${t("۳۰ دن سے زیادہ غیر استعمال شدہ تسبیحات <b>ایپ کھلنے یا اس فہرست کو کھولنے پر</b> خود حذف ہو جاتی ہیں (پس منظر میں کوئی سروس نہیں چلتی)۔ جن کو «ہمیشہ محفوظ» کیا جائے وہ کبھی خود حذف نہیں ہوتیں۔",
+        "Tasbeehs unused for more than 30 days are removed <b>when the app or this list is opened</b> (nothing runs in the background). Those marked Keep Forever are never removed automatically.")}</div>` +
         (sessions.length ? sessions.map((s) => {
           const left = s.keepForever ? null : Math.max(0, C.TASBEEH_EXPIRY_DAYS - Math.floor((Date.now() - s.updatedAt) / DAY));
           return `<div class="sess">
             <div class="top"><span class="nm">${esc(s.name)}</span><span class="cnt">${s.count}</span></div>
-            <div class="meta">بنائی گئی: ${esc(fmtDate(s.createdAt))} · آخری استعمال: ${esc(fmtDateTime(s.updatedAt))}${s.target ? " · ہدف " + urNum(s.target) : ""}<br>${s.keepForever ? "ہمیشہ محفوظ ★" : `${urNum(left)} دن بعد خود حذف ہو گی (اگر استعمال نہ ہوئی)`}</div>
+            <div class="meta">${t("بنائی گئی: ", "Created: ")}${esc(fmtDate(s.createdAt))} · ${t("آخری استعمال: ", "Last used: ")}${esc(fmtDateTime(s.updatedAt))}${s.target ? " · " + t("ہدف ", "Target ") + N(s.target) : ""}<br>${s.keepForever ? t("ہمیشہ محفوظ ★", "Kept forever ★") : t(`${N(left)} دن بعد خود حذف ہو گی (اگر استعمال نہ ہوئی)`, `Removed in ${left} days if not used`)}</div>
             <div class="acts">
-              <button class="btn green" data-res="${s.id}">جاری رکھیں</button>
-              <button class="btn ${s.keepForever ? "keep-on" : ""}" data-keep="${s.id}">${s.keepForever ? "★ ہمیشہ محفوظ" : "☆ ہمیشہ محفوظ رکھیں"}</button>
-              <button class="btn danger" data-del="${s.id}">حذف</button>
+              <button class="btn green" data-res="${s.id}">${t("جاری رکھیں", "Continue")}</button>
+              <button class="btn ${s.keepForever ? "keep-on" : ""}" data-keep="${s.id}">${s.keepForever ? t("★ ہمیشہ محفوظ", "★ Kept forever") : t("☆ ہمیشہ محفوظ رکھیں", "☆ Keep forever")}</button>
+              <button class="btn danger" data-del="${s.id}">${t("حذف", "Delete")}</button>
             </div></div>`;
-        }).join("") : `<div class="empty">کوئی محفوظ تسبیح نہیں۔ تسبیح کی اسکرین پر «محفوظ کریں» دبائیں۔</div>`);
+        }).join("") : `<div class="empty">${t("کوئی محفوظ تسبیح نہیں۔ تسبیح کی اسکرین پر «محفوظ کریں» دبائیں۔", "No saved tasbeehs. Tap Save on the Tasbeeh screen.")}</div>`);
     } else if (tab === "ayat") {
       body = ayat.length ? ayat.map((a, i) => `<article class="rcard">
-          <div class="ar quran" style="font-size:22px">${esc(a.ar)}</div><div class="ur">${esc(a.ur)}</div>
-          <div class="actions"><span class="ref">سورۃ ${esc(a.sname)} (${urNum(a.s)}) : آیت ${urNum(a.a)}</span>
-          <button class="rbtn" data-oa="${i}">کھولیں</button><button class="rbtn" data-ra="${i}">ہٹائیں</button></div></article>`).join("")
-        : `<div class="empty">کوئی آیت محفوظ نہیں۔ قرآن میں کسی آیت پر «محفوظ کریں» دبائیں۔</div>`;
+          <div class="ar quran" style="font-size:22px">${esc(a.ar)}</div><div class="ur" ${U}>${esc(a.ur)}</div>
+          <div class="actions"><span class="ref">${esc(ayahRef(a))}</span>
+          <button class="rbtn" data-oa="${i}">${t("کھولیں", "Open")}</button><button class="rbtn" data-ra="${i}">${t("ہٹائیں", "Remove")}</button></div></article>`).join("")
+        : `<div class="empty">${t("کوئی آیت محفوظ نہیں۔ قرآن میں کسی آیت پر «محفوظ کریں» دبائیں۔", "No saved ayahs. Tap Save on any ayah in the Quran.")}</div>`;
     } else {
       body = hadith.length ? hadith.map((h, i) => `<article class="rcard">
-          <div class="ar" style="font-size:21px">${esc(h.ar)}</div>${h.ur ? `<div class="ur">${esc(h.ur)}</div>` : ""}
+          <div class="ar" style="font-size:21px">${esc(h.ar)}</div>${h.ur ? `<div class="ur" ${U}>${esc(h.ur)}</div>` : ""}
           <div class="actions"><span class="ref">${esc(hadithRef(h))}</span>
-          <button class="rbtn" data-sh2="${i}">${ICON.share} شیئر</button><button class="rbtn" data-rh="${i}">ہٹائیں</button></div></article>`).join("")
-        : `<div class="empty">کوئی حدیث محفوظ نہیں۔</div>`;
+          <button class="rbtn" data-sh2="${i}">${ICON.share} ${t("شیئر", "Share")}</button><button class="rbtn" data-rh="${i}">${t("ہٹائیں", "Remove")}</button></div></article>`).join("")
+        : `<div class="empty">${t("کوئی حدیث محفوظ نہیں۔", "No saved hadith.")}</div>`;
     }
-    view().innerHTML = topbar("محفوظ شدہ") + `<div class="view">
-      <div class="chips" role="group" aria-label="قسم">
-        <button class="chip" data-tab="tasbeeh" aria-pressed="${tab === "tasbeeh"}">تسبیحات (${urNum(sessions.length)})</button>
-        <button class="chip" data-tab="ayat" aria-pressed="${tab === "ayat"}">آیات (${urNum(ayat.length)})</button>
-        <button class="chip" data-tab="hadith" aria-pressed="${tab === "hadith"}">احادیث (${urNum(hadith.length)})</button>
+    view().innerHTML = topbar(t("محفوظ شدہ", "Saved Items")) + `<div class="view">
+      <div class="chips" role="group" aria-label="${t("قسم", "Type")}">
+        <button class="chip" data-tab="tasbeeh" aria-pressed="${tab === "tasbeeh"}">${t("تسبیحات", "Tasbeehs")} (${N(sessions.length)})</button>
+        <button class="chip" data-tab="ayat" aria-pressed="${tab === "ayat"}">${t("آیات", "Ayahs")} (${N(ayat.length)})</button>
+        <button class="chip" data-tab="hadith" aria-pressed="${tab === "hadith"}">${t("احادیث", "Hadith")} (${N(hadith.length)})</button>
       </div>
       ${body}
-      <p class="small muted">تمام ریکارڈ صرف اسی فون/براؤزر میں محفوظ ہیں۔ براؤزر ڈیٹا صاف کرنے یا ایپ ان انسٹال کرنے سے یہ مٹ سکتے ہیں۔</p>
+      <p class="small muted">${t("تمام ریکارڈ صرف اسی فون/براؤزر میں محفوظ ہیں۔ براؤزر ڈیٹا صاف کرنے یا ایپ ان انسٹال کرنے سے یہ مٹ سکتے ہیں۔", "All records are stored only on this phone/browser. Clearing browser data or uninstalling the app can erase them.")}</p>
     </div>`;
     document.querySelectorAll("[data-tab]").forEach((b) => b.onclick = () => go("saved", { tab: b.dataset.tab }, false));
     document.querySelectorAll("[data-res]").forEach((b) => b.onclick = () => { resumeSession(b.dataset.res); go("tasbeeh"); });
     document.querySelectorAll("[data-keep]").forEach((b) => b.onclick = () => {
       const list = getSessions(); const s = list.find((x) => x.id === b.dataset.keep); s.keepForever = !s.keepForever; saveSessions(list);
-      toast(s.keepForever ? "اب یہ ہمیشہ محفوظ رہے گی" : "خودکار حذف دوبارہ فعال"); screenSaved({ tab });
+      toast(s.keepForever ? t("اب یہ ہمیشہ محفوظ رہے گی", "This will now be kept forever") : t("خودکار حذف دوبارہ فعال", "Automatic removal turned back on")); screenSaved({ tab });
     });
     document.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => {
       const s = getSessions().find((x) => x.id === b.dataset.del);
-      confirmBox({ title: "تسبیح حذف کریں؟", body: `«${s.name}» (${s.count}) مستقل طور پر حذف ہو جائے گی۔`, ok: "حذف کریں", danger: true, onOk() {
+      confirmBox({ title: t("تسبیح حذف کریں؟", "Delete this tasbeeh?"), body: t(`«${s.name}» (${s.count}) مستقل طور پر حذف ہو جائے گی۔`, `“${s.name}” (${s.count}) will be deleted permanently.`), ok: t("حذف کریں", "Delete"), danger: true, onOk() {
         saveSessions(getSessions().filter((x) => x.id !== s.id));
         const c = getCurrent(); if (c.id === s.id) { c.id = null; setCurrent(c); }
         screenSaved({ tab });
@@ -1734,41 +1793,46 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   let installPrompt = null;
   window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installPrompt = e; });
   function screenAbout() {
-    view().innerHTML = topbar("ایپ کے بارے میں") + `<div class="view">
+    view().innerHTML = topbar(t("ایپ کے بارے میں", "About the App")) + `<div class="view">
       <section class="about-dua">
-        <h3>دعائے مغفرت</h3>
-        <p>اس ایپ کو استعمال کرنے والے تمام حضرات سے گزارش ہے کہ میرے والدِ محترم <b style="color:var(--gold-soft)">محمد عاشق مرحوم</b> کے لیے دعائے مغفرت فرمائیں۔</p>
-        <p>اللہ تعالیٰ ان کی مغفرت فرمائے، ان پر اپنی رحمت نازل فرمائے اور انہیں جنت الفردوس میں اعلیٰ مقام عطا فرمائے۔ آمین۔</p>
+        <h3 ${U}>دعائے مغفرت</h3>
+        <p ${U}>اس ایپ کو استعمال کرنے والے تمام حضرات سے گزارش ہے کہ میرے والدِ محترم <b style="color:var(--gold-soft)">محمد عاشق مرحوم</b> کے لیے دعائے مغفرت فرمائیں۔</p>
+        <p ${U}>اللہ تعالیٰ ان کی مغفرت فرمائے، ان پر اپنی رحمت نازل فرمائے اور انہیں جنت الفردوس میں اعلیٰ مقام عطا فرمائے۔ آمین۔</p>
+        ${LANG === "en" ? `<p class="en-dua">I humbly request everyone who uses this app to pray for the forgiveness of my respected late father, <b>Muhammad Ashiq</b>. May Allah forgive him, send His mercy upon him, and grant him a high place in Jannat-ul-Firdaus. Ameen.</p>` : ""}
       </section>
 
       <div class="card">
-        <b style="color:var(--gold)">ایپ ڈاؤن لوڈ کریں</b>
+        <b style="color:var(--gold)">${t("ایپ ڈاؤن لوڈ کریں", "Download the App")}</b>
         ${C.APP_DOWNLOAD_URL
-          ? `<p class="small" style="margin:4px 0 8px">اینڈرائیڈ APK کا لنک:</p><a class="btn gold block" href="${esc(C.APP_DOWNLOAD_URL)}" target="_blank" rel="noopener noreferrer">${ICON.download} APK ڈاؤن لوڈ کریں</a>
-             <p class="small muted ltr" style="margin:6px 0 0;text-align:right;overflow-wrap:anywhere">${esc(C.APP_DOWNLOAD_URL)}</p>`
-          : `<p class="small muted" style="margin:4px 0 0">ڈاؤن لوڈ لنک ابھی دستیاب نہیں۔ APK بننے اور اپ لوڈ ہونے کے بعد یہاں لنک آئے گا۔</p>`}
-        <button class="btn block" id="installBtn" style="margin-top:8px">${ICON.download} اس فون پر انسٹال کریں (ویب ایپ)</button>
-        <p class="small muted" style="margin:6px 0 0">ویب ایپ (PWA) انسٹال کرنے سے ہوم اسکرین پر آئیکن آ جاتا ہے، مگر یہ مکمل APK جیسی نہیں ہوتی۔</p>
+          ? `<p class="small" style="margin:4px 0 8px">${t("اینڈرائیڈ APK کا لنک:", "Android APK link:")}</p><a class="btn gold block" href="${esc(C.APP_DOWNLOAD_URL)}" target="_blank" rel="noopener noreferrer">${ICON.download} ${t("APK ڈاؤن لوڈ کریں", "Download APK")}</a>
+             <p class="small muted ltr" style="margin:6px 0 0;text-align:start;overflow-wrap:anywhere">${esc(C.APP_DOWNLOAD_URL)}</p>`
+          : `<p class="small muted" style="margin:4px 0 0">${t("ڈاؤن لوڈ لنک ابھی دستیاب نہیں۔ APK بننے اور اپ لوڈ ہونے کے بعد یہاں لنک آئے گا۔", "The download link isn't available yet. It will appear here once the APK is built and uploaded.")}</p>`}
+        <button class="btn block" id="installBtn" style="margin-top:8px">${ICON.download} ${t("اس فون پر انسٹال کریں (ویب ایپ)", "Install on this phone (web app)")}</button>
+        <p class="small muted" style="margin:6px 0 0">${t("ویب ایپ (PWA) انسٹال کرنے سے ہوم اسکرین پر آئیکن آ جاتا ہے، مگر یہ مکمل APK جیسی نہیں ہوتی۔", "Installing the web app (PWA) adds an icon to your home screen, but it isn't the same as a full APK.")}</p>
       </div>
 
       <div class="card small">
-        <b style="color:var(--gold)">ذرائع (سب مفت)</b><br>
-        • قرآن: alquran.cloud — عربی متن Tanzil (رسمِ عثمانی)، اردو ترجمہ مولانا محمد جوناگڑھی<br>
+        <b style="color:var(--gold)">${t("ذرائع (سب مفت)", "Sources (all free)")}</b><br>
+        ${t(`• قرآن: alquran.cloud — عربی متن Tanzil (رسمِ عثمانی)، اردو ترجمہ مولانا محمد جوناگڑھی<br>
         • احادیث: fawazahmed0/hadith-api (jsDelivr CDN)<br>
         • نماز کے بعد اذکار: مالک کا فراہم کردہ اذکار کارڈ<br>
-        • صبح و شام کے اذکار: حصن المسلم کے حوالہ جات<br>
-        • Islam360: صرف بیرونی لنک (ویب سائٹ اور Play Store ایپ) — کوئی سرکاری API نہیں ملی
+        • صبح و شام کے اذکار: حصن المسلم کے حوالہ جات`,
+        `• Quran: alquran.cloud — Arabic text Tanzil (Uthmani script), Urdu translation by Maulana Muhammad Junagarhi<br>
+        • Hadith: fawazahmed0/hadith-api (jsDelivr CDN)<br>
+        • Azkar after prayer: the Azkar card provided by the app owner<br>
+        • Morning & evening azkar: references from Hisn al-Muslim`)}
       </div>
 
       <div class="card small">
-        <b style="color:var(--gold)">رازداری</b><br>
-        کوئی اکاؤنٹ نہیں، کوئی اشتہار نہیں، کوئی ذاتی معلومات جمع نہیں ہوتیں۔ تسبیح، پیش رفت اور محفوظ آیات/احادیث صرف آپ کے فون میں رہتی ہیں۔ براؤزر ڈیٹا صاف کرنے یا ایپ ان انسٹال کرنے سے یہ ریکارڈ مٹ سکتے ہیں۔ قرآن/حدیث لوڈ کرتے وقت صرف متعلقہ صفحے کی درخواست ان مفت سرورز کو جاتی ہے۔
+        <b style="color:var(--gold)">${t("رازداری", "Privacy")}</b><br>
+        ${t("کوئی اکاؤنٹ نہیں، کوئی اشتہار نہیں، کوئی ذاتی معلومات جمع نہیں ہوتیں۔ تسبیح، پیش رفت اور محفوظ آیات/احادیث صرف آپ کے فون میں رہتی ہیں۔ براؤزر ڈیٹا صاف کرنے یا ایپ ان انسٹال کرنے سے یہ ریکارڈ مٹ سکتے ہیں۔ قرآن/حدیث لوڈ کرتے وقت صرف متعلقہ صفحے کی درخواست ان مفت سرورز کو جاتی ہے۔",
+          "No account, no ads, no personal data collected. Tasbeeh counts, progress and saved ayahs/hadith stay on your phone. Clearing browser data or uninstalling the app can erase these records. When Quran or Hadith text loads, only the request for that page goes to these free servers.")}
       </div>
-      <p class="small muted" style="text-align:center">${C.appName} · ورژن ${C.version}</p>
+      <p class="small muted" style="text-align:center">${C.appName} · ${t("ورژن", "Version")} ${C.version}</p>
     </div>`;
     $("#installBtn").onclick = async () => {
       if (installPrompt) { installPrompt.prompt(); try { await installPrompt.userChoice; } catch (e) {} installPrompt = null; }
-      else toast("براؤزر مینو (⋮) میں «Add to Home screen / Install app» دبائیں");
+      else toast(t("براؤزر مینو (⋮) میں «Add to Home screen / Install app» دبائیں", "Open the browser menu (⋮) and tap “Add to Home screen / Install app”"));
     };
   }
 
@@ -1780,6 +1844,8 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     "azkar-prayer": () => screenAzkar("prayer"), saved: screenSaved, about: screenAbout
   };
   document.addEventListener("click", (e) => {
+    const l = e.target.closest("[data-lang]");
+    if (l) { e.preventDefault(); setLang(l.dataset.lang); return; }
     const g = e.target.closest("[data-go]");
     if (g) { e.preventDefault(); go(g.dataset.go, {}); return; }
     if (e.target.closest("[data-back]")) { e.preventDefault(); back(); }
@@ -1794,12 +1860,12 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   // Expose pure helpers for tests
   window.__NT = { pruneSessions, dailyPick, localDayKey, normAr };
 
-  // Startup: expiry check on open
+  // Startup: language, expiry check on open, first screen
+  applyLang();
   getSessions();
   const start = (location.hash || "").replace("#", "");
   go(SCREENS[start] && !["surah", "hsection"].includes(start) ? start : "home", {}, false);
 
-  // Keep the screen awake on the Tasbeeh screen where supported
   // Service worker (only works on real hosting; ignored in previews)
   if ("serviceWorker" in navigator && location.protocol === "https:" && !/claude|anthropic/.test(location.hostname)) {
     window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
