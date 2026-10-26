@@ -450,6 +450,121 @@ details.more summary::-webkit-details-marker { display: none; }
 .en-dua { margin-top: 10px !important; font-size: 14px; line-height: 1.7 !important; color: var(--muted); font-family: var(--f-ui-en); }
 .tile.wide small { display: inline; }
 
+/* ---------- laptop keyboard hint (only on devices with a mouse/trackpad) ---------- */
+.tsb-keys { display: none; font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 2.2; }
+.tsb-keys kbd { font-family: var(--f-ui-en); font-size: 11px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; padding: 1px 7px; color: var(--gold-soft); background: rgba(3,19,14,.5); direction: ltr; display: inline-block; line-height: 1.6; }
+.haskb .tsb-keys { display: block; }
+.kpress { transform: scale(.97); }
+
+/* ---------- Daily Hadith: share with anyone ---------- */
+.share-any { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: var(--r); border: 1px solid var(--line); background: linear-gradient(160deg, #0f4a34, #0a3122 75%); }
+.share-any .btn.gold { min-height: 52px; font-size: 15.5px; }
+
+/* ---------- Quran: tabs, paras, continue reading ---------- */
+.seg.seg3 { grid-template-columns: repeat(3, 1fr); }
+.qcont { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: var(--r); border: 1px solid var(--line); background: linear-gradient(160deg, #0f4a34, #0a3122 75%); }
+.qmark { display: flex; gap: 8px; align-items: center; }
+.qmark > button.grow { flex: 1; min-width: 0; text-align: start; background: rgba(3,19,14,.45); border: 1px solid var(--line-soft); border-radius: 14px; padding: 8px 12px; display: flex; flex-direction: column; }
+.qmark b { color: var(--gold-soft); font-size: 14.5px; display: flex; align-items: center; gap: 6px; line-height: 1.9; }
+.qmark b svg { width: 16px; height: 16px; color: var(--gold); flex: none; }
+.qmark span { font-size: 12px; line-height: 1.9; }
+.qmark .iconbtn { width: 36px; height: 36px; font-size: 13px; color: var(--muted); }
+.paras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.para { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 10px 4px 8px; border-radius: 14px; border: 1px solid var(--line-soft); background: var(--panel); min-height: 96px; justify-content: center; }
+.para:active { transform: scale(.98); }
+.para .pn { font-family: var(--f-latin); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--gold); color: var(--gold); font-size: 14px; line-height: 1; }
+.para .pa { font-family: var(--f-quran); font-size: 17px; color: var(--gold-soft); line-height: 2; text-align: center; }
+.para small { font-size: 11px; color: var(--muted); line-height: 1.6; }
+.para[aria-current="true"] { border-color: var(--gold); background: #0f4a34; }
+.small-paras .para { min-height: 74px; padding: 6px 2px; }
+.small-paras .para .pa { font-size: 15px; }
+
+/* ---------- Mushaf page ---------- */
+.mview { gap: 10px; }
+.mtools { display: flex; gap: 8px; flex-wrap: wrap; }
+.mtools .chip { display: inline-flex; align-items: center; gap: 6px; }
+.mtools .chip svg { width: 15px; height: 15px; }
+.mpage {
+  background: var(--ivory); color: #1a1a14; border-radius: 10px; position: relative;
+  padding: 14px 14px 10px; border: 2px solid #c9a24e;
+  box-shadow: inset 0 0 0 5px var(--ivory), inset 0 0 0 6px rgba(201,162,78,.55), 0 10px 30px rgba(0,0,0,.35);
+  min-height: 60vh;
+}
+.mhead { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: #7a5c19; border-bottom: 1px solid rgba(201,162,78,.5); padding: 0 6px 4px; margin-bottom: 6px; line-height: 2; }
+.mtext { font-family: var(--f-quran); font-size: 25px; line-height: 2.35; text-align: justify; text-align-last: center; direction: rtl; padding: 0 4px; word-spacing: 1px; }
+.mpage .ay { cursor: pointer; border-radius: 6px; transition: background .2s; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.mpage .ay:hover { background: rgba(18,128,96,.08); }
+.ay.marked { background: rgba(214,178,94,.28); box-shadow: 0 2px 0 #c9a24e; }
+.ay.playing, [data-bism].playing { background: rgba(18,128,96,.20) !important; box-shadow: 0 2px 0 var(--emerald); }
+.ay.hl { animation: hl 2.4s ease-out; }
+@keyframes hl { 0%, 40% { background: rgba(214,178,94,.55); } 100% { background: transparent; } }
+.aend { font-family: var(--f-quran); color: #9a7420; font-size: .92em; white-space: nowrap; }
+.sajda { color: #9a7420; margin-inline-start: 2px; }
+.sframe { margin: 10px 0 2px; border: 1.5px solid #c9a24e; border-radius: 8px; background: linear-gradient(90deg, rgba(201,162,78,.12), rgba(201,162,78,.28), rgba(201,162,78,.12)); text-align: center; padding: 2px 8px; }
+.sframe span { font-family: var(--f-quran); font-size: 21px; color: #6b4f12; line-height: 2; }
+.mbism { font-family: var(--f-quran); font-size: 23px; text-align: center; color: #3c2f0e; line-height: 2.3; border-radius: 6px; }
+.mfoot { text-align: center; font-family: var(--f-latin); font-size: 13px; color: #7a5c19; border-top: 1px solid rgba(201,162,78,.5); margin-top: 8px; padding-top: 2px; }
+.mpage.withtr .mtext { text-align: start; text-align-last: auto; display: flex; flex-direction: column; gap: 4px; }
+.mpage .tray { border-bottom: 1px dashed rgba(201,162,78,.45); padding: 4px 0 8px; }
+.mpage .tray .ur { font-family: var(--f-urdu); font-size: 15px; line-height: 2.2; color: var(--ink); }
+.mpager { display: flex; gap: 8px; align-items: center; }
+.mpager .pgno { font-family: var(--f-latin); color: var(--gold); font-size: 14px; direction: ltr; white-space: nowrap; }
+.rcard .ay.marked, .rcard .ay.playing { border-radius: 8px; padding-inline: 4px; }
+
+/* ---------- recitation bar ---------- */
+.qbar { position: fixed; left: 0; right: 0; bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 8px); z-index: 45; padding: 0 10px; pointer-events: none; }
+.qbar-in { pointer-events: auto; max-width: 540px; margin: 0 auto; display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 18px; background: rgba(10,49,34,.97); border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.qb { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-soft); background: transparent; color: var(--gold-soft); display: grid; place-items: center; flex: none; font-size: 14px; }
+.qb svg { width: 18px; height: 18px; }
+.qb.main { width: 46px; height: 46px; background: linear-gradient(180deg, #e2c06c, #c39a41); color: #1c1606; border-color: #e9cf88; }
+.qlabel { flex: 1; min-width: 0; background: none; border: 0; text-align: start; display: flex; flex-direction: column; line-height: 1.6; padding: 0 4px; }
+.qlabel b { font-size: 13.5px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--f-quran); }
+.qlabel span { font-size: 11px; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qbar ~ .app, body:has(.qbar) .app { padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 90px); }
+
+/* ---------- home: continue reading ---------- */
+.resume.qresume { margin-top: -4px; }
+.resume.qresume .t b { color: var(--gold-soft); }
+
+/* ---------- Asma-ul-Husna ---------- */
+.nstage { text-align: center; padding: 18px 14px 14px; border-radius: 22px; border: 1px solid var(--line); background: radial-gradient(120% 90% at 50% 0%, rgba(214,178,94,.16), transparent 60%), linear-gradient(170deg, #0f4a34, #062419 80%); display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.nstage.pop .nar { animation: npop .5s ease-out; }
+@keyframes npop { from { opacity: .2; transform: scale(.92); } to { opacity: 1; transform: none; } }
+.nnum { font-family: var(--f-latin); color: var(--muted); font-size: 12.5px; direction: ltr; }
+.nar { font-family: var(--f-quran); font-size: 54px; line-height: 1.9; color: var(--gold-soft); text-shadow: 0 4px 22px rgba(214,178,94,.25); }
+.ntr { font-family: var(--f-latin); color: var(--gold); letter-spacing: .06em; font-size: 15px; line-height: 1.6; }
+.nur { font-size: 21px; line-height: 2.2; color: var(--text); }
+.nen { font-family: var(--f-ui-en); font-size: 14px; color: var(--muted); }
+.nctl { display: flex; gap: 14px; align-items: center; justify-content: center; margin: 8px 0 4px; }
+.qb.big { width: 62px; height: 62px; }
+.qb.big svg { width: 26px; height: 26px; }
+.ngrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.ncard { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 8px 4px; border-radius: 14px; border: 1px solid var(--line-soft); background: var(--panel); position: relative; min-height: 118px; justify-content: center; }
+.ncard.on { border-color: var(--gold); background: #0f4a34; box-shadow: 0 0 0 2px rgba(214,178,94,.25); }
+.nno { position: absolute; top: 4px; inset-inline-start: 8px; font-family: var(--f-latin); font-size: 10.5px; color: var(--muted); }
+.nar2 { font-family: var(--f-quran); font-size: 22px; color: var(--gold-soft); line-height: 2; text-align: center; }
+.ntr2 { font-family: var(--f-latin); font-size: 10.5px; color: var(--gold); line-height: 1.5; text-align: center; }
+.nur2 { font-size: 11.5px; line-height: 1.9; color: var(--text); text-align: center; }
+
+/* ---------- Qibla ---------- */
+.qcard { display: flex; flex-direction: column; gap: 12px; align-items: center; padding: 14px; border-radius: 22px; border: 1px solid var(--line); background: linear-gradient(170deg, #0f4a34, #062419 85%); }
+.qstatus { font-size: 16px; color: var(--gold-soft); text-align: center; line-height: 2; min-height: 2em; }
+.qstatus.ok { color: #7ff0c3; font-weight: 700; font-size: 18px; }
+.qstatus.warn { font-size: 13px; color: var(--muted); }
+.dialwrap { position: relative; width: min(78vw, 320px); aspect-ratio: 1; border-radius: 50%; transition: box-shadow .3s; }
+.dialwrap.ok { box-shadow: 0 0 0 4px rgba(31,165,124,.55), 0 0 40px rgba(31,165,124,.45); }
+.dialwrap .pointer { position: absolute; top: -16px; left: 50%; width: 26px; transform: translateX(-50%); z-index: 2; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
+.dial { width: 100%; height: 100%; transform-origin: 50% 50%; will-change: transform; }
+.dial text { font-family: var(--f-urdu); font-size: 15px; fill: var(--muted); }
+.dial text.dn { fill: #e07a6a; font-weight: 700; }
+html[lang="en"] .dial text { font-family: var(--f-ui-en); font-size: 17px; }
+.qinfo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; text-align: center; }
+.qinfo div { background: rgba(3,19,14,.45); border: 1px solid var(--line-soft); border-radius: 14px; padding: 6px 4px; display: flex; flex-direction: column; }
+.qinfo b { font-family: var(--f-latin); color: var(--gold); font-size: 20px; line-height: 1.6; direction: ltr; }
+.qinfo span { font-size: 11px; color: var(--muted); line-height: 1.8; }
+select.input { appearance: auto; }
+[hidden] { display: none !important; }
+
 </style>
 </head>
 <body>
@@ -474,7 +589,7 @@ details.more summary::-webkit-details-marker { display: none; }
 const APP_CONFIG = {
   appName: "Noor-e-Tasbeeh",
   appNameUr: "نورِ تسبیح",
-  version: "1.1.0",
+  version: "1.2.0",
 
   /* After you upload the APK to Google Drive, paste the real share link here
      (see GUIDE-ur.md, step 6). Leave empty until then — the app will simply
@@ -655,10 +770,10 @@ const AZKAR_DATA = {
     },
     /* Which items appear after which prayer, as the card describes. */
     prayers: {
-      fajr:    { name: "فجر",  items: ["pp1","pp2","pp3","pp4","pp5","pp6","pp7","pp8","pp9","pp10","pp11"], counts: { pp6: 3, pp7: 3 } },
+      fajr:    { name: "فجر",  items: ["pp1","pp2","pp3","pp4","pp5","pp6","pp7","pp8","pp9","pp10","pp11"], counts: { pp5: 3, pp6: 3, pp7: 3 } },
       dhuhr:   { name: "ظہر",  items: ["pp1","pp2","pp3","pp4","pp5","pp6","pp7","pp8","pp9"] },
       asr:     { name: "عصر",  items: ["pp1","pp2","pp3","pp4","pp5","pp6","pp7","pp8","pp9"] },
-      maghrib: { name: "مغرب", items: ["pp1","pp2","pp3","pp4","pp5","pp6","pp7","pp8","pp9","pp10"], counts: { pp6: 3, pp7: 3 } },
+      maghrib: { name: "مغرب", items: ["pp1","pp2","pp3","pp4","pp5","pp6","pp7","pp8","pp9","pp10"], counts: { pp5: 3, pp6: 3, pp7: 3 } },
       isha:    { name: "عشاء", items: ["pp1","pp2","pp3","pp4","pp5","pp6","pp7","pp8","pp9"], extra: ["pp12"], extraLabel: "وتر کے بعد (وتر فرض نماز نہیں؛ یہ ذکر وتر کے بعد ہے)" }
     },
     general: ["pp13"],
@@ -765,6 +880,124 @@ if (typeof module !== "undefined") module.exports = AZKAR_DATA;
 
 </script>
 <script>
+/*
+ * Noor-e-Tasbeeh — Asma-ul-Husna (the 99 Beautiful Names of Allah)
+ * ------------------------------------------------------------------
+ * The hadith "Allah has ninety-nine names…" is in Sahih al-Bukhari 2736 and
+ * Sahih Muslim 2677. The list of names below follows the well-known order of
+ * the narration in Jami at-Tirmidhi 3507 (the scholars of hadith have
+ * discussed the chain of this list; the names themselves are attributes of
+ * Allah mentioned in the Quran and Sunnah or derived from them).
+ * Urdu meanings: the commonly used short meanings — compare with a scholar
+ * or a published book before changing them.
+ * Each item: [Arabic, transliteration, Urdu meaning, English meaning]
+ */
+const ASMA_UL_HUSNA = [
+  ["الرَّحْمٰنُ", "Ar-Rahmaan", "بے حد مہربان", "The Most Gracious"],
+  ["الرَّحِيْمُ", "Ar-Raheem", "نہایت رحم کرنے والا", "The Most Merciful"],
+  ["الْمَلِكُ", "Al-Malik", "حقیقی بادشاہ", "The King"],
+  ["الْقُدُّوْسُ", "Al-Quddoos", "ہر عیب سے پاک", "The Most Holy"],
+  ["السَّلَامُ", "As-Salaam", "سلامتی والا", "The Source of Peace"],
+  ["الْمُؤْمِنُ", "Al-Mu'min", "امن دینے والا", "The Giver of Security"],
+  ["الْمُهَيْمِنُ", "Al-Muhaymin", "نگہبان، نگرانی کرنے والا", "The Guardian"],
+  ["الْعَزِيْزُ", "Al-Azeez", "غالب، زبردست", "The Almighty"],
+  ["الْجَبَّارُ", "Al-Jabbaar", "زور آور، بگڑی بنانے والا", "The Compeller"],
+  ["الْمُتَكَبِّرُ", "Al-Mutakabbir", "بڑائی والا", "The Supreme in Greatness"],
+  ["الْخَالِقُ", "Al-Khaaliq", "پیدا کرنے والا", "The Creator"],
+  ["الْبَارِئُ", "Al-Baari'", "ٹھیک ٹھیک بنانے والا", "The Maker"],
+  ["الْمُصَوِّرُ", "Al-Musawwir", "صورت بنانے والا", "The Fashioner"],
+  ["الْغَفَّارُ", "Al-Ghaffaar", "بہت بخشنے والا", "The Ever-Forgiving"],
+  ["الْقَهَّارُ", "Al-Qahhaar", "سب پر غالب", "The Subduer"],
+  ["الْوَهَّابُ", "Al-Wahhaab", "بہت عطا کرنے والا", "The Bestower"],
+  ["الرَّزَّاقُ", "Ar-Razzaaq", "رزق دینے والا", "The Provider"],
+  ["الْفَتَّاحُ", "Al-Fattaah", "کھولنے والا، فیصلہ کرنے والا", "The Opener"],
+  ["الْعَلِيْمُ", "Al-Aleem", "سب کچھ جاننے والا", "The All-Knowing"],
+  ["الْقَابِضُ", "Al-Qaabid", "تنگی کرنے والا، روکنے والا", "The Withholder"],
+  ["الْبَاسِطُ", "Al-Baasit", "کشادگی دینے والا", "The Extender"],
+  ["الْخَافِضُ", "Al-Khaafid", "پست کرنے والا", "The Abaser"],
+  ["الرَّافِعُ", "Ar-Raafi'", "بلند کرنے والا", "The Exalter"],
+  ["الْمُعِزُّ", "Al-Mu'izz", "عزت دینے والا", "The Giver of Honour"],
+  ["الْمُذِلُّ", "Al-Mudhill", "ذلت دینے والا", "The Giver of Disgrace"],
+  ["السَّمِيْعُ", "As-Samee'", "سب کچھ سننے والا", "The All-Hearing"],
+  ["الْبَصِيْرُ", "Al-Baseer", "سب کچھ دیکھنے والا", "The All-Seeing"],
+  ["الْحَكَمُ", "Al-Hakam", "فیصلہ کرنے والا", "The Judge"],
+  ["الْعَدْلُ", "Al-Adl", "سراسر انصاف کرنے والا", "The Utterly Just"],
+  ["اللَّطِيْفُ", "Al-Lateef", "باریک بین، مہربان", "The Subtle, the Kind"],
+  ["الْخَبِيْرُ", "Al-Khabeer", "پوری خبر رکھنے والا", "The All-Aware"],
+  ["الْحَلِيْمُ", "Al-Haleem", "بردبار", "The Forbearing"],
+  ["الْعَظِيْمُ", "Al-Azeem", "عظمت والا", "The Magnificent"],
+  ["الْغَفُوْرُ", "Al-Ghafoor", "بخشنے والا", "The All-Forgiving"],
+  ["الشَّكُوْرُ", "Ash-Shakoor", "قدر دان", "The Appreciative"],
+  ["الْعَلِيُّ", "Al-Aliyy", "سب سے بلند", "The Most High"],
+  ["الْكَبِيْرُ", "Al-Kabeer", "سب سے بڑا", "The Most Great"],
+  ["الْحَفِيْظُ", "Al-Hafeez", "حفاظت کرنے والا", "The Preserver"],
+  ["الْمُقِيْتُ", "Al-Muqeet", "روزی اور قوت دینے والا", "The Sustainer"],
+  ["الْحَسِيْبُ", "Al-Haseeb", "حساب لینے والا، کافی", "The Reckoner"],
+  ["الْجَلِيْلُ", "Al-Jaleel", "بزرگی اور جلال والا", "The Majestic"],
+  ["الْكَرِيْمُ", "Al-Kareem", "بہت کرم والا", "The Most Generous"],
+  ["الرَّقِيْبُ", "Ar-Raqeeb", "نگرانی کرنے والا", "The Watchful"],
+  ["الْمُجِيْبُ", "Al-Mujeeb", "دعائیں قبول کرنے والا", "The Responsive"],
+  ["الْوَاسِعُ", "Al-Waasi'", "وسعت والا", "The All-Encompassing"],
+  ["الْحَكِيْمُ", "Al-Hakeem", "حکمت والا", "The All-Wise"],
+  ["الْوَدُوْدُ", "Al-Wadood", "محبت کرنے والا", "The Most Loving"],
+  ["الْمَجِيْدُ", "Al-Majeed", "بڑی شان والا", "The Glorious"],
+  ["الْبَاعِثُ", "Al-Baa'ith", "(مردوں کو) زندہ کر کے اٹھانے والا", "The Resurrector"],
+  ["الشَّهِيْدُ", "Ash-Shaheed", "ہر چیز پر گواہ", "The Witness"],
+  ["الْحَقُّ", "Al-Haqq", "سچا، برحق", "The Truth"],
+  ["الْوَكِيْلُ", "Al-Wakeel", "کارساز", "The Trustee"],
+  ["الْقَوِيُّ", "Al-Qawiyy", "قوت والا", "The All-Strong"],
+  ["الْمَتِيْنُ", "Al-Mateen", "نہایت مضبوط", "The Firm"],
+  ["الْوَلِيُّ", "Al-Waliyy", "دوست، مددگار", "The Protecting Friend"],
+  ["الْحَمِيْدُ", "Al-Hameed", "تعریف کے لائق", "The Praiseworthy"],
+  ["الْمُحْصِيْ", "Al-Muhsi", "ہر چیز کا شمار رکھنے والا", "The All-Enumerating"],
+  ["الْمُبْدِئُ", "Al-Mubdi'", "پہلی بار پیدا کرنے والا", "The Originator"],
+  ["الْمُعِيْدُ", "Al-Mu'eed", "دوبارہ پیدا کرنے والا", "The Restorer"],
+  ["الْمُحْيِيْ", "Al-Muhyi", "زندگی دینے والا", "The Giver of Life"],
+  ["الْمُمِيْتُ", "Al-Mumeet", "موت دینے والا", "The Bringer of Death"],
+  ["الْحَيُّ", "Al-Hayy", "ہمیشہ زندہ رہنے والا", "The Ever-Living"],
+  ["الْقَيُّوْمُ", "Al-Qayyoom", "سب کو قائم رکھنے والا", "The Self-Subsisting"],
+  ["الْوَاجِدُ", "Al-Waajid", "ہر چیز کو پانے والا", "The Finder"],
+  ["الْمَاجِدُ", "Al-Maajid", "بزرگی والا", "The Noble"],
+  ["الْوَاحِدُ", "Al-Waahid", "ایک", "The One"],
+  ["الْاَحَدُ", "Al-Ahad", "یکتا", "The Unique"],
+  ["الصَّمَدُ", "As-Samad", "بے نیاز", "The Eternal Refuge"],
+  ["الْقَادِرُ", "Al-Qaadir", "قدرت والا", "The All-Able"],
+  ["الْمُقْتَدِرُ", "Al-Muqtadir", "پوری قدرت رکھنے والا", "The All-Powerful"],
+  ["الْمُقَدِّمُ", "Al-Muqaddim", "آگے کرنے والا", "The Expediter"],
+  ["الْمُؤَخِّرُ", "Al-Mu'akhkhir", "پیچھے کرنے والا", "The Delayer"],
+  ["الْاَوَّلُ", "Al-Awwal", "سب سے پہلا", "The First"],
+  ["الْاٰخِرُ", "Al-Aakhir", "سب سے آخری", "The Last"],
+  ["الظَّاهِرُ", "Az-Zaahir", "ظاہر", "The Manifest"],
+  ["الْبَاطِنُ", "Al-Baatin", "پوشیدہ", "The Hidden"],
+  ["الْوَالِيْ", "Al-Waali", "کارساز، مالک", "The Patron"],
+  ["الْمُتَعَالِيْ", "Al-Muta'aali", "سب سے برتر", "The Most Exalted"],
+  ["الْبَرُّ", "Al-Barr", "بہت بھلائی کرنے والا", "The Source of Goodness"],
+  ["التَّوَّابُ", "At-Tawwaab", "توبہ قبول کرنے والا", "The Accepter of Repentance"],
+  ["الْمُنْتَقِمُ", "Al-Muntaqim", "بدلہ لینے والا", "The Avenger"],
+  ["الْعَفُوُّ", "Al-Afuww", "بہت معاف کرنے والا", "The Pardoner"],
+  ["الرَّءُوْفُ", "Ar-Ra'oof", "بہت شفقت کرنے والا", "The Most Kind"],
+  ["مَالِكُ الْمُلْكِ", "Maalik-ul-Mulk", "ساری بادشاہی کا مالک", "Owner of All Sovereignty"],
+  ["ذُو الْجَلَالِ وَالْاِكْرَامِ", "Dhul-Jalaali wal-Ikraam", "جلال اور عزت والا", "Lord of Majesty and Honour"],
+  ["الْمُقْسِطُ", "Al-Muqsit", "انصاف کرنے والا", "The Equitable"],
+  ["الْجَامِعُ", "Al-Jaami'", "جمع کرنے والا", "The Gatherer"],
+  ["الْغَنِيُّ", "Al-Ghaniyy", "بے پروا، بے نیاز", "The Self-Sufficient"],
+  ["الْمُغْنِيْ", "Al-Mughni", "غنی کر دینے والا", "The Enricher"],
+  ["الْمَانِعُ", "Al-Maani'", "روکنے والا", "The Preventer"],
+  ["الضَّارُّ", "Ad-Daarr", "نقصان کا مالک", "The Distresser"],
+  ["النَّافِعُ", "An-Naafi'", "نفع دینے والا", "The Benefactor"],
+  ["النُّوْرُ", "An-Noor", "نور", "The Light"],
+  ["الْهَادِيْ", "Al-Haadi", "ہدایت دینے والا", "The Guide"],
+  ["الْبَدِيْعُ", "Al-Badee'", "بے مثال پیدا کرنے والا", "The Incomparable Originator"],
+  ["الْبَاقِيْ", "Al-Baaqi", "ہمیشہ باقی رہنے والا", "The Everlasting"],
+  ["الْوَارِثُ", "Al-Waarith", "سب کا وارث", "The Inheritor"],
+  ["الرَّشِيْدُ", "Ar-Rasheed", "سیدھی راہ دکھانے والا", "The Guide to the Right Path"],
+  ["الصَّبُوْرُ", "As-Saboor", "بڑا صبر والا", "The Most Patient"]
+];
+
+if (typeof module !== "undefined") module.exports = ASMA_UL_HUSNA;
+
+</script>
+<script>
 const HERO_IMG = "data:image/webp;base64,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";
 /* Noor-e-Tasbeeh — application logic (plain JavaScript, no framework)
  * Interface language: Urdu (default) or English. Only the interface changes;
@@ -819,6 +1052,14 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     </div>`;
   }
 
+  /* ================= Android app bridge (only inside the APK) ================= */
+  const NATIVE = (typeof window !== "undefined" && window.AndroidShare) ? window.AndroidShare : null;
+  const blobToB64 = (blob) => new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(",")[1] || "");
+    r.onerror = rej; r.readAsDataURL(blob);
+  });
+
   /* ================= helpers ================= */
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -846,6 +1087,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
   function vibrate(ms) { try { navigator.vibrate && navigator.vibrate(ms); } catch (e) {} }
   async function copyText(text) {
+    if (NATIVE && NATIVE.copyText) { try { NATIVE.copyText(text); toast(t("کاپی ہو گیا", "Copied")); return true; } catch (e) {} }
     try { await navigator.clipboard.writeText(text); toast(t("کاپی ہو گیا", "Copied")); return true; }
     catch (e) { toast(t("کاپی نہیں ہو سکا — متن کو دبا کر منتخب کریں", "Couldn't copy — long-press the text to select it")); return false; }
   }
@@ -867,6 +1109,12 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     wa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.2-3.8A8 8 0 1 1 8 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 1c-1-.5-2.5-2-3-3l1-1-1-2z"/></svg>',
     image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5-5 4 4 3-3 4.5 4.5"/></svg>',
     minus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>',
+    pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>',
+    next: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 6v12l-9-6z"/><rect x="16.5" y="6" width="2.2" height="12" rx="1"/></svg>',
+    prev: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6v12l9-6z"/><rect x="5.3" y="6" width="2.2" height="12" rx="1"/></svg>',
+    compass: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/><path d="M12 3v1.5M12 19.5V21M3 12h1.5M19.5 12H21"/></svg>',
+    names: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2.8 14.6 6l4-.6-.6 4 3.2 2.6-3.2 2.6.6 4-4-.6L12 21.2 9.4 18l-4 .6.6-4L2.8 12 6 9.4l-.6-4 4 .6z"/><circle cx="12" cy="12" r="3.2"/></svg>',
     download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>'
   };
 
@@ -942,6 +1190,9 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     const r = route.name;
     document.querySelectorAll(".nav button").forEach((b) => b.setAttribute("aria-current", b.dataset.go === r ? "page" : "false"));
     $("#nav").hidden = r === "tasbeeh";
+    if (r !== "surah" && r !== "mushaf" && player.active()) player.stop();
+    if (r !== "names") stopNames();
+    if (r !== "qibla") stopQibla();
     const fn = SCREENS[r] || SCREENS.home;
     fn(route.params);
   }
@@ -966,9 +1217,12 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
           <span class="iconbtn" aria-hidden="true">${ICON.beads}</span>
         </button>
 
+        ${(() => { const m = getMarks()[0]; return m ? `<button class="resume qresume" data-mkhome="1"><span class="iconbtn" aria-hidden="true">${ICON.book}</span><span class="t"><b>${t("تلاوت جاری رکھیں", "Continue reading")} — ${esc(m.name)}</b><span>${esc(markWhere(m))}</span></span></button>` : ""; })()}
         <div class="grid">
           ${tile("tasbeeh", ICON.beads, t("ڈیجیٹل تسبیح", "Digital Tasbeeh"), t("پوری اسکرین کاؤنٹر", "Full-screen counter"), "feature")}
-          ${tile("quran", ICON.book, t("قرآن پاک", "Quran Pak"), t("۱۱۴ سورتیں، اردو ترجمہ", "114 Surahs, Urdu translation"))}
+          ${tile("quran", ICON.book, t("قرآن پاک", "Quran Pak"), t("سورتیں، پارے، تلاوت، اردو ترجمہ", "Surahs, Paras, recitation, Urdu"))}
+          ${tile("qibla", ICON.compass, t("قبلہ رخ", "Qibla Direction"), t("قطب نما — مفت، آف لائن", "Compass — free, offline"))}
+          ${tile("names", ICON.names, t("اللہ کے ۹۹ نام", "99 Names of Allah"), t("اسماء الحسنیٰ، اردو معنی، آواز", "Asma-ul-Husna, Urdu, audio"))}
           ${tile("hadith", ICON.search, t("حدیث تلاش", "Hadith Search"), t("کتبِ حدیث، عربی و اردو", "Hadith books, Arabic & Urdu"))}
           ${tile("daily", ICON.scroll, t("روزانہ حدیث", "Daily Hadith"), t("آج کی حدیث، شیئر کریں", "Today's hadith, share it"))}
           ${tile("azkar-morning", ICON.sun, t("صبح کے اذکار", "Morning Azkar"), t("مسنون اذکار، گنتی کے ساتھ", "Sunnah azkar with counter"))}
@@ -981,6 +1235,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         <p class="footer-dua">${t("مرحوم محمد عاشق صاحب کے لیے دعائے مغفرت کی درخواست ہے۔", "Please pray for the forgiveness of the late Muhammad Ashiq.")} <button data-go="about">${t("مزید", "More")}</button></p>
       </div>`;
   }
+  document.addEventListener("click", (e) => { if (e.target.closest("[data-mkhome]")) { const m = getMarks()[0]; if (m) openMark(m); } });
   function tile(go, icon, title, sub, cls = "") {
     if (cls === "wide") return `<button class="tile wide" data-go="${go}"><span class="ic">${icon}</span><span class="grow"><b>${title}</b><br><small>${sub}</small></span></button>`;
     return `<button class="tile ${cls}" data-go="${go}"><span class="ic">${icon}</span><b>${title}</b><small>${sub}</small></button>`;
@@ -1012,6 +1267,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
             </div>
           </div>
           <div class="tsb-hint">${t("اسکرین پر کہیں بھی دبائیں", "Tap anywhere on the screen")}</div>
+          <div class="tsb-keys" aria-hidden="true">${t("لیپ ٹاپ: <kbd>Space</kbd> یا <kbd>+</kbd> = ایک زیادہ · <kbd>−</kbd> = ایک کم", "Laptop: <kbd>Space</kbd> or <kbd>+</kbd> = plus one · <kbd>−</kbd> = minus one")}</div>
         </button>
         <div class="tsb-bottom">
           <button class="tsb-minus" id="tsbMinus">${ICON.minus} ${t("ایک کم کریں", "Minus one")}</button>
@@ -1023,6 +1279,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         </div>
       </section>`;
 
+    try { if (!matchMedia("(pointer: coarse)").matches || matchMedia("(any-pointer: fine)").matches) $("#tsb").classList.add("haskb"); } catch (e) {}
     const countEl = $("#tsbCount"), arc = $("#tsbArc"), sub = $("#tsbSub");
     function paint(flash) {
       const c = getCurrent();
@@ -1142,21 +1399,327 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
 
   /* ================= QURAN ================= */
+  /* Sources (all free, no key): text — api.alquran.cloud (Tanzil Uthmani + Junagarhi Urdu);
+     recitation audio — cdn.islamic.network (the alquran.cloud audio CDN), verse by verse. */
+  const AR_DIGITS = (n) => String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+  /* First page of each Para (Juz) in the standard 604-page Madani mushaf (same numbering as alquran.cloud) */
+  const JUZ_PAGE = [1, 22, 42, 62, 82, 102, 121, 142, 162, 182, 201, 222, 242, 262, 282, 302, 322, 342, 362, 382, 402, 422, 442, 462, 482, 502, 522, 542, 562, 582];
+  const JUZ_NAME = ["الٓمّٓ", "سَیَقُوْلُ", "تِلْکَ الرُّسُلُ", "لَنْ تَنَالُوْا", "وَالْمُحْصَنٰتُ", "لَا یُحِبُّ اللّٰہُ", "وَاِذَا سَمِعُوْا", "وَلَوْ اَنَّنَا", "قَالَ الْمَلَاُ", "وَاعْلَمُوْا", "یَعْتَذِرُوْنَ", "وَمَا مِنْ دَآبَّۃٍ", "وَمَآ اُبَرِّئُ", "رُبَمَا", "سُبْحٰنَ الَّذِیْٓ", "قَالَ اَلَمْ", "اِقْتَرَبَ لِلنَّاسِ", "قَدْ اَفْلَحَ", "وَقَالَ الَّذِیْنَ", "اَمَّنْ خَلَقَ", "اُتْلُ مَآ اُوْحِیَ", "وَمَنْ یَّقْنُتْ", "وَمَا لِیَ", "فَمَنْ اَظْلَمُ", "اِلَیْہِ یُرَدُّ", "حٰمٓ", "قَالَ فَمَا خَطْبُکُمْ", "قَدْ سَمِعَ اللّٰہُ", "تَبٰرَکَ الَّذِیْ", "عَمَّ"];
+  const juzOfPage = (p) => { let j = 1; for (let i = 0; i < 30; i++) if (JUZ_PAGE[i] <= p) j = i + 1; return j; };
+  const paraLabel = (j) => t(`پارہ ${N(j)}`, `Para ${j}`);
+
   async function loadSurahList() {
     const cached = store.get("surahList", null);
     if (cached && cached.length === 114) return cached;
+    const off = await offlineRecord(C.QURAN_AR_EDITION);
+    if (off && off.surahs && off.surahs.length === 114) return off.surahs;
     const j = await getJSON(`${C.QURAN_API}/surah`);
     const list = j.data.map((s) => ({ n: s.number, ar: s.name, en: s.englishName, ayahs: s.numberOfAyahs, type: s.revelationType }));
     store.set("surahList", list);
     return list;
   }
-  const quranCredit = () => t("عربی متن: Tanzil (رسمِ عثمانی) · اردو ترجمہ: مولانا محمد جوناگڑھی رحمہ اللہ · ذریعہ: alquran.cloud",
-    "Arabic text: Tanzil (Uthmani script) · Urdu translation: Maulana Muhammad Junagarhi · Source: alquran.cloud");
+  const quranCredit = () => t("عربی متن: Tanzil (رسمِ عثمانی) · اردو ترجمہ: مولانا محمد جوناگڑھی رحمہ اللہ · ذریعہ: alquran.cloud · تلاوت: cdn.islamic.network",
+    "Arabic text: Tanzil (Uthmani script) · Urdu translation: Maulana Muhammad Junagarhi · Source: alquran.cloud · Recitation: cdn.islamic.network");
+
+  /* ---------- small key-value store in IndexedDB (for the whole-Quran offline copy) ---------- */
+  const idb = (() => {
+    let dbp = null;
+    function open() {
+      if (dbp) return dbp;
+      dbp = new Promise((res, rej) => {
+        try {
+          const r = indexedDB.open("noor-e-tasbeeh", 1);
+          r.onupgradeneeded = () => r.result.createObjectStore("kv");
+          r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+        } catch (e) { rej(e); }
+      });
+      dbp.catch(() => { dbp = null; });
+      return dbp;
+    }
+    const tx = (mode, fn) => open().then((db) => new Promise((res, rej) => {
+      const x = db.transaction("kv", mode); const st = x.objectStore("kv"); let out;
+      const q = fn(st); if (q) q.onsuccess = () => { out = q.result; };
+      x.oncomplete = () => res(out); x.onerror = () => rej(x.error); x.onabort = () => rej(x.error);
+    }));
+    return { get: (k) => tx("readonly", (s) => s.get(k)), set: (k, v) => tx("readwrite", (s) => s.put(v, k)), del: (k) => tx("readwrite", (s) => s.delete(k)) };
+  })();
+
+  /* Offline copy: one record per edition { ayahs: [[g, s, a, text, juz, page, sajda], …], surahs: [...] } */
+  const offRec = {}, offPages = {};
+  async function offlineRecord(ed) {
+    if (!(store.get("quran.offline", {})[ed])) return null;
+    if (offRec[ed]) return offRec[ed];
+    try { const r = await idb.get("q:" + ed); if (r && r.ayahs && r.ayahs.length > 6000) { offRec[ed] = r; return r; } } catch (e) {}
+    return null;
+  }
+  async function offlinePage(p, ed) {
+    const r = await offlineRecord(ed); if (!r) return null;
+    if (!offPages[ed]) {
+      const m = new Map(), sn = new Map(r.surahs.map((s) => [s.n, s]));
+      for (const x of r.ayahs) {
+        const s = sn.get(x[1]) || {};
+        const a = { g: x[0], s: x[1], a: x[2], text: x[3], juz: x[4], page: x[5], sajda: !!x[6], sname: s.ar || "", sen: s.en || "" };
+        if (!m.has(a.page)) m.set(a.page, []); m.get(a.page).push(a);
+      }
+      offPages[ed] = m;
+    }
+    return offPages[ed].get(p) || null;
+  }
+  async function offlineSurah(n, ed) {
+    const r = await offlineRecord(ed); if (!r) return null;
+    const s = r.surahs.find((x) => x.n === n); if (!s) return null;
+    return { number: n, name: s.ar, englishName: s.en, numberOfAyahs: s.ayahs,
+      ayahs: r.ayahs.filter((x) => x[1] === n).map((x) => ({ number: x[0], numberInSurah: x[2], text: x[3], juz: x[4], page: x[5] })) };
+  }
+  async function downloadQuranOffline(onStep) {
+    const eds = [C.QURAN_AR_EDITION, C.QURAN_UR_EDITION];
+    for (let i = 0; i < eds.length; i++) {
+      const ed = eds[i];
+      onStep && onStep(i);
+      const res = await fetch(`${C.QURAN_API}/quran/${ed}`);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const j = await res.json();
+      const surahs = [], ayahs = [];
+      for (const s of j.data.surahs) {
+        surahs.push({ n: s.number, ar: s.name, en: s.englishName, ayahs: s.numberOfAyahs || s.ayahs.length, type: s.revelationType });
+        for (const a of s.ayahs) ayahs.push([a.number, s.number, a.numberInSurah, a.text, a.juz, a.page, a.sajda && a.sajda !== false ? 1 : 0]);
+      }
+      if (ayahs.length < 6000) throw new Error("incomplete");
+      await idb.set("q:" + ed, { v: 1, ed, at: Date.now(), surahs, ayahs });
+      const f = store.get("quran.offline", {}); f[ed] = Date.now(); store.set("quran.offline", f);
+      delete offRec[ed]; delete offPages[ed];
+    }
+    onStep && onStep(eds.length);
+  }
+
+  /* One mushaf page (Arabic or Urdu edition) */
+  const pageCache = new Map();
+  async function loadPage(p, ed) {
+    const key = ed + ":" + p;
+    if (pageCache.has(key)) return pageCache.get(key);
+    let list = await offlinePage(p, ed);
+    if (!list) {
+      const j = await getJSON(`${C.QURAN_API}/page/${p}/${ed}`);
+      list = j.data.ayahs.map((a) => ({
+        g: a.number, s: a.surah.number, a: a.numberInSurah, text: a.text, juz: a.juz, page: a.page,
+        sajda: !!(a.sajda && a.sajda !== false), sname: a.surah.name, sen: a.surah.englishName
+      }));
+    }
+    pageCache.set(key, list);
+    return list;
+  }
+
+  /* ---------- reading marks ("یہاں تک پڑھا") + last opened page ---------- */
+  const getMarks = () => store.get("quran.marks", []);
+  function saveMark(m) {
+    const list = getMarks().filter((x) => x.name !== m.name);
+    list.unshift({ ...m, id: uid(), at: Date.now() });
+    store.set("quran.marks", list.slice(0, 12));
+  }
+  function markWhere(m) {
+    const bits = [paraLabel(m.juz || juzOfPage(m.page || 1))];
+    if (m.page) bits.push(t(`صفحہ ${N(m.page)}`, `Page ${m.page}`));
+    if (m.s) bits.push(t(`${m.sname || "سورۃ " + N(m.s)} · آیت ${N(m.a)}`, `${m.sen || "Surah " + m.s} · Ayah ${m.a}`));
+    return bits.join(" · ");
+  }
+  function openMark(m) {
+    if (m.mode === "surah") go("surah", { n: m.s, ayah: m.a });
+    else go("mushaf", { page: m.page, hl: m.g });
+  }
+  function markSheet(base) {
+    const names = [...new Set(getMarks().map((x) => x.name))].slice(0, 4);
+    const sh = openSheet(`<h2>${t("یہاں تک پڑھا — نشان لگائیں", "Mark where you stopped")}</h2>
+      <p class="small muted" style="margin:0">${esc(markWhere(base))}</p>
+      <label class="small" for="mkName">${t("نشان کا نام (ایک فون پر کئی لوگ اپنا اپنا نشان رکھ سکتے ہیں)", "Name of the mark (several people can keep their own mark on one phone)")}</label>
+      <input id="mkName" class="input" maxlength="30" value="${esc(names[0] || t("میرا نشان", "My mark"))}">
+      ${names.length > 1 ? `<div class="chips">${names.map((n) => `<button class="chip" data-mkn="${esc(n)}">${esc(n)}</button>`).join("")}</div>` : ""}
+      <button class="btn gold block" data-mksave>${ICON.bookmarkFill} ${t("نشان محفوظ کریں", "Save mark")}</button>
+      <p class="small muted" style="margin:0">${t("اگلی بار «قرآن پاک» کھولیں تو اوپر «جاری رکھیں» سے سیدھا یہیں پہنچیں گے۔ اسی نام کا پرانا نشان آگے آ جائے گا۔", "Next time, open Quran Pak and tap Continue to come straight back here. An older mark with the same name moves forward.")}</p>
+      <button class="btn ghost" data-close>${t("منسوخ", "Cancel")}</button>`);
+    sh.querySelectorAll("[data-mkn]").forEach((b) => b.onclick = () => { sh.querySelector("#mkName").value = b.dataset.mkn; });
+    sh.querySelector("[data-mksave]").onclick = () => {
+      const name = sh.querySelector("#mkName").value.trim().slice(0, 30) || t("میرا نشان", "My mark");
+      saveMark({ ...base, name }); closeSheet();
+      toast(t("نشان لگ گیا: ", "Marked: ") + name);
+      document.querySelectorAll(".marked").forEach((e) => e.classList.remove("marked"));
+      const el = base.g && document.querySelector(`[data-g="${base.g}"]`); if (el) el.classList.add("marked");
+    };
+  }
+  function continueHTML() {
+    const marks = getMarks();
+    const last = store.get("quran.last", null);
+    if (!marks.length && !last) return "";
+    return `<section class="qcont">
+      <p class="section-label" style="margin:0">${t("تلاوت جاری رکھیں", "Continue reading")}</p>
+      ${marks.map((m) => `<div class="qmark">
+        <button class="grow" data-mk="${m.id}"><b>${ICON.bookmarkFill} ${esc(m.name)}</b><span>${esc(markWhere(m))}</span><span class="muted">${esc(fmtDateTime(m.at))}</span></button>
+        <button class="iconbtn" data-mkdel="${m.id}" aria-label="${t("نشان ہٹائیں", "Remove mark")}">✕</button></div>`).join("")}
+      ${last ? `<button class="btn block" data-last>${ICON.book} ${t(`آخری کھولا گیا صفحہ: ${N(last.page)} (${paraLabel(juzOfPage(last.page))})`, `Last opened page: ${last.page} (${paraLabel(juzOfPage(last.page))})`)}</button>` : ""}
+    </section>`;
+  }
+  function wireContinue(root, redraw) {
+    root.querySelectorAll("[data-mk]").forEach((b) => b.onclick = () => { const m = getMarks().find((x) => x.id === b.dataset.mk); if (m) openMark(m); });
+    root.querySelectorAll("[data-mkdel]").forEach((b) => b.onclick = () => {
+      const m = getMarks().find((x) => x.id === b.dataset.mkdel); if (!m) return;
+      confirmBox({ title: t("نشان ہٹائیں؟", "Remove this mark?"), body: `${m.name} — ${markWhere(m)}`, ok: t("ہٹائیں", "Remove"), danger: true,
+        onOk() { store.set("quran.marks", getMarks().filter((x) => x.id !== m.id)); redraw(); } });
+    });
+    const l = root.querySelector("[data-last]"); if (l) l.onclick = () => go("mushaf", { page: store.get("quran.last", { page: 1 }).page });
+  }
+
+  /* ---------- recitation player (verse by verse, highlights the ayah being recited) ---------- */
+  const RECITERS = [
+    { id: "ar.alafasy", ur: "مشاری راشد العفاسی", en: "Mishary Rashid Alafasy", src: [[128, "ar.alafasy"], [64, "ar.alafasy"]] },
+    { id: "ar.abdulbasitmurattal", ur: "عبدالباسط عبدالصمد", en: "Abdul Basit Abdul Samad", src: [[192, "ar.abdulbasitmurattal"], [64, "ar.abdulbasitmurattal"], [192, "ar.abdulbasit"]] },
+    { id: "ar.husary", ur: "محمود خلیل الحصری", en: "Mahmoud Khalil al-Husary", src: [[128, "ar.husary"], [64, "ar.husary"]] },
+    { id: "ar.minshawi", ur: "محمد صدیق المنشاوی", en: "Muhammad Siddiq al-Minshawi", src: [[128, "ar.minshawi"], [64, "ar.minshawi"]] },
+    { id: "ar.abdurrahmaansudais", ur: "عبدالرحمٰن السدیس (امامِ حرم)", en: "Abdur-Rahman as-Sudais", src: [[192, "ar.abdurrahmaansudais"], [64, "ar.abdurrahmaansudais"]] }
+  ];
+  const reciter = () => RECITERS.find((r) => r.id === store.get("quran.reciter", "ar.alafasy")) || RECITERS[0];
+  const audioUrl = (br, ed, g) => `https://cdn.islamic.network/quran/audio/${br}/${ed}/${g}.mp3`;
+  const player = {
+    audio: null, queue: [], i: 0, tryN: 0, onEnd: null, label: "",
+    el() {
+      if (!this.audio) {
+        this.audio = new Audio(); this.audio.preload = "auto";
+        this.audio.addEventListener("ended", () => this.next(true));
+        this.audio.addEventListener("error", () => this.fail());
+        this.audio.addEventListener("playing", () => this.bar());
+        this.audio.addEventListener("pause", () => this.bar());
+      }
+      return this.audio;
+    },
+    start(queue, i, onEnd) { this.queue = queue; this.i = Math.max(0, i || 0); this.onEnd = onEnd || null; this.play(); },
+    cur() { return this.queue[this.i]; },
+    play() {
+      const it = this.cur(); if (!it) return this.stop();
+      this.tryN = 0; this.load(it);
+    },
+    load(it) {
+      const r = reciter(); const [br, ed] = r.src[Math.min(this.tryN, r.src.length - 1)];
+      const a = this.el(); a.src = audioUrl(br, ed, it.bism ? 1 : it.g);
+      const p = a.play(); if (p && p.catch) p.catch((e) => { if (e && e.name === "NotAllowedError") { this.bar(); } });
+      this.mark(it); this.bar(); this.media(it);
+    },
+    fail() {
+      const it = this.cur(); if (!it || !this.queue.length) return;
+      this.tryN++;
+      if (this.tryN < reciter().src.length) { const r = reciter(); const [br, ed] = r.src[this.tryN]; this.audio.src = audioUrl(br, ed, it.bism ? 1 : it.g); this.audio.play().catch(() => {}); return; }
+      toast(navigator.onLine === false ? t("تلاوت کے لیے انٹرنیٹ ضروری ہے", "Recitation needs an internet connection") : t("یہ آیت لوڈ نہیں ہو سکی — اگلی پر جا رہے ہیں", "Couldn't load this ayah — moving on"));
+      if (navigator.onLine === false) { this.pause(); return; }
+      this.next(true);
+    },
+    next(auto) {
+      if (this.i < this.queue.length - 1) { this.i++; this.play(); return; }
+      const cb = this.onEnd; this.stop(); if (auto && cb) cb();
+    },
+    prev() {
+      let i = this.i - 1; while (i > 0 && this.queue[i] && this.queue[i].bism) i--;
+      this.i = Math.max(0, i); this.play();
+    },
+    toggle() { const a = this.el(); if (a.paused) a.play().catch(() => {}); else a.pause(); this.bar(); },
+    pause() { if (this.audio) this.audio.pause(); this.bar(); },
+    stop() {
+      if (this.audio) { this.audio.pause(); this.audio.removeAttribute("src"); try { this.audio.load(); } catch (e) {} }
+      this.queue = []; this.i = 0; this.onEnd = null;
+      document.querySelectorAll(".playing").forEach((e) => e.classList.remove("playing"));
+      const b = $("#qbar"); if (b) b.remove();
+    },
+    active() { return this.queue.length > 0; },
+    mark(it) {
+      document.querySelectorAll(".playing").forEach((e) => e.classList.remove("playing"));
+      const el = it.bism ? document.querySelector(`[data-bism="${it.s}"]`) : document.querySelector(`[data-g="${it.g}"]`);
+      if (el) {
+        el.classList.add("playing");
+        const r = el.getBoundingClientRect();
+        if (r.top < 70 || r.bottom > window.innerHeight - 150) el.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    },
+    media(it) {
+      try {
+        if (!("mediaSession" in navigator)) return;
+        navigator.mediaSession.metadata = new MediaMetadata({ title: it.bism ? "بسم اللہ" : `${it.sname || ""} : ${it.a}`, artist: LANG === "en" ? reciter().en : reciter().ur, album: C.appNameUr });
+        navigator.mediaSession.setActionHandler("nexttrack", () => this.next());
+        navigator.mediaSession.setActionHandler("previoustrack", () => this.prev());
+      } catch (e) {}
+    },
+    bar() {
+      if (!this.active()) return;
+      let b = $("#qbar");
+      if (!b) {
+        b = document.createElement("div"); b.id = "qbar"; b.className = "qbar"; document.body.appendChild(b);
+        b.addEventListener("click", (e) => {
+          const x = e.target.closest("[data-qb]"); if (!x) return;
+          const k = x.dataset.qb;
+          if (k === "pp") this.toggle(); else if (k === "nx") this.next(); else if (k === "pv") this.prev(); else if (k === "x") this.stop(); else if (k === "rc") reciterSheet();
+        });
+      }
+      b.dir = LANG === "en" ? "ltr" : "rtl";
+      const it = this.cur() || {};
+      const paused = !this.audio || this.audio.paused;
+      b.innerHTML = `<div class="qbar-in">
+        <button class="qb" data-qb="pv" aria-label="${t("پچھلی آیت", "Previous ayah")}">${ICON.prev}</button>
+        <button class="qb main" data-qb="pp" aria-label="${paused ? t("چلائیں", "Play") : t("روکیں", "Pause")}">${paused ? ICON.play : ICON.pause}</button>
+        <button class="qb" data-qb="nx" aria-label="${t("اگلی آیت", "Next ayah")}">${ICON.next}</button>
+        <button class="qlabel grow" data-qb="rc"><b>${it.bism ? "بِسْمِ اللّٰهِ" : esc(`${LANG === "en" ? (it.sen || "") : (it.sname || "")} · ${t("آیت", "Ayah")} ${N(it.a || "")}`)}</b><span>${esc(LANG === "en" ? reciter().en : reciter().ur)} ▾</span></button>
+        <button class="qb" data-qb="x" aria-label="${t("بند کریں", "Close")}">✕</button></div>`;
+    }
+  };
+  function reciterSheet() {
+    const cur = reciter().id;
+    const sh = openSheet(`<h2>${t("قاری منتخب کریں", "Choose reciter")}</h2>
+      <div class="list">${RECITERS.map((r) => `<button class="li" data-rc="${r.id}" aria-pressed="${r.id === cur}"><span class="grow"><b>${esc(LANG === "en" ? r.en : r.ur)}</b><span class="ltr">${esc(r.en)}</span></span>${r.id === cur ? `<span style="color:var(--gold)">✓</span>` : ""}</button>`).join("")}</div>
+      <p class="small muted" style="margin:0">${t("تلاوت مفت انٹرنیٹ سے چلتی ہے (cdn.islamic.network)، کوئی فیس نہیں۔ موبائل ڈیٹا تقریباً ۱ MB فی منٹ۔", "Recitation streams free from cdn.islamic.network — no fee. Uses about 1 MB of mobile data per minute.")}</p>
+      <button class="btn ghost" data-close>${t("بند کریں", "Close")}</button>`);
+    sh.querySelectorAll("[data-rc]").forEach((b) => b.onclick = () => {
+      store.set("quran.reciter", b.dataset.rc); closeSheet();
+      if (player.active()) player.play();
+      toast(t("قاری: ", "Reciter: ") + (LANG === "en" ? reciter().en : reciter().ur));
+    });
+  }
+  /* queue for a list of ayahs; a Bismillah clip (Al-Fatiha 1) is played before every surah start except 1 and 9 */
+  function makeQueue(ayahs) {
+    const q = [];
+    for (const x of ayahs) {
+      if (x.a === 1 && x.s !== 1 && x.s !== 9) q.push({ bism: true, s: x.s, a: 0, g: 1, sname: x.sname, sen: x.sen, page: x.page });
+      q.push({ g: x.g, s: x.s, a: x.a, sname: x.sname, sen: x.sen, page: x.page });
+    }
+    return q;
+  }
+  function qIndexOf(q, g) { const i = q.findIndex((x) => !x.bism && x.g === g); if (i < 0) return 0; return i > 0 && q[i - 1].bism ? i - 1 : i; }
+
+  /* ---------- Quran home: surahs, paras, continue reading, offline copy ---------- */
   async function screenQuran() {
-    view().innerHTML = topbar(t("قرآن پاک", "Quran Pak")) + `<div class="view">
-      <div class="row">
-        <input id="qFilter" class="input grow" placeholder="${t("سورت کا نام یا نمبر", "Surah name or number")}">
+    const tab = store.get("quran.tab", "surah");
+    view().innerHTML = topbar(t("قرآن پاک", "Quran Pak")) + `<div class="view" id="qv">
+      <div id="qCont">${continueHTML()}</div>
+      <div class="seg seg3" role="group" aria-label="${t("قرآن کیسے کھولیں", "How to open the Quran")}">
+        <button data-qtab="surah" aria-pressed="${tab === "surah"}">${t("سورتیں", "Surahs")}</button>
+        <button data-qtab="para" aria-pressed="${tab === "para"}">${t("پارے", "Paras")}</button>
+        <button data-qtab="mushaf" aria-pressed="false">${t("مصحف (صفحہ وار)", "Mushaf (pages)")}</button>
       </div>
+      <div id="qTab"></div>
+      <div id="qOff"></div>
+      <p class="small muted">${quranCredit()}</p>
+    </div>`;
+    const redrawCont = () => { $("#qCont").innerHTML = continueHTML(); wireContinue($("#qCont"), redrawCont); };
+    wireContinue($("#qCont"), redrawCont);
+    document.querySelectorAll("[data-qtab]").forEach((b) => b.onclick = () => {
+      if (b.dataset.qtab === "mushaf") { go("mushaf", { page: (store.get("quran.last", null) || { page: 1 }).page }); return; }
+      store.set("quran.tab", b.dataset.qtab); screenQuran();
+    });
+    drawOffline();
+    if (tab === "para") return drawParas();
+    return drawSurahs();
+  }
+  function drawParas() {
+    $("#qTab").innerHTML = `<p class="small muted" style="margin:0">${t("پارہ چنیں — مصحف کے صفحات کی طرح عربی متن کھلے گا۔ کسی آیت کو دبا کر تلاوت سنیں یا «یہاں تک پڑھا» کا نشان لگائیں۔", "Choose a Para — the Arabic text opens page by page like a printed mushaf. Tap any ayah to listen or to mark where you stopped.")}</p>
+      <div class="paras">${JUZ_NAME.map((nm, i) => `<button class="para" data-juz="${i + 1}"><span class="pn">${N(i + 1)}</span><span class="pa">${nm}</span><small>${t("صفحہ ", "Page ")}${N(JUZ_PAGE[i])}</small></button>`).join("")}</div>`;
+    $("#qTab").querySelectorAll("[data-juz]").forEach((b) => b.onclick = () => go("mushaf", { page: JUZ_PAGE[+b.dataset.juz - 1] }));
+  }
+  async function drawSurahs() {
+    $("#qTab").innerHTML = `
+      <div class="row"><input id="qFilter" class="input grow" placeholder="${t("سورت کا نام یا نمبر", "Surah name or number")}"></div>
       <form id="qSearch" class="card" style="display:flex;flex-direction:column;gap:8px">
         <label for="qKw" class="small muted">${t("قرآن میں تلاش کریں", "Search the Quran")}</label>
         <div class="row"><input id="qKw" class="input grow" placeholder="${t("مثلاً: صبر، رحمت", "In Urdu or Arabic, e.g. صبر")}"><button class="btn gold" type="submit">${ICON.search} ${t("تلاش", "Search")}</button></div>
@@ -1166,9 +1729,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         </div>
       </form>
       <div id="qResults"></div>
-      <div id="qList"><div class="spinner"></div></div>
-      <p class="small muted">${quranCredit()}</p>
-    </div>`;
+      <div id="qList"><div class="spinner"></div></div>`;
     let qs = "ur";
     document.querySelectorAll("[data-qs]").forEach((b) => b.onclick = () => {
       qs = b.dataset.qs; document.querySelectorAll("[data-qs]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
@@ -1195,6 +1756,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     };
     try {
       const list = await loadSurahList();
+      if (!$("#qList")) return;
       const draw = (f) => {
         const q = f.trim().toLowerCase();
         const items = list.filter((s) => !q || String(s.n) === q || s.en.toLowerCase().includes(q) || s.ar.includes(f.trim()));
@@ -1209,34 +1771,185 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       draw("");
       $("#qFilter").oninput = (e) => draw(e.target.value);
     } catch (e) {
-      $("#qList").innerHTML = netErrorHTML(() => screenQuran());
+      if ($("#qList")) $("#qList").innerHTML = netErrorHTML(() => screenQuran());
     }
   }
+  function drawOffline() {
+    const box = $("#qOff"); if (!box) return;
+    const f = store.get("quran.offline", {});
+    const have = f[C.QURAN_AR_EDITION] && f[C.QURAN_UR_EDITION];
+    box.innerHTML = `<div class="card small" style="display:flex;flex-direction:column;gap:8px">
+      <b style="color:var(--gold)">${t("انٹرنیٹ کے بغیر قرآن", "Quran without internet")}</b>
+      ${have ? `<span>✓ ${t(`پورا قرآن (عربی + اردو ترجمہ) اس فون میں محفوظ ہے — ${esc(fmtDate(f[C.QURAN_AR_EDITION]))}۔ اب سورتیں اور پارے انٹرنیٹ کے بغیر کھلیں گے۔ (تلاوت کی آواز کے لیے انٹرنیٹ پھر بھی چاہیے۔)`, `The whole Quran (Arabic + Urdu) is saved on this phone — ${esc(fmtDate(f[C.QURAN_AR_EDITION]))}. Surahs and Paras now open without internet. (Recitation audio still needs internet.)`)}</span>
+        <button class="btn ghost" id="offDel" style="min-height:36px">${t("محفوظ نسخہ ہٹائیں", "Remove saved copy")}</button>`
+      : `<span>${t("ایک بار ڈاؤن لوڈ کریں (تقریباً ۵–۸ MB)، پھر پورا قرآن اور اردو ترجمہ بغیر انٹرنیٹ کے پڑھیں۔", "Download once (about 5–8 MB), then read the whole Quran and Urdu translation without internet.")}</span>
+        <button class="btn gold" id="offGet">${ICON.download} ${t("پورا قرآن فون میں محفوظ کریں", "Save the whole Quran on this phone")}</button>`}
+    </div>`;
+    const g = $("#offGet");
+    if (g) g.onclick = async () => {
+      g.disabled = true;
+      try {
+        await downloadQuranOffline((i) => { g.innerHTML = `<span class="spinner" style="width:18px;height:18px;margin:0;border-width:2px"></span> ${i === 0 ? t("عربی متن…", "Arabic text…") : i === 1 ? t("اردو ترجمہ…", "Urdu translation…") : t("مکمل", "Done")}`; });
+        toast(t("پورا قرآن محفوظ ہو گیا", "The whole Quran is saved")); drawOffline();
+      } catch (e) {
+        g.disabled = false; g.innerHTML = `${ICON.download} ${t("دوبارہ کوشش کریں", "Try again")}`;
+        toast(t("ڈاؤن لوڈ نہیں ہو سکا — انٹرنیٹ چیک کریں", "Download failed — check the internet"));
+      }
+    };
+    const d = $("#offDel");
+    if (d) d.onclick = () => confirmBox({ title: t("محفوظ قرآن ہٹائیں؟", "Remove the saved Quran?"), body: t("فون سے آف لائن نسخہ ہٹ جائے گا؛ انٹرنیٹ ہو تو قرآن پہلے کی طرح کھلتا رہے گا۔", "The offline copy is removed; with internet the Quran still opens as before."), ok: t("ہٹائیں", "Remove"), danger: true,
+      async onOk() { for (const ed of [C.QURAN_AR_EDITION, C.QURAN_UR_EDITION]) { try { await idb.del("q:" + ed); } catch (e) {} delete offRec[ed]; delete offPages[ed]; } store.del("quran.offline"); pageCache.clear(); drawOffline(); } });
+  }
 
+  /* ---------- Mushaf reader (page by page, like the printed 604-page Quran) ---------- */
+  function screenMushaf(params) {
+    const p = Math.min(604, Math.max(1, Math.round(+params.page || (store.get("quran.last", null) || { page: 1 }).page || 1)));
+    route.params = { ...params, page: p };
+    const showTr = !!store.get("quran.tr", false);
+    view().innerHTML = topbar(`${paraLabel(juzOfPage(p))} · ${t("صفحہ", "Page")} ${N(p)}`, { right: `<button class="iconbtn" id="mMark" aria-label="${t("یہاں تک پڑھا — نشان", "Mark where you stopped")}">${ICON.bookmark}</button>` }) + `
+      <div class="view mview" id="mv">
+        <div class="mtools">
+          <button class="chip" id="mPlay">${ICON.play} ${t("اس صفحے کی تلاوت", "Recite this page")}</button>
+          <button class="chip" id="mTr" aria-pressed="${showTr}">${t("اردو ترجمہ", "Urdu translation")}</button>
+          <button class="chip" id="mJump">${t("پارہ / صفحہ بدلیں", "Para / page")}</button>
+        </div>
+        <article class="mpage ${showTr ? "withtr" : ""}" id="mpage" aria-live="polite"><div class="spinner"></div></article>
+        <div class="mpager">
+          <button class="btn grow" data-pg="${p + 1}" ${p >= 604 ? "disabled" : ""}>${t("← اگلا صفحہ", "Next page →")}</button>
+          <span class="pgno">${N(p)} / ${N(604)}</span>
+          <button class="btn grow" data-pg="${p - 1}" ${p <= 1 ? "disabled" : ""}>${t("پچھلا صفحہ →", "← Previous page")}</button>
+        </div>
+        <p class="small muted" style="text-align:center;margin:0">${t("صفحہ بدلنے کے لیے دائیں/بائیں سوائپ کریں · کسی آیت کو دبائیں: سنیں، نشان لگائیں، محفوظ یا شیئر کریں", "Swipe to turn the page · Tap an ayah to listen, mark, save or share")}</p>
+        <p class="small muted">${quranCredit()}</p>
+      </div>`;
+    store.set("quran.last", { page: p, at: Date.now() });
+    const turn = (to) => { if (to < 1 || to > 604) return; go("mushaf", { page: to }, false); };
+    document.querySelectorAll("[data-pg]").forEach((b) => b.onclick = () => turn(+b.dataset.pg));
+    $("#mTr").onclick = () => { store.set("quran.tr", !showTr); screenMushaf({ page: p, hl: params.hl }); };
+    $("#mJump").onclick = () => jumpSheet(p);
+    // swipe: Arabic books open right-to-left, so a swipe towards the right shows the next page
+    let sx = 0, sy = 0;
+    const mv = $("#mv");
+    mv.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    mv.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) turn(dx > 0 ? p + 1 : p - 1);
+    }, { passive: true });
+    drawMushafPage(p, showTr, params);
+  }
+  async function drawMushafPage(p, showTr, params) {
+    const box = $("#mpage");
+    let ar, ur = null;
+    try {
+      [ar, ur] = await Promise.all([loadPage(p, C.QURAN_AR_EDITION), showTr ? loadPage(p, C.QURAN_UR_EDITION).catch(() => null) : null]);
+    } catch (e) { if (box) box.innerHTML = netErrorHTML(() => drawMushafPage(p, showTr, params)); return; }
+    if (route.name !== "mushaf" || route.params.page !== p || !$("#mpage")) return;
+    const urMap = new Map((ur || []).map((x) => [x.g, x.text]));
+    const marks = getMarks();
+    const markedG = new Set(marks.map((m) => m.g).filter(Boolean));
+    const names = [...new Set(ar.map((x) => x.sname))];
+    let html = `<header class="mhead"><span>${esc(names.join(" · "))}</span><span>${paraLabel(ar[0] ? ar[0].juz : juzOfPage(p))}</span></header><div class="mtext">`;
+    for (const x of ar) {
+      if (x.a === 1) {
+        html += `</div><div class="sframe"><span>${esc(x.sname)}</span></div>`;
+        if (x.s !== 1 && x.s !== 9) html += `<div class="mbism" data-bism="${x.s}">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>`;
+        html += `<div class="mtext">`;
+      }
+      const text = (x.a === 1 && x.s !== 1 && x.s !== 9) ? x.text.replace(BISMILLAH_RE, "") : x.text;
+      const cls = `ay${markedG.has(x.g) ? " marked" : ""}${params.hl === x.g ? " hl" : ""}`;
+      const end = `<span class="aend">﴿${AR_DIGITS(x.a)}﴾</span>${x.sajda ? `<span class="sajda" title="${t("سجدۂ تلاوت", "Prostration")}">۩</span>` : ""}`;
+      if (showTr) html += `<div class="tray"><span class="${cls}" data-g="${x.g}" tabindex="0" role="button">${esc(text)} ${end}</span><div class="ur" ${U}>${esc(urMap.get(x.g) || "")}</div></div>`;
+      else html += `<span class="${cls}" data-g="${x.g}" tabindex="0" role="button">${esc(text)}</span> ${end} `;
+    }
+    html += `</div><footer class="mfoot">${N(p)}</footer>`;
+    box.innerHTML = html.replace(/<div class="mtext"><\/div>/g, "");
+    box.querySelectorAll("[data-g]").forEach((el) => {
+      el.onclick = () => ayahMenu(ar.find((x) => x.g === +el.dataset.g), ar, p);
+      el.onkeydown = (e) => { if (e.key === "Enter") el.click(); };
+    });
+    $("#mPlay").onclick = () => startPageRecitation(p, ar, 0);
+    $("#mMark").onclick = () => { const x = ar[ar.length - 1]; markSheet({ mode: "mushaf", page: p, juz: x.juz, s: x.s, a: x.a, g: x.g, sname: x.sname, sen: x.sen }); };
+    if (params.hl) { const el = box.querySelector(`[data-g="${params.hl}"]`); if (el) setTimeout(() => el.scrollIntoView({ block: "center" }), 60); }
+    if (params.autoplay) { delete route.params.autoplay; startPageRecitation(p, ar, 0); }
+    else if (player.active()) { const c = player.cur(); if (c) player.mark(c); player.bar(); }
+  }
+  function startPageRecitation(p, ar, fromG) {
+    const q = makeQueue(ar);
+    player.start(q, fromG ? qIndexOf(q, fromG) : 0, () => {
+      if (route.name === "mushaf" && route.params.page === p && p < 604) go("mushaf", { page: p + 1, autoplay: true }, false);
+    });
+  }
+  function jumpSheet(p) {
+    const sh = openSheet(`<h2>${t("پارہ یا صفحہ منتخب کریں", "Choose a Para or page")}</h2>
+      <form class="row" id="pgForm"><label for="pgIn" class="small">${t("صفحہ نمبر (۱ تا ۶۰۴)", "Page number (1–604)")}</label>
+        <input id="pgIn" class="input grow" type="number" min="1" max="604" inputmode="numeric" value="${p}" style="max-width:120px"><button class="btn gold" type="submit">${t("کھولیں", "Open")}</button></form>
+      <div class="paras small-paras">${JUZ_NAME.map((nm, i) => `<button class="para" data-jz="${i + 1}" ${juzOfPage(p) === i + 1 ? 'aria-current="true"' : ""}><span class="pn">${N(i + 1)}</span><span class="pa">${nm}</span></button>`).join("")}</div>
+      <button class="btn ghost" data-close>${t("بند کریں", "Close")}</button>`);
+    sh.querySelector("#pgForm").onsubmit = (e) => { e.preventDefault(); const v = +sh.querySelector("#pgIn").value; if (v >= 1 && v <= 604) { closeSheet(); go("mushaf", { page: v }, false); } else toast(t("۱ سے ۶۰۴ تک صفحہ لکھیں", "Enter a page from 1 to 604")); };
+    sh.querySelectorAll("[data-jz]").forEach((b) => b.onclick = () => { closeSheet(); go("mushaf", { page: JUZ_PAGE[+b.dataset.jz - 1] }, false); });
+  }
+  async function ayahMenu(x, ar, p) {
+    if (!x) return;
+    const it0 = { key: `${x.s}:${x.a}`, s: x.s, a: x.a, sname: x.sname, sen: x.sen, ar: (x.a === 1 && x.s !== 1 && x.s !== 9) ? x.text.replace(BISMILLAH_RE, "") : x.text, ur: "" };
+    const on = store.get("bm.ayah", []).some((b) => b.key === it0.key);
+    const sh = openSheet(`<h2>${esc(ayahRef(it0))}</h2>
+      <div class="ar quran" style="font-size:22px;max-height:30vh;overflow:auto">${esc(it0.ar)}</div>
+      <button class="btn gold block" data-am="play">${ICON.play} ${t("یہاں سے تلاوت سنیں", "Listen from here")}</button>
+      <button class="btn green block" data-am="mark">${ICON.bookmarkFill} ${t("یہاں تک پڑھا — نشان لگائیں", "I stopped here — mark it")}</button>
+      <div class="row">
+        <button class="btn grow" data-am="save">${on ? ICON.bookmarkFill + " " + t("محفوظ ہے", "Saved") : ICON.bookmark + " " + t("آیت محفوظ کریں", "Save ayah")}</button>
+        <button class="btn grow" data-am="share">${ICON.share} ${t("شیئر", "Share")}</button>
+      </div>
+      <button class="btn block" data-am="tr">${ICON.book} ${t("ترجمے کے ساتھ سورت میں کھولیں", "Open in the surah with translation")}</button>
+      <button class="btn ghost" data-close>${t("بند کریں", "Close")}</button>`);
+    const withUr = async () => { try { const u = await loadPage(p, C.QURAN_UR_EDITION); const f = u.find((y) => y.g === x.g); return { ...it0, ur: f ? f.text : "" }; } catch (e) { return it0; } };
+    sh.querySelector('[data-am="play"]').onclick = () => { closeSheet(); startPageRecitation(p, ar, x.g); };
+    sh.querySelector('[data-am="mark"]').onclick = () => { closeSheet(); markSheet({ mode: "mushaf", page: p, juz: x.juz, s: x.s, a: x.a, g: x.g, sname: x.sname, sen: x.sen }); };
+    sh.querySelector('[data-am="tr"]').onclick = () => { closeSheet(); go("surah", { n: x.s, ayah: x.a }); };
+    sh.querySelector('[data-am="save"]').onclick = async () => {
+      const it = await withUr();
+      let list = store.get("bm.ayah", []); const has = list.some((b) => b.key === it.key);
+      list = has ? list.filter((b) => b.key !== it.key) : [{ ...it, savedAt: Date.now() }, ...list];
+      store.set("bm.ayah", list); closeSheet(); toast(has ? t("ہٹا دیا گیا", "Removed") : t("آیت محفوظ ہو گئی", "Ayah saved"));
+    };
+    sh.querySelector('[data-am="share"]').onclick = async () => { const it = await withUr(); closeSheet(); shareSheet({ kind: "ayah", ar: it.ar, ur: it.ur, ref: ayahRef(it), text: ayahText(it) }); };
+  }
+
+  /* ---------- Surah with translation (ayah cards) ---------- */
   const BISMILLAH_RE = /^﻿?بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ\s*/;
   const ayahRef = (it) => t(`سورۃ ${it.sen} (${N(it.s)}) : آیت ${N(it.a)}`, `Surah ${it.sen} (${it.s}) : Ayah ${it.a}`);
+  async function surahData(n) {
+    const [oa, ou] = await Promise.all([offlineSurah(n, C.QURAN_AR_EDITION), offlineSurah(n, C.QURAN_UR_EDITION)]);
+    if (oa && ou) return [oa, ou];
+    const j = await getJSON(`${C.QURAN_API}/surah/${n}/editions/${C.QURAN_AR_EDITION},${C.QURAN_UR_EDITION}`);
+    return j.data;
+  }
   async function screenSurah({ n, ayah }) {
     view().innerHTML = topbar(t("سورت ", "Surah ") + N(n)) + `<div class="view" id="sv"><div class="spinner"></div></div>`;
     try {
-      const j = await getJSON(`${C.QURAN_API}/surah/${n}/editions/${C.QURAN_AR_EDITION},${C.QURAN_UR_EDITION}`);
-      const [ar, ur] = j.data;
+      const [ar, ur] = await surahData(n);
+      if (route.name !== "surah" || !$("#sv")) return;
       $(".topbar h1").textContent = (LANG === "en" ? ar.englishName : ar.name) + " (" + N(n) + ")";
       const bms = store.get("bm.ayah", []);
+      const markedG = new Set(getMarks().map((m) => m.g).filter(Boolean));
       const showBism = n !== 1 && n !== 9;
       const getAyah = (no) => ({
         key: `${n}:${no}`, s: n, a: +no, sname: ar.name, sen: ar.englishName,
         ar: (no == 1 && showBism) ? ar.ayahs[no - 1].text.replace(BISMILLAH_RE, "") : ar.ayahs[no - 1].text,
         ur: ur.ayahs[no - 1] ? ur.ayahs[no - 1].text : ""
       });
+      const qAyahs = ar.ayahs.map((a) => ({ g: a.number, s: n, a: a.numberInSurah, page: a.page, juz: a.juz, sname: ar.name, sen: ar.englishName }));
       const cards = ar.ayahs.map((a) => {
         const it = getAyah(a.numberInSurah);
         const on = bms.some((b) => b.key === it.key);
         return `<article class="rcard" id="a${a.numberInSurah}">
           <div class="head"><span class="badge">${a.numberInSurah}</span><span class="title">${esc(LANG === "en" ? ar.englishName : ar.name)} · ${t("آیت", "Ayah")} ${N(a.numberInSurah)}</span></div>
-          <div class="ar quran">${esc(it.ar)}</div>
+          <div class="ar quran ay ${markedG.has(a.number) ? "marked" : ""}" data-g="${a.number}">${esc(it.ar)}</div>
           <div class="ur" ${U}>${esc(it.ur)}</div>
           <div class="actions">
             <span class="ref">${esc(ayahRef(it))}</span>
+            <button class="rbtn" data-pl="${a.numberInSurah}">${ICON.play} ${t("سنیں", "Listen")}</button>
+            <button class="rbtn" data-mk2="${a.numberInSurah}">${ICON.bookmarkFill} ${t("یہاں تک پڑھا", "Stopped here")}</button>
             <button class="rbtn ${on ? "on" : ""}" data-bm="${a.numberInSurah}">${on ? ICON.bookmarkFill + " " + t("محفوظ", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save")}</button>
             <button class="rbtn" data-cp="${a.numberInSurah}">${ICON.copy} ${t("کاپی", "Copy")}</button>
             <button class="rbtn" data-sh="${a.numberInSurah}">${ICON.share} ${t("شیئر", "Share")}</button>
@@ -1244,6 +1957,10 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         </article>`;
       }).join("");
       $("#sv").innerHTML = `
+        <div class="row">
+          <button class="btn gold grow" id="sPlay">${ICON.play} ${t("پوری سورت کی تلاوت سنیں", "Listen to the whole surah")}</button>
+          ${ar.ayahs[0] && ar.ayahs[0].page ? `<button class="btn grow" id="sMushaf">${ICON.book} ${t("مصحف میں پڑھیں", "Read in mushaf")}</button>` : ""}
+        </div>
         <div class="row card" style="padding:10px 12px">
           <label for="jump" class="small muted">${t("آیت نمبر پر جائیں", "Go to ayah")}</label>
           <input id="jump" class="input grow" type="number" min="1" max="${ar.numberOfAyahs}" inputmode="numeric" style="max-width:110px">
@@ -1252,12 +1969,21 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
           ${n > 1 ? `<button class="btn ghost" data-sur="${n - 1}">${t("پچھلی", "Previous")}</button>` : ""}
           ${n < 114 ? `<button class="btn ghost" data-sur="${n + 1}">${t("اگلی", "Next")}</button>` : ""}
         </div>
-        ${showBism ? `<div class="ar quran" style="color:var(--gold-soft)">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : ""}
+        ${showBism ? `<div class="ar quran" data-bism="${n}" style="color:var(--gold-soft)">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : ""}
         ${cards}
         <p class="small muted">${quranCredit()}</p>`;
-      $("#sv").querySelectorAll("[data-sur]").forEach((b) => b.onclick = () => go("surah", { n: +b.dataset.sur }, false));
+      const sv = $("#sv");
+      const startAt = (no) => { const q = makeQueue(qAyahs); player.start(q, no > 1 ? qIndexOf(q, qAyahs[no - 1].g) : 0); };
+      $("#sPlay").onclick = () => startAt(1);
+      if ($("#sMushaf")) $("#sMushaf").onclick = () => go("mushaf", { page: ar.ayahs[0].page });
+      sv.querySelectorAll("[data-pl]").forEach((b) => b.onclick = () => startAt(+b.dataset.pl));
+      sv.querySelectorAll("[data-mk2]").forEach((b) => b.onclick = () => {
+        const x = qAyahs[+b.dataset.mk2 - 1];
+        markSheet({ mode: "surah", page: x.page, juz: x.juz || juzOfPage(x.page || 1), s: n, a: x.a, g: x.g, sname: ar.name, sen: ar.englishName });
+      });
+      sv.querySelectorAll("[data-sur]").forEach((b) => b.onclick = () => { player.stop(); go("surah", { n: +b.dataset.sur }, false); });
       $("#jumpGo").onclick = () => { const v = +$("#jump").value; const el = document.getElementById("a" + v); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); else toast(t("درست آیت نمبر لکھیں", "Enter a valid ayah number")); };
-      $("#sv").querySelectorAll("[data-bm]").forEach((b) => b.onclick = () => {
+      sv.querySelectorAll("[data-bm]").forEach((b) => b.onclick = () => {
         const it = getAyah(b.dataset.bm);
         let list = store.get("bm.ayah", []);
         const has = list.some((x) => x.key === it.key);
@@ -1266,14 +1992,15 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         b.classList.toggle("on", !has); b.innerHTML = !has ? ICON.bookmarkFill + " " + t("محفوظ", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save");
         toast(has ? t("ہٹا دیا گیا", "Removed") : t("آیت محفوظ ہو گئی", "Ayah saved"));
       });
-      $("#sv").querySelectorAll("[data-cp]").forEach((b) => b.onclick = () => copyText(ayahText(getAyah(b.dataset.cp))));
-      $("#sv").querySelectorAll("[data-sh]").forEach((b) => b.onclick = () => {
+      sv.querySelectorAll("[data-cp]").forEach((b) => b.onclick = () => copyText(ayahText(getAyah(b.dataset.cp))));
+      sv.querySelectorAll("[data-sh]").forEach((b) => b.onclick = () => {
         const it = getAyah(b.dataset.sh);
         shareSheet({ kind: "ayah", ar: it.ar, ur: it.ur, ref: ayahRef(it), text: ayahText(it) });
       });
+      if (player.active()) { const c = player.cur(); if (c) player.mark(c); player.bar(); }
       if (ayah) setTimeout(() => { const el = document.getElementById("a" + ayah); if (el) el.scrollIntoView({ block: "start" }); }, 50);
     } catch (e) {
-      $("#sv").innerHTML = netErrorHTML(() => screenSurah({ n, ayah }));
+      if ($("#sv")) $("#sv").innerHTML = netErrorHTML(() => screenSurah({ n, ayah }));
     }
   }
   function ayahText(it) { return `${it.ar}\n\n${it.ur}\n\n(${ayahRef(it)})${shareTail()}`; }
@@ -1348,7 +2075,10 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       shareSheet({ kind: "hadith", ar: h.ar, ur: h.ur, ref: hadithRef(h), text: hadithText(h) });
     });
   }
-  function hadithText(h) { return `${h.ar}\n\n${h.ur || ""}\n\n(${hadithRef(h)})${shareTail()}`; }
+  function hadithText(h, passOn) {
+    const pass = passOn ? "\n\n" + t("«بَلِّغُوْا عَنِّيْ وَلَوْ اٰيَةً» — اسے آگے شیئر کریں، سب تک پہنچائیں۔", "“Convey from me, even if it is one verse” (Bukhari 3461) — please pass it on.") : "";
+    return `${h.ar}\n\n${h.ur || ""}\n\n(${hadithRef(h)})${pass}${shareTail()}`;
+  }
 
   let hadithInfo = null;
   async function screenHadith(params) {
@@ -1496,9 +2226,15 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
           </article>
         </div>
       </section>
+      <section class="share-any">
+        <p class="ar" style="margin:0;font-size:21px;color:var(--gold-soft);text-align:center">بَلِّغُوْا عَنِّيْ وَلَوْ اٰيَةً</p>
+        <p class="small" ${U} style="margin:0;text-align:center">«میری طرف سے (لوگوں تک) پہنچا دو، خواہ ایک آیت ہی ہو» <span class="muted">(البخاری: 3461)</span></p>
+        <button class="btn gold block" id="dAny">${ICON.share} ${t("سب کے ساتھ شیئر کریں", "Share with anyone")}${LANG === "en" ? "" : ` <small class="ltr" style="font-size:12px;opacity:.75">(Share with anyone)</small>`}</button>
+        <p class="small muted" style="margin:0;text-align:center">${t("واٹس ایپ، فیس بک، میسج، ای میل — جس ایپ سے چاہیں، گھر والوں اور دوستوں کو بھیجیں۔", "WhatsApp, Facebook, SMS, email — send it to family and friends with any app.")}</p>
+      </section>
       <div class="row">
         <button class="btn wa grow" id="dWa">${ICON.wa} ${t("واٹس ایپ پر شیئر", "Share on WhatsApp")}</button>
-        <button class="btn gold grow" id="dImg">${ICON.image} ${t("تصویر بنائیں", "Make image")}</button>
+        <button class="btn grow" id="dImg">${ICON.image} ${t("تصویر بنائیں", "Make image")}</button>
       </div>
       <div class="row">
         <button class="btn grow ${on ? "keep-on" : ""}" id="dSave">${on ? ICON.bookmarkFill + " " + t("محفوظ ہے", "Saved") : ICON.bookmark + " " + t("محفوظ کریں", "Save")}</button>
@@ -1506,7 +2242,8 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       </div>
       <p class="small muted">${t("روزانہ حدیث صحیح البخاری کی منتخب احادیث میں سے ہر دن بدلتی ہے اور پورا دن ایک ہی رہتی ہے۔ متن: fawazahmed0/hadith-api (اردو مترجم کا نام ماخذ میں درج نہیں)۔ اردو متن میں سند (راویوں کا سلسلہ) بھی شامل ہو سکتی ہے۔",
         "The daily hadith changes each day from a selection of Sahih al-Bukhari and stays the same all day. Text: fawazahmed0/hadith-api (the source does not name the Urdu translator). The Urdu text may include the chain of narrators.")}</p>`;
-    const payload = { kind: "hadith", ar: h.ar, ur: h.ur, ref: hadithRef(h), text: hadithText(h), title: t("آج کی حدیث", "Hadith of the Day") };
+    const payload = { kind: "hadith", ar: h.ar, ur: h.ur, ref: hadithRef(h), text: hadithText(h, true), title: t("آج کی حدیث", "Hadith of the Day") };
+    $("#dAny").onclick = () => shareAny(payload);
     $("#dWa").onclick = () => shareWhatsApp(payload);
     $("#dImg").onclick = () => shareSheet(payload);
     $("#dCopy").onclick = () => copyText(payload.text);
@@ -1599,7 +2336,30 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     ctx.closePath(); fill ? ctx.fill() : ctx.stroke();
   }
   function waLink(text) { return "https://wa.me/?text=" + encodeURIComponent(text); }
+  async function nativeShare(p, blob) {
+    try {
+      if (!blob) blob = await makeCard(p);
+      NATIVE.shareImage(await blobToB64(blob), p.text);
+    } catch (e) { NATIVE.shareText(p.text); }
+  }
+  /* "Share with anyone": the phone's own share menu (every installed app) */
+  async function shareAny(p) {
+    if (NATIVE) { nativeShare(p); return; }
+    let file = null;
+    try {
+      const blob = await makeCard(p);
+      file = new File([blob], "noor-e-tasbeeh.png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text: p.text }); return; }
+    } catch (e) { if (e && e.name === "AbortError") return; }
+    try { if (navigator.share) { await navigator.share({ text: p.text }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+    shareSheet(p);
+  }
   async function shareWhatsApp(p) {
+    if (NATIVE && NATIVE.shareImageTo) {
+      try { const blob = await makeCard(p); NATIVE.shareImageTo(await blobToB64(blob), p.text, "com.whatsapp"); return; }
+      catch (e) { /* fall through */ }
+    }
+    if (NATIVE) { nativeShare(p); return; }
     try {
       const blob = await makeCard(p);
       const file = new File([blob], "noor-e-tasbeeh.png", { type: "image/png" });
@@ -1612,24 +2372,25 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
   async function shareSheet(p, waFirst) {
     const sh = openSheet(`<h2>${t("شیئر کریں", "Share")}</h2><div class="spinner"></div>`);
-    let url = "", file = null;
+    let url = "", file = null, blob = null;
     try {
-      const blob = await makeCard(p);
+      blob = await makeCard(p);
       url = URL.createObjectURL(blob);
       file = new File([blob], "noor-e-tasbeeh.png", { type: "image/png" });
     } catch (e) { /* canvas unavailable */ }
-    const canFiles = !!(file && navigator.canShare && (() => { try { return navigator.canShare({ files: [file] }); } catch (e) { return false; } })());
+    const canFiles = !!NATIVE || !!(file && navigator.canShare && (() => { try { return navigator.canShare({ files: [file] }); } catch (e) { return false; } })());
     sh.innerHTML = `<div class="grab"></div><h2>${t("شیئر کریں", "Share")}</h2>
       ${url ? `<img class="preview" src="${url}" alt="${t("شیئر کارڈ کی تصویر", "Share card image")}">` : ""}
       ${waFirst ? `<p class="small muted" style="margin:0">${t("اس ڈیوائس پر تصویر براہِ راست شیئر نہیں ہو سکی۔ واٹس ایپ پر متن بھیجیں، یا تصویر کو دبا کر محفوظ کریں اور پھر واٹس ایپ میں لگائیں۔", "This device couldn't share the image directly. Send the text on WhatsApp, or long-press the image to save it and attach it in WhatsApp.")}</p>` : ""}
       ${canFiles ? `<button class="btn gold block" data-sfile>${ICON.share} ${t("تصویر شیئر کریں (واٹس ایپ وغیرہ)", "Share image (WhatsApp etc.)")}</button>` : ""}
       <a class="btn wa block" href="${waLink(p.text)}" target="_blank" rel="noopener noreferrer">${ICON.wa} ${t("واٹس ایپ پر متن بھیجیں", "Send text on WhatsApp")}</a>
-      ${url ? `<a class="btn block" href="${url}" download="noor-e-tasbeeh.png">${ICON.download} ${t("تصویر محفوظ کریں", "Save image")}</a>` : ""}
+      ${url && !NATIVE ? `<a class="btn block" href="${url}" download="noor-e-tasbeeh.png">${ICON.download} ${t("تصویر محفوظ کریں", "Save image")}</a>` : ""}
       <button class="btn block" data-scopy>${ICON.copy} ${t("متن کاپی کریں", "Copy text")}</button>
       <p class="small muted" style="margin:0">${C.APP_DOWNLOAD_URL ? t("شیئر متن میں ایپ کا ڈاؤن لوڈ لنک شامل ہے۔", "The shared text includes the app download link.") : t("ڈاؤن لوڈ لنک ابھی شامل نہیں (APK اپ لوڈ ہونے کے بعد لگایا جائے گا)۔", "No download link yet (it will be added after the APK is uploaded).")}</p>
       <button class="btn ghost" data-close>${t("بند کریں", "Close")}</button>`;
     const sf = sh.querySelector("[data-sfile]");
-    if (sf) sf.onclick = async () => { try { await navigator.share({ files: [file], text: p.text }); } catch (e) { if (e.name !== "AbortError") toast(t("شیئر نہیں ہو سکا", "Couldn't share")); } };
+    if (sf && NATIVE) sf.onclick = () => nativeShare(p, blob);
+    else if (sf) sf.onclick = async () => { try { await navigator.share({ files: [file], text: p.text }); } catch (e) { if (e.name !== "AbortError") toast(t("شیئر نہیں ہو سکا", "Couldn't share")); } };
     sh.querySelector("[data-scopy]").onclick = () => copyText(p.text);
   }
 
@@ -1697,6 +2458,9 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         <div class="progress"><i style="width:${(doneCount / items.length) * 100}%"></i></div>
         <span class="small muted">${t("پیش رفت آج کی تاریخ کے ساتھ اسی فون پر محفوظ رہتی ہے؛ کل نئے سرے سے شروع ہو گی۔", "Progress is saved on this phone for today; it starts fresh tomorrow.")}</span>
       </div>
+      ${isPrayer ? `<div class="notice qul3">${(pkey === "fajr" || pkey === "maghrib")
+        ? t(`<b>${AZKAR_DATA.postPrayer.prayers[pkey].name} کے بعد:</b> سورۃ الاخلاص، سورۃ الفلق اور سورۃ الناس — <b>تین تین مرتبہ</b>۔ (باقی نمازوں کے بعد ایک ایک مرتبہ)`, `<b>After ${PRAYER_EN[pkey]}:</b> Surah al-Ikhlas, al-Falaq and an-Nas — <b>3 times each</b>. (After the other prayers, once each.)`)
+        : t(`<b>${AZKAR_DATA.postPrayer.prayers[pkey].name} کے بعد:</b> سورۃ الاخلاص، سورۃ الفلق اور سورۃ الناس — <b>ایک ایک مرتبہ</b>۔ (فجر اور مغرب کے بعد تین تین مرتبہ)`, `<b>After ${PRAYER_EN[pkey]}:</b> Surah al-Ikhlas, al-Falaq and an-Nas — <b>once each</b>. (After Fajr and Maghrib, 3 times each.)`)}</div>` : ""}
       ${isPrayer ? `<div class="notice">${t("ماخذ: ایپ کے مالک کی فراہم کردہ اذکار کی تصویر (متن، گنتی اور حوالے جیسے چھپے ہیں)۔ یہ مسنون اذکار ہیں، فرض نہیں۔", "Source: the Azkar card provided by the app owner (text, counts and references as printed). These are Sunnah azkar, not obligations.")}</div>` :
         `<div class="notice">${t("حوالہ جات: حصن المسلم میں درج احادیث۔ قرآنی سورتوں اور آیت الکرسی کا اردو ترجمہ مالک کے اذکار کارڈ سے ہے۔ <b>باقی دعاؤں کا اردو ترجمہ</b> اس ورژن کے لیے تیار کیا گیا ہے؛ کسی عالم یا مستند اردو حصن المسلم سے نظرِ ثانی باقی ہے۔",
           "References: hadith listed in Hisn al-Muslim. The Urdu translation of the surahs and Ayat al-Kursi comes from the owner's Azkar card. <b>The Urdu translation of the other duas</b> was prepared for this version and is awaiting review by a scholar or a published Urdu Hisn al-Muslim.")}</div>`}
@@ -1723,6 +2487,286 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   function guessPrayer() {
     const h = new Date().getHours();
     if (h < 11) return "fajr"; if (h < 15) return "dhuhr"; if (h < 18) return "asr"; if (h < 20) return "maghrib"; return "isha";
+  }
+
+  /* ================= VOICE (Asma-ul-Husna) =================
+     Inside the Android app: the phone's own text-to-speech through the app bridge
+     (Android WebView has no speechSynthesis). In Chrome / the web app: speechSynthesis.
+     Free and offline once the phone has the voice installed. */
+  const voice = {
+    seq: 0, waits: new Map(),
+    nativeOk() { return !!(NATIVE && NATIVE.speak); },
+    webVoices() { try { return window.speechSynthesis ? speechSynthesis.getVoices() : []; } catch (e) { return []; } },
+    has(lang) {
+      if (this.nativeOk()) { try { return NATIVE.ttsHas ? String(NATIVE.ttsHas(lang)) === "true" : lang === "ar"; } catch (e) { return false; } }
+      return this.webVoices().some((v) => (v.lang || "").toLowerCase().startsWith(lang));
+    },
+    speak(text, lang, rate) {
+      return new Promise((res) => {
+        const id = "v" + (++this.seq);
+        const guard = setTimeout(() => { this.waits.delete(id); res(false); }, Math.max(3500, text.length * 380 / (rate || 1)));
+        const done = (ok) => { clearTimeout(guard); this.waits.delete(id); res(ok !== false); };
+        if (this.nativeOk()) {
+          this.waits.set(id, done);
+          try { NATIVE.speak(text, lang, String(rate || 1), id); } catch (e) { done(false); }
+          return;
+        }
+        try {
+          const v = this.webVoices().find((x) => (x.lang || "").toLowerCase().startsWith(lang));
+          if (!v || !window.speechSynthesis) { done(false); return; }
+          const u = new SpeechSynthesisUtterance(text);
+          u.voice = v; u.lang = v.lang; u.rate = rate || 1;
+          u.onend = () => done(true); u.onerror = () => done(false);
+          speechSynthesis.speak(u);
+        } catch (e) { done(false); }
+      });
+    },
+    stop() {
+      try { if (this.nativeOk() && NATIVE.stopSpeak) NATIVE.stopSpeak(); } catch (e) {}
+      try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
+      for (const f of this.waits.values()) f(false);
+      this.waits.clear();
+    }
+  };
+  window.__ntTtsDone = (id) => { const f = voice.waits.get(id); if (f) f(true); };
+  try { if (window.speechSynthesis) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => { if (route.name === "names") namesVoiceNote(); }; } } catch (e) {}
+
+  /* ================= ASMA-UL-HUSNA (99 names) ================= */
+  const namesState = { playing: false, i: 0, run: 0 };
+  function stopNames() { namesState.playing = false; namesState.run++; voice.stop(); }
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  function screenNames() {
+    const L = ASMA_UL_HUSNA;
+    const urduVoice = store.get("names.urVoice", true);
+    const slow = store.get("names.slow", false);
+    view().innerHTML = topbar(t("اسماء الحسنیٰ — اللہ کے ۹۹ نام", "Asma-ul-Husna — 99 Names of Allah")) + `<div class="view" id="nv">
+      <section class="nstage" id="nStage" aria-live="polite">
+        <div class="nnum" id="nNum">${N(1)} / ${N(99)}</div>
+        <div class="nar" id="nAr">${L[0][0]}</div>
+        <div class="ntr ltr" id="nTr">${L[0][1]}</div>
+        <div class="nur" id="nUr" ${U}>${L[0][2]}</div>
+        ${LANG === "en" ? `<div class="nen" id="nEn">${L[0][3]}</div>` : ""}
+        <div class="nctl">
+          <button class="qb" id="nPrev" aria-label="${t("پچھلا نام", "Previous name")}">${ICON.prev}</button>
+          <button class="qb main big" id="nPlay" aria-label="${t("آواز کے ساتھ چلائیں", "Play with audio")}">${ICON.play}</button>
+          <button class="qb" id="nNext" aria-label="${t("اگلا نام", "Next name")}">${ICON.next}</button>
+        </div>
+        <div class="chips" style="justify-content:center">
+          <button class="chip" id="nUrV" aria-pressed="${urduVoice}">${t("اردو معنی بھی آواز میں", "Speak Urdu meaning too")}</button>
+          <button class="chip" id="nSlow" aria-pressed="${slow}">${t("آہستہ", "Slow")}</button>
+        </div>
+        <div id="nVoiceNote"></div>
+      </section>
+      <div class="notice" ${U}>
+        <div class="ar" style="font-size:20px;color:var(--gold-soft);margin:0">اِنَّ لِلّٰهِ تِسْعَةً وَّتِسْعِيْنَ اسْمًا، مِائَةً اِلَّا وَاحِدًا، مَنْ اَحْصَاهَا دَخَلَ الْجَنَّةَ</div>
+        «اللہ تعالیٰ کے ننانوے نام ہیں، ایک کم سو۔ جو ان کو یاد کرے (شمار کرے) وہ جنت میں داخل ہو گا۔» <b>(البخاری: 2736، مسلم: 2677)</b>
+      </div>
+      <div class="ngrid" id="nGrid">${L.map((x, i) => `<button class="ncard" data-ni="${i}"><span class="nno">${N(i + 1)}</span><span class="nar2">${x[0]}</span><span class="ntr2 ltr">${x[1]}</span><span class="nur2" ${U}>${x[2]}</span></button>`).join("")}</div>
+      <p class="small muted">${t("ناموں کی ترتیب جامع ترمذی (3507) کی روایت کے مطابق ہے؛ محدثین نے اس فہرست کی سند پر کلام کیا ہے، جبکہ ۹۹ ناموں والی اصل حدیث صحیح بخاری و مسلم میں ہے۔ آواز فون کی اپنی مفت «Text-to-Speech» سے آتی ہے (کمپیوٹر کی آواز، کسی قاری کی نہیں)۔",
+        "The order follows the narration in Jami at-Tirmidhi (3507); hadith scholars have discussed the chain of this list, while the hadith about the 99 names itself is in Bukhari and Muslim. The voice is the phone's own free Text-to-Speech (a computer voice, not a reciter).")}</p>
+    </div>`;
+    namesState.i = Math.min(98, namesState.i || 0);
+    show(namesState.i, false);
+    namesVoiceNote();
+    function show(i, scroll) {
+      const x = L[i]; namesState.i = i;
+      $("#nNum").textContent = `${N(i + 1)} / ${N(99)}`; $("#nAr").textContent = x[0]; $("#nTr").textContent = x[1]; $("#nUr").textContent = x[2];
+      if ($("#nEn")) $("#nEn").textContent = x[3];
+      const st = $("#nStage"); st.classList.remove("pop"); void st.offsetWidth; st.classList.add("pop");
+      document.querySelectorAll(".ncard.on").forEach((e) => e.classList.remove("on"));
+      const c = document.querySelector(`[data-ni="${i}"]`); if (c) { c.classList.add("on"); if (scroll) { const r = c.getBoundingClientRect(); if (r.top < 0 || r.bottom > innerHeight) c.scrollIntoView({ block: "nearest", behavior: "smooth" }); } }
+    }
+    async function sayOne(i, run) {
+      const x = L[i], rate = store.get("names.slow", false) ? 0.62 : 0.85;
+      const okAr = await voice.speak(x[0], "ar", rate);
+      if (run !== namesState.run) return;
+      if (!okAr) await wait(1600);
+      if (run !== namesState.run) return;
+      if (store.get("names.urVoice", true) && voice.has("ur")) { await wait(250); if (run !== namesState.run) return; await voice.speak(x[2], "ur", rate + 0.1); }
+      else await wait(900);
+    }
+    async function playAll() {
+      voice.stop(); const run = ++namesState.run; namesState.playing = true; paintPlay();
+      for (let i = namesState.i; i < 99; i++) {
+        if (run !== namesState.run) return;
+        show(i, true);
+        await sayOne(i, run);
+        if (run !== namesState.run) return;
+        await wait(350);
+      }
+      if (run === namesState.run) { namesState.playing = false; namesState.i = 0; paintPlay(); toast(t("۹۹ نام مکمل — سبحان اللہ", "All 99 names done — SubhanAllah")); }
+    }
+    function paintPlay() { const b = $("#nPlay"); if (b) b.innerHTML = namesState.playing ? ICON.pause : ICON.play; }
+    $("#nPlay").onclick = () => { if (namesState.playing) { stopNames(); paintPlay(); } else playAll(); };
+    $("#nNext").onclick = () => { const was = namesState.playing; stopNames(); show(Math.min(98, namesState.i + 1), true); if (was) playAll(); else paintPlay(); };
+    $("#nPrev").onclick = () => { const was = namesState.playing; stopNames(); show(Math.max(0, namesState.i - 1), true); if (was) playAll(); else paintPlay(); };
+    $("#nUrV").onclick = (e) => { const v = !store.get("names.urVoice", true); store.set("names.urVoice", v); e.currentTarget.setAttribute("aria-pressed", String(v)); namesVoiceNote(); };
+    $("#nSlow").onclick = (e) => { const v = !store.get("names.slow", false); store.set("names.slow", v); e.currentTarget.setAttribute("aria-pressed", String(v)); };
+    document.querySelectorAll("[data-ni]").forEach((b) => b.onclick = () => {
+      const i = +b.dataset.ni; stopNames(); paintPlay(); show(i, false); window.scrollTo({ top: 0, behavior: "smooth" });
+      const run = ++namesState.run; sayOne(i, run);
+    });
+  }
+  function namesVoiceNote() {
+    const box = $("#nVoiceNote"); if (!box) return;
+    const ar = voice.has("ar"), ur = voice.has("ur");
+    let msg = "";
+    if (NATIVE && !NATIVE.speak) msg = t("آواز کے لیے «نورِ تسبیح» کا نیا ورژن (1.2) انسٹال کریں۔ تب تک نام بغیر آواز کے آگے چلیں گے۔", "Install the new version (1.2) of the app for the voice. Until then the names move on without sound.");
+    else if (!ar) msg = t("اس فون/براؤزر میں عربی آواز (Text-to-Speech) نہیں ملی، اس لیے نام بغیر آواز کے خود بخود آگے چلیں گے۔ آواز کے لیے: فون کی Settings ← Text-to-speech ← Google Speech Services ← Install voice data ← Arabic (اور Urdu) مفت ڈاؤن لوڈ کریں۔",
+      "No Arabic Text-to-Speech voice was found on this phone/browser, so the names will move on silently. For sound: phone Settings → Text-to-speech → Google Speech Services → Install voice data → Arabic (and Urdu), free.");
+    else if (store.get("names.urVoice", true) && !ur) msg = t("اردو آواز اس فون میں نہیں ملی — عربی نام آواز میں، اردو معنی اسکرین پر چلیں گے۔ (Settings ← Text-to-speech میں Urdu آواز مفت انسٹال ہو سکتی ہے)", "No Urdu voice on this phone — the Arabic name is spoken and the Urdu meaning is shown on screen. (An Urdu voice can be installed free in Settings → Text-to-speech.)");
+    box.innerHTML = msg ? `<p class="small muted" style="margin:6px 0 0;text-align:center">${msg}</p>` : "";
+  }
+
+  /* ================= QIBLA (compass) =================
+     Direction is calculated on the phone from your location and the Kaaba's
+     coordinates (great-circle bearing). No server, no fee, works without internet. */
+  const KAABA = { lat: 21.422487, lon: 39.826206 };
+  const RAD = Math.PI / 180;
+  function qiblaBearing(lat, lon) {
+    const p1 = lat * RAD, p2 = KAABA.lat * RAD, dl = (KAABA.lon - lon) * RAD;
+    const y = Math.sin(dl) * Math.cos(p2), x = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl);
+    return (Math.atan2(y, x) / RAD + 360) % 360;
+  }
+  function distKm(lat1, lon1, lat2, lon2) {
+    const a = Math.sin((lat2 - lat1) * RAD / 2) ** 2 + Math.cos(lat1 * RAD) * Math.cos(lat2 * RAD) * Math.sin((lon2 - lon1) * RAD / 2) ** 2;
+    return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+  const CITIES = [
+    ["کراچی", "Karachi", 24.8607, 67.0011], ["لاہور", "Lahore", 31.5204, 74.3587], ["اسلام آباد", "Islamabad", 33.6844, 73.0479],
+    ["راولپنڈی", "Rawalpindi", 33.5651, 73.0169], ["فیصل آباد", "Faisalabad", 31.4504, 73.135], ["ملتان", "Multan", 30.1575, 71.5249],
+    ["پشاور", "Peshawar", 34.0151, 71.5249], ["کوئٹہ", "Quetta", 30.1798, 66.975], ["حیدرآباد", "Hyderabad", 25.396, 68.3578],
+    ["گوجرانوالہ", "Gujranwala", 32.1877, 74.1945], ["سیالکوٹ", "Sialkot", 32.4945, 74.5229], ["بہاولپور", "Bahawalpur", 29.3956, 71.6836],
+    ["سرگودھا", "Sargodha", 32.0836, 72.6711], ["سکھر", "Sukkur", 27.7052, 68.8574], ["لاڑکانہ", "Larkana", 27.559, 68.2264],
+    ["ایبٹ آباد", "Abbottabad", 34.1688, 73.2215], ["مردان", "Mardan", 34.1986, 72.0404], ["ڈیرہ اسماعیل خان", "D.I. Khan", 31.8314, 70.9019],
+    ["مظفرآباد", "Muzaffarabad", 34.37, 73.4711], ["گلگت", "Gilgit", 35.9208, 74.308], ["گجرات", "Gujrat", 32.5736, 74.0789],
+    ["ساہیوال", "Sahiwal", 30.6682, 73.1114], ["رحیم یار خان", "Rahim Yar Khan", 28.4202, 70.2952], ["ڈیرہ غازی خان", "D.G. Khan", 30.0459, 70.6403],
+    ["شیخوپورہ", "Sheikhupura", 31.7131, 73.9783], ["جہلم", "Jhelum", 32.9405, 73.7276], ["قصور", "Kasur", 31.1187, 74.4507], ["اوکاڑہ", "Okara", 30.8138, 73.4534],
+    ["گوادر", "Gwadar", 25.1216, 62.3254], ["سوات (مینگورہ)", "Swat (Mingora)", 34.7717, 72.3602]
+  ];
+  const qb = { on: false, h: null, sx: 0, sy: 0, last: 0, raf: 0, aligned: false, handler: null, evt: "" };
+  function stopQibla() {
+    if (qb.handler) { window.removeEventListener(qb.evt, qb.handler, true); qb.handler = null; }
+    cancelAnimationFrame(qb.raf); qb.on = false; qb.h = null; qb.sx = 0; qb.sy = 0;
+  }
+  function nearestCity(lat, lon) {
+    let best = null, bd = 1e9;
+    for (const c of CITIES) { const d = distKm(lat, lon, c[2], c[3]); if (d < bd) { bd = d; best = c; } }
+    return bd < 60 ? best : null;
+  }
+  const locName = (l) => l.city ? t(l.city[0], l.city[1]) : `${l.lat.toFixed(3)}, ${l.lon.toFixed(3)}`;
+  function screenQibla() {
+    stopQibla();
+    const loc = store.get("qibla.loc", null);
+    const bearing = loc ? qiblaBearing(loc.lat, loc.lon) : null;
+    const dist = loc ? distKm(loc.lat, loc.lon, KAABA.lat, KAABA.lon) : null;
+    const ticks = Array.from({ length: 72 }, (_, i) => { const a = i * 5, big = a % 30 === 0; return `<line x1="150" y1="${big ? 14 : 18}" x2="150" y2="${big ? 28 : 24}" transform="rotate(${a} 150 150)" stroke="${big ? "#d6b25e" : "rgba(214,178,94,.45)"}" stroke-width="${big ? 2.4 : 1.2}"/>`; }).join("");
+    const labels = [["N", 0, t("شمال", "N")], ["E", 90, t("مشرق", "E")], ["S", 180, t("جنوب", "S")], ["W", 270, t("مغرب", "W")]]
+      .map(([k, a, l]) => `<text x="150" y="48" transform="rotate(${a} 150 150)" text-anchor="middle" class="${k === "N" ? "dn" : "dl"}">${l}</text>`).join("");
+    view().innerHTML = topbar(t("قبلہ رخ — قطب نما", "Qibla Compass")) + `<div class="view" id="qbv">
+      <section class="qcard">
+        <div class="qstatus" id="qStatus">${loc ? t("فون کو سیدھا (زمین کے متوازی) رکھیں اور گھمائیں", "Hold the phone flat and turn around") : t("پہلے اپنی جگہ معلوم کریں", "First set your location")}</div>
+        <div class="dialwrap" id="dialWrap">
+          <svg class="pointer" viewBox="0 0 40 30" aria-hidden="true"><path d="M20 2 34 28H6z" fill="#d6b25e"/></svg>
+          <svg class="dial" id="dial" viewBox="0 0 300 300" role="img" aria-label="${t("قطب نما", "Compass")}">
+            <circle cx="150" cy="150" r="146" fill="#062419" stroke="#d6b25e" stroke-width="2"/>
+            <circle cx="150" cy="150" r="118" fill="none" stroke="rgba(214,178,94,.25)" stroke-width="1"/>
+            ${ticks}${labels}
+            ${bearing != null ? `<g transform="rotate(${bearing.toFixed(2)} 150 150)">
+              <line x1="150" y1="150" x2="150" y2="62" stroke="#1fa57c" stroke-width="5" stroke-linecap="round"/>
+              <g transform="translate(150 50)"><rect x="-15" y="-15" width="30" height="30" rx="3" fill="#111" stroke="#d6b25e" stroke-width="2"/><rect x="-15" y="-7" width="30" height="5" fill="#d6b25e"/></g>
+            </g>` : ""}
+            <circle cx="150" cy="150" r="7" fill="#d6b25e"/>
+          </svg>
+        </div>
+        ${bearing != null ? `<div class="qinfo">
+          <div><b>${N(Math.round(bearing))}°</b><span>${t("قبلہ — شمال سے گھڑی کی سمت میں", "Qibla — clockwise from North")}</span></div>
+          <div><b id="qHead">—</b><span>${t("فون کا رخ", "Phone heading")}</span></div>
+          <div><b>${N(Math.round(dist).toLocaleString("en"))}</b><span>${t("کلومیٹر — مکہ مکرمہ", "km to Makkah")}</span></div>
+        </div>` : ""}
+        <button class="btn gold block" id="qStart" ${bearing == null ? "hidden" : ""}>${ICON.compass} ${t("قطب نما شروع کریں", "Start compass")}</button>
+      </section>
+      <div class="card" style="display:flex;flex-direction:column;gap:8px">
+        <div class="row"><span class="grow small">${t("آپ کی جگہ:", "Your location:")} <b style="color:var(--gold-soft)">${loc ? esc(locName(loc)) : t("ابھی معلوم نہیں", "not set yet")}</b>${loc ? ` <span class="muted">(${loc.src === "gps" ? "GPS" : t("شہر", "city")})</span>` : ""}</span></div>
+        <button class="btn green block" id="qGps">📍 ${t("میری جگہ خود معلوم کریں (GPS)", "Find my location (GPS)")}</button>
+        <label class="small muted" for="qCity">${t("یا شہر منتخب کریں:", "Or choose a city:")}</label>
+        <select id="qCity" class="input"><option value="">${t("— شہر —", "— City —")}</option>${CITIES.map((c, i) => `<option value="${i}" ${loc && loc.city && loc.city[1] === c[1] ? "selected" : ""}>${esc(t(c[0], c[1]))}</option>`).join("")}</select>
+      </div>
+      <div class="notice">${t(`<b>درست رخ کے لیے:</b> فون کو ہتھیلی پر سیدھا لٹا کر رکھیں · لوہے، مقناطیس، اسپیکر اور گاڑی سے دور رہیں · سوئی غلط لگے تو فون کو ہوا میں ∞ (آٹھ) کی شکل میں ۲–۳ بار گھمائیں۔<br>یہ رخ فون کے اندر ہی حساب ہوتا ہے — کوئی فیس نہیں، کوئی سرور نہیں، جگہ ایک بار معلوم ہو جائے تو انٹرنیٹ کے بغیر بھی ہمیشہ چلتا ہے۔ فون کا سینسر چند ڈگری کا فرق دے سکتا ہے؛ مسجد کی سمت سے ملا کر تسلی کر لیں۔`,
+        `<b>For an accurate direction:</b> hold the phone flat on your palm · stay away from iron, magnets, speakers and cars · if the needle looks wrong, move the phone in a figure-8 two or three times.<br>The direction is calculated on the phone itself — no fee, no server; once the location is set it always works, even without internet. Phone sensors can be off by a few degrees; compare with a nearby mosque.`)}</div>
+    </div>`;
+    const setLoc = (l) => { store.set("qibla.loc", { ...l, at: Date.now() }); screenQibla(); };
+    $("#qCity").onchange = (e) => { const c = CITIES[+e.target.value]; if (c) setLoc({ lat: c[2], lon: c[3], city: [c[0], c[1]], src: "city" }); };
+    $("#qGps").onclick = () => {
+      if (!navigator.geolocation) { toast(t("اس ڈیوائس پر GPS دستیاب نہیں — شہر منتخب کریں", "GPS isn't available — choose a city")); return; }
+      const b = $("#qGps"); b.disabled = true; b.textContent = t("جگہ معلوم ہو رہی ہے…", "Finding your location…");
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const lat = pos.coords.latitude, lon = pos.coords.longitude, c = nearestCity(lat, lon);
+        setLoc({ lat, lon, city: c ? [c[0], c[1]] : null, src: "gps" });
+        toast(t("جگہ مل گئی", "Location found"));
+      }, () => {
+        b.disabled = false; b.textContent = "📍 " + t("دوبارہ کوشش کریں", "Try again");
+        if (NATIVE && !NATIVE.speak) { toast(t("GPS کے لیے ایپ کا نیا ورژن (1.2) انسٹال کریں — ابھی شہر منتخب کریں", "Install app version 1.2 for GPS — choose a city for now")); return; }
+        toast(t("جگہ معلوم نہیں ہو سکی — فون کی Location آن کریں اور اجازت دیں، یا نیچے سے شہر منتخب کریں", "Couldn't get your location — turn on Location and allow it, or choose a city below"));
+      }, { enableHighAccuracy: false, timeout: 20000, maximumAge: 30 * 60 * 1000 });
+    };
+    if (bearing == null) return;
+    // Start listening straight away (Android). iPhone/iPad need a tap to allow the compass → the button.
+    $("#qStart").onclick = async () => {
+      try {
+        const DOE = window.DeviceOrientationEvent;
+        if (DOE && typeof DOE.requestPermission === "function") { const r = await DOE.requestPermission(); if (r !== "granted") { noSensor(); return; } }
+      } catch (e) { /* not needed on this device */ }
+      stopQibla(); startCompass(bearing);
+    };
+    startCompass(bearing);
+  }
+  function noSensor() {
+    const s = $("#qStatus"); if (!s) return;
+    s.className = "qstatus warn";
+    s.innerHTML = t("اس ڈیوائس میں قطب نما (compass sensor) نہیں ملا — لیپ ٹاپ اور کچھ سستے فونز میں نہیں ہوتا۔ اوپر کا نقشہ «شمال» کو اوپر رکھ کر قبلہ دکھا رہا ہے: کسی اور قطب نما یا مسجد کی مدد سے شمال معلوم کر کے سبز سوئی کی سمت دیکھیں۔",
+      "No compass sensor was found on this device (laptops and some low-cost phones don't have one). The dial shows the Qibla with North at the top: find North with another compass or a nearby mosque, then follow the green needle.");
+  }
+  function startCompass(bearing) {
+    qb.on = true; qb.aligned = false; let got = false;
+    const useAbs = "ondeviceorientationabsolute" in window;
+    qb.evt = useAbs ? "deviceorientationabsolute" : "deviceorientation";
+    qb.handler = (e) => {
+      let h = null;
+      if (typeof e.webkitCompassHeading === "number" && !isNaN(e.webkitCompassHeading)) h = e.webkitCompassHeading;
+      else if ((useAbs || e.absolute === true) && e.alpha != null) h = 360 - e.alpha;
+      if (h == null) return;
+      const sa = (screen.orientation && typeof screen.orientation.angle === "number") ? screen.orientation.angle : (window.orientation || 0);
+      h = (h + sa + 360) % 360;
+      // smooth on the circle so the needle doesn't jump between 359° and 0°
+      qb.sx = qb.sx * 0.82 + Math.cos(h * RAD) * 0.18; qb.sy = qb.sy * 0.82 + Math.sin(h * RAD) * 0.18;
+      qb.h = (Math.atan2(qb.sy, qb.sx) / RAD + 360) % 360;
+      if (!got) { got = true; const sb = $("#qStart"); if (sb) sb.hidden = true; }
+    };
+    window.addEventListener(qb.evt, qb.handler, true);
+    setTimeout(() => { if (qb.on && !got && route.name === "qibla") noSensor(); }, 2500);
+    const loop = () => {
+      if (!qb.on) return;
+      if (qb.h != null) {
+        const dial = $("#dial"); if (!dial) { stopQibla(); return; }
+        dial.style.transform = `rotate(${-qb.h}deg)`;
+        const hd = $("#qHead"); if (hd) hd.textContent = N(Math.round(qb.h)) + "°";
+        const diff = ((bearing - qb.h + 540) % 360) - 180; // −180…180
+        const ok = Math.abs(diff) <= 4;
+        const st = $("#qStatus");
+        if (st) {
+          st.className = "qstatus" + (ok ? " ok" : "");
+          st.textContent = ok ? t("✓ آپ قبلہ رخ ہیں", "✓ You are facing the Qibla")
+            : diff > 0 ? t(`دائیں طرف گھومیں ${N(Math.round(Math.abs(diff)))}°`, `Turn right ${Math.round(Math.abs(diff))}°`)
+            : t(`بائیں طرف گھومیں ${N(Math.round(Math.abs(diff)))}°`, `Turn left ${Math.round(Math.abs(diff))}°`);
+        }
+        $("#dialWrap").classList.toggle("ok", ok);
+        if (ok && !qb.aligned) vibrate([40, 50, 40]);
+        qb.aligned = ok;
+      }
+      qb.raf = requestAnimationFrame(loop);
+    };
+    qb.raf = requestAnimationFrame(loop);
   }
 
   /* ================= SAVED ================= */
@@ -1807,8 +2851,8 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
           ? `<p class="small" style="margin:4px 0 8px">${t("اینڈرائیڈ APK کا لنک:", "Android APK link:")}</p><a class="btn gold block" href="${esc(C.APP_DOWNLOAD_URL)}" target="_blank" rel="noopener noreferrer">${ICON.download} ${t("APK ڈاؤن لوڈ کریں", "Download APK")}</a>
              <p class="small muted ltr" style="margin:6px 0 0;text-align:start;overflow-wrap:anywhere">${esc(C.APP_DOWNLOAD_URL)}</p>`
           : `<p class="small muted" style="margin:4px 0 0">${t("ڈاؤن لوڈ لنک ابھی دستیاب نہیں۔ APK بننے اور اپ لوڈ ہونے کے بعد یہاں لنک آئے گا۔", "The download link isn't available yet. It will appear here once the APK is built and uploaded.")}</p>`}
-        <button class="btn block" id="installBtn" style="margin-top:8px">${ICON.download} ${t("اس فون پر انسٹال کریں (ویب ایپ)", "Install on this phone (web app)")}</button>
-        <p class="small muted" style="margin:6px 0 0">${t("ویب ایپ (PWA) انسٹال کرنے سے ہوم اسکرین پر آئیکن آ جاتا ہے، مگر یہ مکمل APK جیسی نہیں ہوتی۔", "Installing the web app (PWA) adds an icon to your home screen, but it isn't the same as a full APK.")}</p>
+        ${NATIVE ? "" : `<button class="btn block" id="installBtn" style="margin-top:8px">${ICON.download} ${t("اس فون پر انسٹال کریں (ویب ایپ)", "Install on this phone (web app)")}</button>
+        <p class="small muted" style="margin:6px 0 0">${t("ویب ایپ (PWA) انسٹال کرنے سے ہوم اسکرین پر آئیکن آ جاتا ہے، مگر یہ مکمل APK جیسی نہیں ہوتی۔", "Installing the web app (PWA) adds an icon to your home screen, but it isn't the same as a full APK.")}</p>`}
       </div>
 
       <div class="card small">
@@ -1816,21 +2860,27 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
         ${t(`• قرآن: alquran.cloud — عربی متن Tanzil (رسمِ عثمانی)، اردو ترجمہ مولانا محمد جوناگڑھی<br>
         • احادیث: fawazahmed0/hadith-api (jsDelivr CDN)<br>
         • نماز کے بعد اذکار: مالک کا فراہم کردہ اذکار کارڈ<br>
-        • صبح و شام کے اذکار: حصن المسلم کے حوالہ جات`,
+        • صبح و شام کے اذکار: حصن المسلم کے حوالہ جات<br>
+        • تلاوت کی آواز: cdn.islamic.network (alquran.cloud)<br>
+        • قبلہ: فون کے اندر حساب (کوئی سرور نہیں)<br>
+        • اللہ کے ۹۹ نام: جامع ترمذی (3507) کی ترتیب؛ آواز: فون کی Text-to-Speech`,
         `• Quran: alquran.cloud — Arabic text Tanzil (Uthmani script), Urdu translation by Maulana Muhammad Junagarhi<br>
         • Hadith: fawazahmed0/hadith-api (jsDelivr CDN)<br>
         • Azkar after prayer: the Azkar card provided by the app owner<br>
-        • Morning & evening azkar: references from Hisn al-Muslim`)}
+        • Morning & evening azkar: references from Hisn al-Muslim<br>
+        • Recitation audio: cdn.islamic.network (alquran.cloud)<br>
+        • Qibla: calculated on the phone (no server)<br>
+        • 99 Names: order of Jami at-Tirmidhi (3507); voice: the phone's Text-to-Speech`)}
       </div>
 
       <div class="card small">
         <b style="color:var(--gold)">${t("رازداری", "Privacy")}</b><br>
-        ${t("کوئی اکاؤنٹ نہیں، کوئی اشتہار نہیں، کوئی ذاتی معلومات جمع نہیں ہوتیں۔ تسبیح، پیش رفت اور محفوظ آیات/احادیث صرف آپ کے فون میں رہتی ہیں۔ براؤزر ڈیٹا صاف کرنے یا ایپ ان انسٹال کرنے سے یہ ریکارڈ مٹ سکتے ہیں۔ قرآن/حدیث لوڈ کرتے وقت صرف متعلقہ صفحے کی درخواست ان مفت سرورز کو جاتی ہے۔",
-          "No account, no ads, no personal data collected. Tasbeeh counts, progress and saved ayahs/hadith stay on your phone. Clearing browser data or uninstalling the app can erase these records. When Quran or Hadith text loads, only the request for that page goes to these free servers.")}
+        ${t("کوئی اکاؤنٹ نہیں، کوئی اشتہار نہیں، کوئی ذاتی معلومات جمع نہیں ہوتیں۔ تسبیح، پیش رفت اور محفوظ آیات/احادیث صرف آپ کے فون میں رہتی ہیں۔ براؤزر ڈیٹا صاف کرنے یا ایپ ان انسٹال کرنے سے یہ ریکارڈ مٹ سکتے ہیں۔ قرآن/حدیث لوڈ کرتے وقت صرف متعلقہ صفحے کی درخواست ان مفت سرورز کو جاتی ہے۔ قبلہ کے لیے آپ کی جگہ صرف اسی فون میں رہتی ہے، کہیں نہیں بھیجی جاتی۔",
+          "No account, no ads, no personal data collected. Tasbeeh counts, progress and saved ayahs/hadith stay on your phone. Clearing browser data or uninstalling the app can erase these records. When Quran or Hadith text loads, only the request for that page goes to these free servers. Your location for the Qibla stays on this phone and is never sent anywhere.")}
       </div>
       <p class="small muted" style="text-align:center">${C.appName} · ${t("ورژن", "Version")} ${C.version}</p>
     </div>`;
-    $("#installBtn").onclick = async () => {
+    if ($("#installBtn")) $("#installBtn").onclick = async () => {
       if (installPrompt) { installPrompt.prompt(); try { await installPrompt.userChoice; } catch (e) {} installPrompt = null; }
       else toast(t("براؤزر مینو (⋮) میں «Add to Home screen / Install app» دبائیں", "Open the browser menu (⋮) and tap “Add to Home screen / Install app”"));
     };
@@ -1841,7 +2891,8 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     home: screenHome, tasbeeh: screenTasbeeh, quran: screenQuran, surah: screenSurah,
     hadith: screenHadith, hsection: screenHSection, daily: screenDaily,
     "azkar-morning": () => screenAzkar("morning"), "azkar-evening": () => screenAzkar("evening"),
-    "azkar-prayer": () => screenAzkar("prayer"), saved: screenSaved, about: screenAbout
+    "azkar-prayer": () => screenAzkar("prayer"), saved: screenSaved, about: screenAbout,
+    mushaf: screenMushaf, qibla: screenQibla, names: screenNames
   };
   document.addEventListener("click", (e) => {
     const l = e.target.closest("[data-lang]");
@@ -1850,21 +2901,50 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     if (g) { e.preventDefault(); go(g.dataset.go, {}); return; }
     if (e.target.closest("[data-back]")) { e.preventDefault(); back(); }
   });
+  /* Laptop / desktop keyboard on the Tasbeeh screen:
+     Space, Enter, + (also = and numpad +), Arrow Up → +1 ;  − (minus, numpad −), Arrow Down → −1 */
+  function tasbeehKey(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return 0;
+    const k = e.key, c = e.code;
+    if (c === "Space" || k === " " || k === "Enter" || k === "+" || k === "=" || c === "NumpadAdd" || k === "ArrowUp") return 1;
+    if (k === "-" || k === "_" || k === "−" || c === "NumpadSubtract" || c === "Minus" || k === "ArrowDown") return -1;
+    return 0;
+  }
   window.addEventListener("keydown", (e) => {
-    if (route.name === "tasbeeh" && (e.code === "Space" || e.code === "Enter") && document.activeElement && document.activeElement.id !== "tsbName" && !$("#overlay")) {
-      e.preventDefault(); $("#tsbTap") && $("#tsbTap").click();
+    if (e.key === "Escape") { closeSheet(); return; }
+    if (route.name === "mushaf" && !$("#overlay") && !(document.activeElement && document.activeElement.tagName === "INPUT")) {
+      const pg = route.params.page || 1;
+      if (e.key === "ArrowLeft" && pg < 604) { e.preventDefault(); go("mushaf", { page: pg + 1 }, false); }
+      else if (e.key === "ArrowRight" && pg > 1) { e.preventDefault(); go("mushaf", { page: pg - 1 }, false); }
+      return;
     }
-    if (e.key === "Escape") closeSheet();
+    if (route.name !== "tasbeeh" || $("#overlay")) return;
+    const a = document.activeElement;
+    if (a && (a.id === "tsbName" || a.tagName === "INPUT" || a.tagName === "TEXTAREA")) return;
+    const d = tasbeehKey(e);
+    if (!d) return;
+    e.preventDefault();
+    if (e.repeat) return; // holding a key down must not count many times
+    const b = d > 0 ? $("#tsbTap") : $("#tsbMinus");
+    if (b) { b.click(); b.classList.add("kpress"); setTimeout(() => b.classList.remove("kpress"), 120); }
   });
 
+  // Android back button: close a sheet, else go back a screen; false on the home screen (app closes)
+  window.__ntBack = () => {
+    if ($("#overlay")) { closeSheet(); return true; }
+    if (route.name !== "home") { back(); return true; }
+    return false;
+  };
+
   // Expose pure helpers for tests
-  window.__NT = { pruneSessions, dailyPick, localDayKey, normAr };
+  window.__NT = { pruneSessions, dailyPick, localDayKey, normAr, qiblaBearing, distKm, juzOfPage, tasbeehKey, voice };
 
   // Startup: language, expiry check on open, first screen
   applyLang();
   getSessions();
   const start = (location.hash || "").replace("#", "");
   go(SCREENS[start] && !["surah", "hsection"].includes(start) ? start : "home", {}, false);
+  window.__NT.player = player;
 
   // Service worker (only works on real hosting; ignored in previews)
   if ("serviceWorker" in navigator && location.protocol === "https:" && !/claude|anthropic/.test(location.hostname)) {
