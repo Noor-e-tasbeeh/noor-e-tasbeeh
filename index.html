@@ -594,7 +594,9 @@ const APP_CONFIG = {
   /* After you upload the APK to Google Drive, paste the real share link here
      (see GUIDE-ur.md, step 6). Leave empty until then — the app will simply
      not show a download link. Never put a placeholder link here. */
-  APP_DOWNLOAD_URL: "",
+  APP_DOWNLOAD_URL: "https://drive.google.com/uc?export=download&id=1EZ-JUnd5lQiDegxBCuMAdygSTAlmfM5-",
+  /* Name shown to people instead of the long link */
+  APP_DOWNLOAD_NAME: "Noor-e-Tasbeeh.apk",
 
 
   /* Free data sources (no API key needed) */
@@ -2005,7 +2007,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
   }
   function ayahText(it) { return `${it.ar}\n\n${it.ur}\n\n(${ayahRef(it)})${shareTail()}`; }
   function shareTail() {
-    return `\n\n— ${C.appNameUr} | ${C.appName}` + (C.APP_DOWNLOAD_URL ? `\n${t("ایپ ڈاؤن لوڈ کریں", "Download the app")}: ${C.APP_DOWNLOAD_URL}` : "");
+    return `\n\n— ${C.appNameUr} | ${C.appName}` + (C.APP_DOWNLOAD_URL ? `\n📥 ${C.APP_DOWNLOAD_NAME || t("ایپ ڈاؤن لوڈ کریں", "Download the app")}:\n${C.APP_DOWNLOAD_URL}` : "");
   }
 
   /* ================= HADITH ================= */
@@ -2322,7 +2324,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
     ctx.fillText(ref, W / 2, Math.max(y + 20, fy));
     ctx.direction = "rtl"; ctx.fillStyle = "#f0dfa8"; ctx.font = `30px ${urFont}`; ctx.fillText(C.appNameUr, W / 2, H - 100);
     ctx.direction = "ltr"; ctx.font = `22px "Marcellus",serif`; ctx.fillStyle = "rgba(240,223,168,.8)";
-    ctx.fillText(C.appName.toUpperCase().split("").join(" ") + (C.APP_DOWNLOAD_URL ? "   ·   " + shortUrl(C.APP_DOWNLOAD_URL) : ""), W / 2, H - 66);
+    ctx.fillText(C.appName.toUpperCase().split("").join(" ") + (C.APP_DOWNLOAD_URL ? "   ·   " + (C.APP_DOWNLOAD_NAME || shortUrl(C.APP_DOWNLOAD_URL)) : ""), W / 2, H - 66);
     return new Promise((res) => c.toBlob((b) => res(b), "image/png"));
   }
   function shortUrl(u) { try { const x = new URL(u); return x.host + (x.pathname.length > 18 ? x.pathname.slice(0, 18) + "…" : x.pathname); } catch (e) { return u; } }
@@ -2848,8 +2850,7 @@ const HERO_IMG = "data:image/webp;base64,UklGRtRUAABXRUJQVlA4IMhUAAAw7wGdASogA/E
       <div class="card">
         <b style="color:var(--gold)">${t("ایپ ڈاؤن لوڈ کریں", "Download the App")}</b>
         ${C.APP_DOWNLOAD_URL
-          ? `<p class="small" style="margin:4px 0 8px">${t("اینڈرائیڈ APK کا لنک:", "Android APK link:")}</p><a class="btn gold block" href="${esc(C.APP_DOWNLOAD_URL)}" target="_blank" rel="noopener noreferrer">${ICON.download} ${t("APK ڈاؤن لوڈ کریں", "Download APK")}</a>
-             <p class="small muted ltr" style="margin:6px 0 0;text-align:start;overflow-wrap:anywhere">${esc(C.APP_DOWNLOAD_URL)}</p>`
+          ? `<p class="small" style="margin:4px 0 8px">${t("ایک بار دبائیں، ڈاؤن لوڈ شروع ہو جائے گا:", "Tap once and the download starts:")}</p><a class="btn gold block" href="${esc(C.APP_DOWNLOAD_URL)}" target="_blank" rel="noopener noreferrer" download="${esc(C.APP_DOWNLOAD_NAME || "Noor-e-Tasbeeh.apk")}">${ICON.download} <span class="ltr">${esc(C.APP_DOWNLOAD_NAME || "Noor-e-Tasbeeh.apk")}</span></a>`
           : `<p class="small muted" style="margin:4px 0 0">${t("ڈاؤن لوڈ لنک ابھی دستیاب نہیں۔ APK بننے اور اپ لوڈ ہونے کے بعد یہاں لنک آئے گا۔", "The download link isn't available yet. It will appear here once the APK is built and uploaded.")}</p>`}
         ${NATIVE ? "" : `<button class="btn block" id="installBtn" style="margin-top:8px">${ICON.download} ${t("اس فون پر انسٹال کریں (ویب ایپ)", "Install on this phone (web app)")}</button>
         <p class="small muted" style="margin:6px 0 0">${t("ویب ایپ (PWA) انسٹال کرنے سے ہوم اسکرین پر آئیکن آ جاتا ہے، مگر یہ مکمل APK جیسی نہیں ہوتی۔", "Installing the web app (PWA) adds an icon to your home screen, but it isn't the same as a full APK.")}</p>`}
